@@ -19,6 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="../common.css" />
     <script src="home.js" type="module" defer></script>
   </head>
   <body>
@@ -40,8 +41,8 @@
       </nav>
       <div>
         <ul class="account">
-          <li><a href="#" class="btn btn--reverse">로그인</a></li>
-          <li><a href="#" class="btn">회원가입</a></li>
+          <li><a href="/login" class="btn btn--reverse">로그인</a></li>
+          <li><a href="/singup" class="btn">회원가입</a></li>
         </ul>
       </div>
     </header>
@@ -66,15 +67,15 @@
         </div>
       </div>
       <div class="list-card">
-        <section class="card spread" OnClick="location.href ='/ranking/elice'" style="background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt7d22282a41a3a7a3/5fa99fc097f9f35d942e9bbb/Patch_10_23_Notes_Header_v2.jpg);">
-          <div class="gradient spread"></div>
+        <section id="card" class="card spread" OnClick="location.href ='/ranking/elice'" style="background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt7d22282a41a3a7a3/5fa99fc097f9f35d942e9bbb/Patch_10_23_Notes_Header_v2.jpg);">
+          <div class="gradient"></div>
           <span>엘리스<br />랭킹 조회</span>
         </section>
-        <section class="card" OnClick="location.href ='/'" style="background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt8979808f7798ecf5/6216ee875fe07272a8a2447a/2021_Key_art.jpg);">
+        <section id="card" class="card" OnClick="location.href ='/'" style="background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt8979808f7798ecf5/6216ee875fe07272a8a2447a/2021_Key_art.jpg);">
           <div class="gradient"></div>
           <span>플레이타입<br />랭킹 조회</span>
         </section>
-        <section class="card" OnClick="location.href ='/'" style="background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltf06237d0ebbe32e0/5efc23abee48da0f762bc2f2/LOL_PROMOART_4.jpg);">
+        <section id="card" class="card" OnClick="location.href ='/'" style="background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltf06237d0ebbe32e0/5efc23abee48da0f762bc2f2/LOL_PROMOART_4.jpg);">
           <div class="gradient"></div>
           <span>티어별<br />랭킹 조회</span>
         </section>
