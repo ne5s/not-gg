@@ -81,6 +81,17 @@ const MatchSchema = new Schema(
           wardsPlaced : Number, // 와드 설치 수
           cs : Number, // 미니언 + 정글(총 cs)
           killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+          item1 : Number,
+          item2 : Number,
+          item3 : Number,
+          item4 : Number, // 0이면 빈 칸
+          item5 : Number,
+          item6 : Number, // 장신구
+          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
+          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
+          spell1 : Number, // 스펠 D
+          spell2 : Number, // 스펠 F
         }
       )
     },
@@ -96,6 +107,27 @@ const MatchSchema = new Schema(
           summonerName : String,
           summonerLevel : Number,
           win : Boolean,
+          kda : Number,
+          goldEarned : Number,
+          totalDamageDealt : Number, // 총 딜량
+          totalDamageDealtToChampions : Number, // 챔피언 딜량
+          totalDamageTaken : Number, // 받은 피해량
+          visionWardsBoughtInGame : Number, // 제어와드 구매수
+          wardsKilled : Number, // 와드 파괴수
+          wardsPlaced : Number, // 와드 설치 수
+          cs : Number, // 미니언 + 정글(총 cs)
+          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+          item1 : Number,
+          item2 : Number,
+          item3 : Number,
+          item4 : Number, // 0이면 빈 칸
+          item5 : Number,
+          item6 : Number, // 장신구
+          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
+          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
+          spell1 : Number, // 스펠 D
+          spell2 : Number, // 스펠 F
         }
       )
     },
@@ -111,6 +143,27 @@ const MatchSchema = new Schema(
           summonerName : String,
           summonerLevel : Number,
           win : Boolean,
+          kda : Number,
+          goldEarned : Number,
+          totalDamageDealt : Number, // 총 딜량
+          totalDamageDealtToChampions : Number, // 챔피언 딜량
+          totalDamageTaken : Number, // 받은 피해량
+          visionWardsBoughtInGame : Number, // 제어와드 구매수
+          wardsKilled : Number, // 와드 파괴수
+          wardsPlaced : Number, // 와드 설치 수
+          cs : Number, // 미니언 + 정글(총 cs)
+          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+          item1 : Number,
+          item2 : Number,
+          item3 : Number,
+          item4 : Number, // 0이면 빈 칸
+          item5 : Number,
+          item6 : Number, // 장신구
+          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
+          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
+          spell1 : Number, // 스펠 D
+          spell2 : Number, // 스펠 F
         }
       )
     },
@@ -126,6 +179,27 @@ const MatchSchema = new Schema(
           summonerName : String,
           summonerLevel : Number,
           win : Boolean,
+          kda : Number,
+          goldEarned : Number,
+          totalDamageDealt : Number, // 총 딜량
+          totalDamageDealtToChampions : Number, // 챔피언 딜량
+          totalDamageTaken : Number, // 받은 피해량
+          visionWardsBoughtInGame : Number, // 제어와드 구매수
+          wardsKilled : Number, // 와드 파괴수
+          wardsPlaced : Number, // 와드 설치 수
+          cs : Number, // 미니언 + 정글(총 cs)
+          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+          item1 : Number,
+          item2 : Number,
+          item3 : Number,
+          item4 : Number, // 0이면 빈 칸
+          item5 : Number,
+          item6 : Number, // 장신구
+          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
+          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
+          spell1 : Number, // 스펠 D
+          spell2 : Number, // 스펠 F
         }
       )
     },
@@ -141,6 +215,27 @@ const MatchSchema = new Schema(
           summonerName : String,
           summonerLevel : Number,
           win : Boolean,
+          kda : Number,
+          goldEarned : Number,
+          totalDamageDealt : Number, // 총 딜량
+          totalDamageDealtToChampions : Number, // 챔피언 딜량
+          totalDamageTaken : Number, // 받은 피해량
+          visionWardsBoughtInGame : Number, // 제어와드 구매수
+          wardsKilled : Number, // 와드 파괴수
+          wardsPlaced : Number, // 와드 설치 수
+          cs : Number, // 미니언 + 정글(총 cs)
+          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+          item1 : Number,
+          item2 : Number,
+          item3 : Number,
+          item4 : Number, // 0이면 빈 칸
+          item5 : Number,
+          item6 : Number, // 장신구
+          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
+          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
+          spell1 : Number, // 스펠 D
+          spell2 : Number, // 스펠 F
         }
       )
     },
@@ -156,6 +251,27 @@ const MatchSchema = new Schema(
           summonerName : String,
           summonerLevel : Number,
           win : Boolean,
+          kda : Number,
+          goldEarned : Number,
+          totalDamageDealt : Number, // 총 딜량
+          totalDamageDealtToChampions : Number, // 챔피언 딜량
+          totalDamageTaken : Number, // 받은 피해량
+          visionWardsBoughtInGame : Number, // 제어와드 구매수
+          wardsKilled : Number, // 와드 파괴수
+          wardsPlaced : Number, // 와드 설치 수
+          cs : Number, // 미니언 + 정글(총 cs)
+          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+          item1 : Number,
+          item2 : Number,
+          item3 : Number,
+          item4 : Number, // 0이면 빈 칸
+          item5 : Number,
+          item6 : Number, // 장신구
+          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
+          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
+          spell1 : Number, // 스펠 D
+          spell2 : Number, // 스펠 F
         }
       )
     },
@@ -171,6 +287,27 @@ const MatchSchema = new Schema(
           summonerName : String,
           summonerLevel : Number,
           win : Boolean,
+          kda : Number,
+          goldEarned : Number,
+          totalDamageDealt : Number, // 총 딜량
+          totalDamageDealtToChampions : Number, // 챔피언 딜량
+          totalDamageTaken : Number, // 받은 피해량
+          visionWardsBoughtInGame : Number, // 제어와드 구매수
+          wardsKilled : Number, // 와드 파괴수
+          wardsPlaced : Number, // 와드 설치 수
+          cs : Number, // 미니언 + 정글(총 cs)
+          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+          item1 : Number,
+          item2 : Number,
+          item3 : Number,
+          item4 : Number, // 0이면 빈 칸
+          item5 : Number,
+          item6 : Number, // 장신구
+          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
+          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
+          spell1 : Number, // 스펠 D
+          spell2 : Number, // 스펠 F
         }
       )
     },
@@ -186,6 +323,27 @@ const MatchSchema = new Schema(
           summonerName : String,
           summonerLevel : Number,
           win : Boolean,
+          kda : Number,
+          goldEarned : Number,
+          totalDamageDealt : Number, // 총 딜량
+          totalDamageDealtToChampions : Number, // 챔피언 딜량
+          totalDamageTaken : Number, // 받은 피해량
+          visionWardsBoughtInGame : Number, // 제어와드 구매수
+          wardsKilled : Number, // 와드 파괴수
+          wardsPlaced : Number, // 와드 설치 수
+          cs : Number, // 미니언 + 정글(총 cs)
+          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+          item1 : Number,
+          item2 : Number,
+          item3 : Number,
+          item4 : Number, // 0이면 빈 칸
+          item5 : Number,
+          item6 : Number, // 장신구
+          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
+          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
+          spell1 : Number, // 스펠 D
+          spell2 : Number, // 스펠 F
         }
       )
     },
@@ -201,6 +359,27 @@ const MatchSchema = new Schema(
           summonerName : String,
           summonerLevel : Number,
           win : Boolean,
+          kda : Number,
+          goldEarned : Number,
+          totalDamageDealt : Number, // 총 딜량
+          totalDamageDealtToChampions : Number, // 챔피언 딜량
+          totalDamageTaken : Number, // 받은 피해량
+          visionWardsBoughtInGame : Number, // 제어와드 구매수
+          wardsKilled : Number, // 와드 파괴수
+          wardsPlaced : Number, // 와드 설치 수
+          cs : Number, // 미니언 + 정글(총 cs)
+          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+          item1 : Number,
+          item2 : Number,
+          item3 : Number,
+          item4 : Number, // 0이면 빈 칸
+          item5 : Number,
+          item6 : Number, // 장신구
+          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
+          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
+          spell1 : Number, // 스펠 D
+          spell2 : Number, // 스펠 F
         }
       )
     },
@@ -216,6 +395,27 @@ const MatchSchema = new Schema(
           summonerName : String,
           summonerLevel : Number,
           win : Boolean,
+          kda : Number,
+          goldEarned : Number,
+          totalDamageDealt : Number, // 총 딜량
+          totalDamageDealtToChampions : Number, // 챔피언 딜량
+          totalDamageTaken : Number, // 받은 피해량
+          visionWardsBoughtInGame : Number, // 제어와드 구매수
+          wardsKilled : Number, // 와드 파괴수
+          wardsPlaced : Number, // 와드 설치 수
+          cs : Number, // 미니언 + 정글(총 cs)
+          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+          item1 : Number,
+          item2 : Number,
+          item3 : Number,
+          item4 : Number, // 0이면 빈 칸
+          item5 : Number,
+          item6 : Number, // 장신구
+          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
+          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
+          spell1 : Number, // 스펠 D
+          spell2 : Number, // 스펠 F
         }
       )
     }
