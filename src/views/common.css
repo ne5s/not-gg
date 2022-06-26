@@ -130,3 +130,6 @@ nav {
 .account > li {
     margin-left: 10px;
 }
+.hide {
+    display: none;
+}

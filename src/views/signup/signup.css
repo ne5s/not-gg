@@ -48,3 +48,9 @@ input:-webkit-autofill {
 .submit {
   margin: 20px 0 0px;
 }
+
+.fail {
+  font-size: 12px;
+  color: #D31A45;
+  padding-top: 10px;
+}
