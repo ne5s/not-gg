@@ -23,7 +23,7 @@ const UserSchema = new Schema(
       required: false,
       default: 'basic-user',
     },
-    profileIconId : {
+    profileIconId : { // profileIcon -> https://ddragon.leagueoflegends.com/cdn/12.12.1/img/profileicon/6.png
       type : Number
     },
     summonerLevel : {
