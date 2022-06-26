@@ -1,0 +1,72 @@
+h3 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+}
+
+#rank-head {
+    width: 100%;
+    margin-left: 300px;
+}
+
+.elice-btn {
+    width: 140px;
+    height: 50px;
+
+    background: #EAEAFE;
+    border-radius: 5px;
+    border: none;
+
+    align-items: center;
+    text-align: center;
+}
+
+.rank-category {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    color: #6667AB;
+}
+
+.rank-container {
+    background: #F7F7F9;
+}
+
+#rank-table {
+    width: 100%;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+tr {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+
+    /* main/black */
+
+    color: #000000;
+}
+
+thead > tr {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 3rem;
+
+    /* main/gray-dark */
+
+    color: #6C6C6C;
+}
+
+tbody > tr {
+    line-height: 3rem;
+}
+tbody > tr > td:nth-child(2) {
+    font-weight: 700;
+}        
