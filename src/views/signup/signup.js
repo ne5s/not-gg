@@ -1,4 +1,4 @@
-// import * as Api from '/api.js';
+import * as Api from '/api.js';
 
 // 요소(element), input 혹은 상수
 const idInput = document.querySelector('#idInput');
@@ -75,14 +75,19 @@ async function handleSubmit(e) {
 
   // 회원가입 api 요청
   try {
-    const data = { fullName, email, password };
+    const data = { fullName, id, password };
 
     await Api.post('/api/signup', data);
 
     alert(`정상적으로 회원가입되었습니다.`);
 
+    const result = await Api.post('/api/user/login', {id, password})
+    const token = result.token;
+
+    localStorage.setItem('token', token);
+
     // 로그인 페이지 이동
-    window.location.href = '/login';
+    window.location.href = '/';
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
