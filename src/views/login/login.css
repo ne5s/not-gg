@@ -1,58 +1,18 @@
-body {
-  background: #F7F7F9;
-}
-.container {
-  width: 532px;
-  background: #FFFFFF;
-  padding: 50px;
-  margin: 100px auto 50px;
+.login-form-container {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  font-size: 16px;
-}
-.container > h1 {
-  font-weight: 600;
-  font-size: 24px;
-}
-.form-box {
-  padding: 40px 0 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 410px;
-}
-.form-group {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 16px;
-  width: 100%;
-}
-.form-group > input {
-border: 1px solid #ECECEC;
-  padding: 15px 20px;
-  margin-top: 6px;
-  font-size: 16px;
+  height: 85vh;
 }
 
-.form-group > input:focus {
-outline: none !important;
-border: 1px solid #6667AB;
-background-color: #fff;
-}
-input:-webkit-autofill {
--webkit-box-shadow: 0 0 0 1000px #fff inset;
+.login-form-box {
+  width: 30rem;
 }
 
-.submit {
-  margin: 20px 0 20px;
+.login-form-box .title {
+  text-align: center;
 }
-.container > span {
-  font-size: 14px;
-  color: #999999;
-}
-.atag {
-  color: #6667AB;
-  border-bottom: 1px solid #6667AB;
+
+.login-form-box .button {
+  font-weight: bold;
 }

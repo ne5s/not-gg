@@ -18,18 +18,16 @@ userRouter.post('/register', async (req, res, next) => {
     }
 
     // req (request)의 body 에서 데이터 가져오기
-    const { id, password, name, summonerName } = req.body;
-    
+    const fullName = req.body.fullName;
+    const email = req.body.email;
+    const password = req.body.password;
+
     // 위 데이터를 유저 db에 추가하기
     const newUser = await userService.addUser({
-      id, 
-      password, 
-      name, 
-      summonerName
+      fullName,
+      email,
+      password,
     });
-
-    // 소환사 등록 시 해당 소환사명으로 매치 검색 위해 req.currentUserId를 통해 유저의 소환사명에 접근 가능하게 됨
-    req.currentUserId = summonerName;
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
@@ -37,7 +35,7 @@ userRouter.post('/register', async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-},);
+});
 
 // 로그인 api (아래는 /login 이지만, 실제로는 /api/login로 요청해야 함.)
 userRouter.post('/login', async function (req, res, next) {
@@ -50,10 +48,11 @@ userRouter.post('/login', async function (req, res, next) {
     }
 
     // req (request) 에서 데이터 가져오기
-    const {id, password} = req.body;
+    const email = req.body.email;
+    const password = req.body.password;
 
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
-    const userToken = await userService.getUserToken({ id, password });
+    const userToken = await userService.getUserToken({ email, password });
 
     // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
     res.status(200).json(userToken);
@@ -79,7 +78,7 @@ userRouter.get('/userlist', loginRequired, async function (req, res, next) {
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
 userRouter.patch(
-  '/users/:id',
+  '/users/:userId',
   loginRequired,
   async function (req, res, next) {
     try {
@@ -92,13 +91,14 @@ userRouter.patch(
       }
 
       // params로부터 id를 가져옴
-      const id = req.params.id;
+      const userId = req.params.userId;
 
       // body data 로부터 업데이트할 사용자 정보를 추출함.
-      const { password, summonerName, 
-        role, puuid, encryptedSummonerId, profileIconId,
-        summonerLevel} = req.body;
-      
+      const fullName = req.body.fullName;
+      const password = req.body.password;
+      const address = req.body.address;
+      const phoneNumber = req.body.phoneNumber;
+      const role = req.body.role;
 
       // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
       const currentPassword = req.body.currentPassword;
@@ -108,16 +108,16 @@ userRouter.patch(
         throw new Error('정보를 변경하려면, 현재의 비밀번호가 필요합니다.');
       }
 
-      const userInfoRequired = { id, currentPassword };
+      const userInfoRequired = { userId, currentPassword };
 
       // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
       // 보내주었다면, 업데이트용 객체에 삽입함.
       const toUpdate = {
-        ...(summonerName && { summonerName }),
+        ...(fullName && { fullName }),
         ...(password && { password }),
-        ...(profileIconId && { profileIconId }),
+        ...(address && { address }),
+        ...(phoneNumber && { phoneNumber }),
         ...(role && { role }),
-        ...(summonerLevel && { summonerLevel }),
       };
 
       // 사용자 정보를 업데이트함.

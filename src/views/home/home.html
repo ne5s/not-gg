@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>not-gg</title>
+    <title>쇼핑-n팀</title>
     <!-- 아이콘 -->
     <link
       rel="icon"
@@ -11,75 +11,70 @@
       sizes="16x16"
       href="/elice-rabbit-favicon.png"
     />
-    <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="home.css" />
-    <link rel="stylesheet" href="../common.css" />
     <script src="home.js" type="module" defer></script>
   </head>
   <body>
-    <div class="background">
-      <div class="wrapper">
-        <div class="wrapper-img" style="background-image: url(https://www.leagueoflegends.com/static/hud-2-2d4279d50f4fffe4012eda7c7f31b5fd.jpg);"></div>
+    <!-- 헤더 -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="container mt-3">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="/elice-rabbit.png" width="30" height="30" />
+            <span class="has-text-link">쇼핑-n팀</span>
+          </a>
+
+          <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+            <ul id="navbar">
+              <li><a href="/login">로그인</a></li>
+              <li><a href="/register">회원가입</a></li>
+              <li>
+                <a href="#cart" aria-current="page">
+                  <span class="icon">
+                    <i class="fas fa-cart-shopping"></i>
+                  </span>
+                  <span>카트</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="div-container">
+      <div class="landing" id="landingDiv">
+        <h1>랜딩 페이지</h1>
+      </div>
+      <div class="greeting" id="greetingDiv">
+        <h1>안녕하세요!</h1>
       </div>
     </div>
-    <header>
-      <nav>
-        <div class="logo"><a href="/">Logo.</a></div>
-        <div>
-          <ul class="nav-list">
-            <li><a href="/ranking/elice">랭킹조회</a></li>
-            <li><a href="#">듀오</a></li>
-            <li><a href="#">내전</a></li>
-          </ul>
-        </div>
-      </nav>
-      <div>
-        <ul class="account">
-          <li><a href="/login" class="btn btn--reverse">로그인</a></li>
-          <li><a href="/singup" class="btn">회원가입</a></li>
-        </ul>
-      </div>
-    </header>
 
-    <main>
-      <div class="main-container">
-        <div class="title">
-          <div>Check</div>
-          <div>Your</div>
-          <span class="text">Ranking</span>
-          <span>.</span>
-        </div>
-        <div class="search-contaienr">
-          <form>
-            <input type="text" placeholder="소환사명 검색">
-          </form>
-          <button type="submit">
-            <span class="material-icons">
-              search
-            </span>
-          </button>
-        </div>
-      </div>
-      <div class="list-card">
-        <section id="card" class="card spread" OnClick="location.href ='/ranking/elice'" style="background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt7d22282a41a3a7a3/5fa99fc097f9f35d942e9bbb/Patch_10_23_Notes_Header_v2.jpg);">
-          <div class="gradient"></div>
-          <span>엘리스<br />랭킹 조회</span>
-        </section>
-        <section id="card" class="card" OnClick="location.href ='/'" style="background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt8979808f7798ecf5/6216ee875fe07272a8a2447a/2021_Key_art.jpg);">
-          <div class="gradient"></div>
-          <span>플레이타입<br />랭킹 조회</span>
-        </section>
-        <section id="card" class="card" OnClick="location.href ='/'" style="background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltf06237d0ebbe32e0/5efc23abee48da0f762bc2f2/LOL_PROMOART_4.jpg);">
-          <div class="gradient"></div>
-          <span>티어별<br />랭킹 조회</span>
-        </section>
-      </div>
-    </main>
   </body>
 </html>
