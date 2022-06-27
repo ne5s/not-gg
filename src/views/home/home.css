@@ -4,12 +4,8 @@ main {
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 50px;
-}
-
-.main-container {
-  position: relative;
-  height: 100%;
 }
 
 .title {
@@ -17,47 +13,9 @@ main {
   font-weight: 500;
   line-height: 76px;
   font-family: 'Inter', sans-serif;
-  padding-top: 80px;
 }
 .title > .text {
   color: #6667AB;
-}
-
-.search-contaienr {
-  margin-top: 80px;
-  display: flex;
-  filter: drop-shadow(10px 10px 30px rgba(0, 0, 0, 0.25));
-  z-index: 9;
-  position: absolute;
-  left: 0;
-}
-
-input {
-width: 350px;
-  height: 80px;
-border: none;
-padding: 0 40px;
-  font-size: 20px;
-}
-
-input:focus {
-outline: none !important;
-border: none;
-background-color: #fff;
-}
-input:-webkit-autofill {
--webkit-box-shadow: 0 0 0 1000px #fff inset;
-}
-.search-contaienr > button {
-  width: 80px;
-  height: 80px;
-  background: #6667AB;
-  border: none;
-  cursor: pointer;
-}
-.material-icons {
-  color: #fff;
-  font-size: 40px;
 }
 
 .list-card {
