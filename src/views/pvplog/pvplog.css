@@ -6,6 +6,14 @@
 	font-weight: 700;
 	font-style: normal;
 }
+hr {
+	margin: 7px 0;
+	color: inherit;
+	border: 0;
+	border-top: 1px solid;
+	opacity: 0.25;
+}
+
 .border-none {
 	border: none;
 }
@@ -52,6 +60,22 @@
 .fs-48 {
 	font-size: 48px;
 }
+.h40w40 {
+	height: 40px;
+	width: 40px;
+}
+.h140w140 {
+	height: 140px;
+	width: 140px;
+}
+.h28w28 {
+	height: 28px;
+	width: 28px;
+}
+.h14w14 {
+	height: 14px;
+	width: 14px;
+}
 .color-red {
 	color: #d31a45;
 }
@@ -63,6 +87,9 @@
 }
 .color-green {
 	color: #3abe87;
+}
+.color-505050 {
+	color: #505050;
 }
 .font-inter-bold {
 	font-family: 'Inter';
@@ -90,6 +117,20 @@
 	align-items: center;
 	width: 100%;
 	justify-content: space-between;
+}
+.flex-center-center-column {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.flex-center-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.flex {
+	display: flex;
 }
 /* Nav 바 */
 .navbar-toggler:focus {
@@ -134,13 +175,13 @@
 }
 .item-box {
 	padding: 0;
-	width: 380px;
-	height: 140px;
+	height: 100%;
 	display: flex;
-	margin-top: 20px;
-
 	align-items: center;
 	margin: 0 auto;
+}
+.player-tier-inf {
+	margin-top: 20px;
 }
 .icon-level-box {
 	position: relative;
@@ -186,6 +227,7 @@
 .profile-name {
 	font-size: 24px;
 	color: #000;
+	font-weight: 600;
 }
 .profile-ranking {
 	font-size: 14px;
@@ -193,29 +235,32 @@
 	margin-bottom: 2rem;
 }
 .solo-rank-inf-box {
-	padding: 0;
-	width: 380px;
-	height: 115px;
-	display: flex;
-	margin-top: 20px;
-	align-items: center;
-	margin: 0 auto;
-	box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.07);
-	border-radius: 5px;
+	width: 100%;
+	margin: 20px auto;
 	background: #ffffff;
+	padding: 20px;
+	box-shadow: 4px 4px 30px rgb(0 0 0 / 7%);
+	border-radius: 5px;
 }
 
-.solo-rank-inf-box .icon-tier-box .profile-tier-icon {
-	width: 120px;
-	height: 89px;
-}
 .rank-inf-box {
 	margin-left: 20px;
 	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 .rank-inf-box .profile-currunt-ranking {
+	color: #505050;
 }
 
+.gamebox {
+	flex: 2 0 0;
+	color: #6c6c6c;
+}
+.current-20game-winrate {
+	font-size: 16px;
+}
 .elice-rank-name-box {
 	height: 28px;
 	align-items: center;
@@ -237,7 +282,10 @@
 	margin-left: 4px;
 	margin-bottom: 2px;
 }
-
+.controlward {
+	display: flex;
+	align-items: center;
+}
 .contentsbox {
 	width: 100%;
 
@@ -247,25 +295,11 @@
 	box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.07);
 	border-radius: 5px;
 }
-.time-contents {
-	width: 188px;
-	height: 136px;
-	background: #efefef;
-	border-radius: 5px;
-	display: flex;
-	flex-direction: column;
-	padding: 15px;
-}
+
 .mobile-padding-top {
 	padding-top: 1rem;
 }
 @media (max-width: 1400px) {
-	.time-contents {
-		width: 168px;
-		height: 136px;
-		background: #efefef;
-		border-radius: 5px;
-	}
 	.mobile-padding-top {
 		padding-top: 0.25rem;
 	}
@@ -275,19 +309,11 @@
 	.row {
 		flex-direction: column-reverse;
 	}
-	.item-box {
-		margin-top: 20px !important;
-	}
 	.contentsbox {
 		margin-top: 0px;
 		width: 545px;
 	}
-	.time-contents {
-		width: 158px;
-		height: 136px;
-		background: #efefef;
-		border-radius: 5px;
-	}
+
 	.mobile-padding-top {
 		padding-top: 1rem;
 	}
@@ -308,8 +334,49 @@
 	.contentsbox {
 		width: 95%;
 	}
-	.time-contents {
-		width: 30%;
-		height: 120px;
-	}
+}
+
+/*  추가 ㅠㅜㅠㅜㅠㅜ */
+.gamelogbox {
+	width: 100%;
+	margin: 10px auto;
+	background: #ffffff;
+
+	box-shadow: 4px 4px 30px rgb(0 0 0 / 7%);
+	border-radius: 5px;
+}
+.line-pick {
+	padding: 0;
+	width: 20px;
+	height: 74px;
+	background-color: #efefef;
+	margin: 0 auto;
+}
+.blueteams,
+.redteams {
+	font-size: 11px;
+	width: 140px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+.pd-1 {
+	padding: 10px 0;
+	box-sizing: border-box;
+}
+.redteam,
+.blueteam {
+	margin: 3px 0;
+}
+.champImg {
+	margin-right: 3px;
+}
+.wincolorline {
+	height: 80px;
+	width: 10px;
+	background-color: #4990e2;
+}
+.topborder:not(:first-child) {
+	color: inherit;
+	border-top: 1px solid #e5e5e5;
 }
