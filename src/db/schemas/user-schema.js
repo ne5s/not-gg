@@ -2,7 +2,11 @@ import { Schema } from 'mongoose';
 
 const UserSchema = new Schema(
   {
-    id: {
+    email: {
+      type: String,
+      required: true,
+    },
+    fullName: {
       type: String,
       required: true,
     },
@@ -10,12 +14,21 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    name: {
+    phoneNumber: {
       type: String,
-      required: true,
+      required: false,
     },
-    summonerName: {
-      type: String,
+    address: {
+      type: new Schema(
+        {
+          postalCode: String,
+          address1: String,
+          address2: String,
+        },
+        {
+          _id: false,
+        }
+      ),
       required: false,
     },
     role: {
@@ -23,23 +36,6 @@ const UserSchema = new Schema(
       required: false,
       default: 'basic-user',
     },
-    profileIconId : { // profileIcon -> https://ddragon.leagueoflegends.com/cdn/12.12.1/img/profileicon/6.png
-      type : Number
-    },
-    summonerLevel : {
-      type : Number
-    },
-    matchIdList: [
-      {
-        type : String,
-        required: false,
-        default : 'before fetch'
-      },
-    ],
-    loginMethod : {
-      type : String,
-      default : 'basic' // basic / kakao(카카오 로그인) / google(구글 로그인)
-    }
   },
   {
     collection: 'users',
