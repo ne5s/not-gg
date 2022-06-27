@@ -22,7 +22,15 @@ class UserService {
 			);
 		}
 
-		// 이메일 중복은 이제 아니므로, 회원가입을 진행함
+		// summonerName 중복 확인
+		const user2 = await this.userModel.findBySummonerName(summonerName);
+		if (user2) {
+			throw new Error(
+				'이 소환사명은 현재 사용중입니다. 다른 소환사명을 입력해 주세요.',
+			);
+		}
+
+		// id/summonerName 중복은 이제 아니므로, 회원가입을 진행함
 
 		// 우선 비밀번호 해쉬화(암호화)
 		const hashedPassword = await bcrypt.hash(password, 10);

@@ -4,7 +4,7 @@ import { SummonerSoloSchema } from '../schemas/summoner-solo-schema';
 const SummonerSolo = model('summonerSolo', SummonerSoloSchema);
 
 export class SummonerSoloModel {
-	async findBysummonerName(summonerName) {
+	async findBySummonerName(summonerName) {
 		const summonerSolo = await SummonerSolo.findOne({ summonerName });
 		return summonerSolo;
 	}

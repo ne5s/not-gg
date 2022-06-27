@@ -9,31 +9,15 @@ class MatchService {
 	// match 데이터 찾은 뒤 추가
 	async addMatch(matchInfo) {
 		// 객체 destructuring
-		const {
-			matchId,
-			gameStartTimestamp,
-			gameDuration,
-			gameEndTimestamp,
-			queueId,
-			blueBans,
-			redBans,
-			win,
-			user1,
-			user2,
-			user3,
-			user4,
-			user5,
-			user6,
-			user7,
-			user8,
-			user9,
-			user10,
-		} = matchInfo;
+		const { matchId } = matchInfo;
 
 		// 아이디 중복 확인
 		const match = await this.matchModel.findById(matchId);
 		if (match) {
-			throw new Error('이 match 정보는 이미 등록되어 있습니다.');
+			console.log(
+				'이 match 정보는 이미 등록되어 있습니다(같은 게임을 플레이한 유저의 검색으로)',
+			);
+			return;
 		}
 
 		// matchId 중복이 아니므로 db에 저장

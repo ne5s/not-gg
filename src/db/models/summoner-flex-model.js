@@ -4,7 +4,7 @@ import { SummonerFlexSchema } from '../schemas/summoner-flex-schema';
 const SummonerFlex = model('summonerFlex', SummonerFlexSchema);
 
 export class SummonerFlexModel {
-	async findBysummonerName(summonerName) {
+	async findBySummonerName(summonerName) {
 		const summonerSolo = await SummonerFlex.findOne({ summonerName });
 		return summonerSolo;
 	}

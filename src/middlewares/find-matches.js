@@ -52,13 +52,15 @@ async function findMatches(req, res, next) {
 		const headers = {
 			'X-Riot-Token': process.env.RIOT_API_KEY,
 		};
+		const encodedSummonerName = encodeURI(joinedSummonerName);
 
 		let response = await axios.get(
-			`https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/${joinedSummonerName}`,
+			`https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodedSummonerName}`,
 			{ headers },
 		);
 		const { id, profileIconId, puuid, summonerLevel } = response.data;
 		console.log(id, profileIconId, puuid, summonerLevel);
+
 		// console.log(
 		// 	`https://ddragon.leagueoflegends.com/cdn/${recent_version}/img/profileicon/${profileIconId}.png`,
 		// );
@@ -73,15 +75,15 @@ async function findMatches(req, res, next) {
 		);
 		const { tier, rank, summonerName, leaguePoints, wins, losses, miniSeries } =
 			InfoData.data[0];
-		console.log(
-			tier,
-			rank,
-			summonerName,
-			leaguePoints,
-			wins,
-			losses,
-			miniSeries,
-		);
+		// console.log(
+		// 	tier,
+		// 	rank,
+		// 	summonerName,
+		// 	leaguePoints,
+		// 	wins,
+		// 	losses,
+		// 	miniSeries,
+		// );
 		db_solo_rank = {
 			tier,
 			rank,
@@ -89,14 +91,14 @@ async function findMatches(req, res, next) {
 			leaguePoints,
 			wins,
 			losses,
+			winRate: (wins / (wins + losses)).toFixed(4) * 100,
 			...(miniSeries && { miniSeries }), // 없을 수 있어서
 		};
 
-		// 솔로랭크, 자유랭크 DB 넣기
+		// 솔로랭크 DB 넣기
 		const createdNewSolo = await summonerSoloService.addSummonerSolo(
 			db_solo_rank,
 		);
-
 		// 자유랭크 있는 지 확인, 있으면 가져와서 변수에 넣음
 		if (InfoData.data[1]) {
 			const {
@@ -117,7 +119,6 @@ async function findMatches(req, res, next) {
 			// 	losses2,
 			// 	miniSeries2,
 			// );
-
 			db_flex_rank = {
 				tier: tier2,
 				rank: rank2,
@@ -125,6 +126,7 @@ async function findMatches(req, res, next) {
 				leaguePoints: leaguePoints2,
 				wins: wins2,
 				losses: losses2,
+				winRate: (wins2 / (wins2 + losses2)).toFixed(4) * 100,
 				...(miniSeries2 && { miniSeries: miniSeries2 }), // 없을 수 있어서
 			};
 			// 자유랭크 DB 넣기
@@ -152,18 +154,23 @@ async function findMatches(req, res, next) {
 				{ headers },
 			);
 			const gameDurationForCS = (match.data.info.gameDuration / 60).toFixed(1);
-			let gameDuration = match.data.info.gameDuration / 60;
+			let gameDuration = (match.data.info.gameDuration / 60).toFixed(2);
 			gameDuration = String(gameDuration).split('.');
-			gameDuration = gameDuration[0] + ':' + (gameDuration[1] / 100) * 60;
+			gameDuration =
+				gameDuration[0] +
+				'분 ' +
+				Math.round((gameDuration[1] / 100) * 60) +
+				'초';
 			console.log(gameDuration);
-			const gameStartTimestamp = match.data.info.gameStartTimestamp;
-			const gameEndTimestamp = match.data.info.gameEndTimestamp;
+			const gameStartTimestamp = new Date(match.data.info.gameStartTimestamp);
+			const gameEndTimestamp = new Date(match.data.info.gameEndTimestamp);
 			const queueId = match.data.info.queueId;
 
 			// match_data 는 [ {} * 10 ] 의 배열
 			const match_data = match.data.info.participants;
 			let users = [];
-			let killPlusAssist = [];
+			let whoIsWin = '';
+			const game_user_dict = {};
 			for (let i of match_data) {
 				console.log(i.champLevel);
 				const champLevel = i.champLevel;
@@ -263,90 +270,83 @@ async function findMatches(req, res, next) {
 					subStyle: runeData[1],
 				});
 			}
-			console.log(game_user_dict);
+			let blueTotalKills = 0;
+			for (let j = 0; j < 5; j++) {
+				blueTotalKills += users[j].kills;
+				if (users[j].win) {
+					whoIsWin = 'blue';
+				}
+			}
+			let redTotalKills = 0;
+			for (let j = 5; j < 10; j++) {
+				redTotalKills += users[j].kills;
+				if (users[j].win) {
+					whoIsWin = 'red';
+				}
+			}
 
+			for (let j = 0; j < 5; j++) {
+				const killParticipation =
+					((users[j].kills + users[j].assists) / blueTotalKills).toFixed(2) *
+					100;
+				users[j][killParticipation] = killParticipation;
+			}
+			for (let j = 5; j < 10; j++) {
+				const killParticipation =
+					((users[j].kills + users[j].assists) / redTotalKills).toFixed(2) *
+					100;
+				users[j][killParticipation] = killParticipation;
+			}
+			console.log(game_user_dict);
+			const listForGameSimply = Object.entries(game_user_dict);
+			const gameSimply = {
+				user1Id: listForGameSimply[0][0],
+				user1Image: listForGameSimply[0][1],
+				user2Id: listForGameSimply[1][0],
+				user2Image: listForGameSimply[1][1],
+				user3Id: listForGameSimply[2][0],
+				user3Image: listForGameSimply[2][1],
+				user4Id: listForGameSimply[3][0],
+				user4Image: listForGameSimply[3][1],
+				user5Id: listForGameSimply[4][0],
+				user5Image: listForGameSimply[4][1],
+				user6Id: listForGameSimply[5][0],
+				user6Image: listForGameSimply[5][1],
+				user7Id: listForGameSimply[6][0],
+				user7Image: listForGameSimply[6][1],
+				user8Id: listForGameSimply[7][0],
+				user8Image: listForGameSimply[7][1],
+				user9Id: listForGameSimply[8][0],
+				user9Image: listForGameSimply[8][1],
+				user10Id: listForGameSimply[9][0],
+				user10Image: listForGameSimply[9][1],
+			};
 			db_match_data = {
 				matchId,
 				gameDuration,
 				gameStartTimestamp,
 				gameEndTimestamp,
 				queueId,
+				win: whoIsWin,
+				user1: users[0],
+				user2: users[1],
+				user3: users[2],
+				user4: users[3],
+				user5: users[4],
+				user6: users[5],
+				user7: users[6],
+				user8: users[7],
+				user9: users[8],
+				user10: users[9],
+				gameSimply,
 			};
+			const createdMatch = await matchService.addMatch(db_match_data);
 		}
-
-		const match = await axios.get(
-			`https://asia.api.riotgames.com/lol/match/v5/matches/${matches.data[0]}`,
-			{ headers },
-		);
-		const gameDuration = (match.data.info.gameDuration / 60).toFixed(1);
-		console.log(gameDuration);
-		const match_data = match.data.info.participants;
-		const game_user_dict = {};
-		for (let i of match_data) {
-			if (i.summonerName == summonerName) {
-				console.log(i.champLevel);
-				console.log(
-					`https://ddragon.leagueoflegends.com/cdn/${recent_version}/img/champion/${i.championName}.png`,
-				);
-				const assists = i.assists;
-				const deaths = i.deaths;
-				const kills = i.kills;
-				const kill_average = ((kills + assists) / deaths).toFixed(2);
-				console.log(kill_average);
-				const total_kill = i.totalMinionsKilled + i.neutralMinionsKilled;
-				console.log(total_kill);
-				const average_kill = Math.floor((total_kill / gameDuration) * 10) / 10;
-				console.log(average_kill);
-				console.log(i.teamPosition);
-				console.log(
-					`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/spell/${
-						spell_jsoned[i.summoner1Id]
-					}.png`,
-				);
-				console.log(
-					`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/spell/${
-						spell_jsoned[i.summoner2Id]
-					}.png`,
-				);
-
-				const perk1 = i.perks.styles[0].style;
-				const perk1_2 = i.perks.styles[0].selections[0].perk;
-				const perk2 = i.perks.styles[1].style;
-				const runeData = Rune_Check(perk1, perk1_2, perk2);
-				console.log(runeData);
-				const killParticipation =
-					i.challenges.killParticipation.toFixed(2) * 100;
-				console.log(killParticipation);
-				console.log(
-					`https://ddragon.leagueoflegends.com/cdn/${recent_version}/img/item/${i.item0}.png`,
-				);
-				console.log(
-					`https://ddragon.leagueoflegends.com/cdn/${recent_version}/img/item/${i.item1}.png`,
-				);
-				console.log(
-					`https://ddragon.leagueoflegends.com/cdn/${recent_version}/img/item/${i.item2}.png`,
-				);
-				console.log(
-					`https://ddragon.leagueoflegends.com/cdn/${recent_version}/img/item/${i.item3}.png`,
-				);
-				console.log(
-					`https://ddragon.leagueoflegends.com/cdn/${recent_version}/img/item/${i.item4}.png`,
-				);
-				console.log(
-					`https://ddragon.leagueoflegends.com/cdn/${recent_version}/img/item/${i.item5}.png`,
-				);
-				console.log(
-					`https://ddragon.leagueoflegends.com/cdn/${recent_version}/img/item/${i.item6}.png`,
-				);
-				console.log(i.visionWardsBoughtInGame);
-				console.log(i.win);
-			}
-			const user_nick = i.summonerName;
-			const user_icon = `https://ddragon.leagueoflegends.com/cdn/${recent_version}/img/champion/${i.championName}.png`;
-			game_user_dict[user_nick] = user_icon;
-		}
-		console.log(game_user_dict);
+		console.log('match 데이터까지 저장 완료');
 	} catch (error) {
+		// if (error.response.status === 403) {
+		// 	throw new Error('RIOT API Key 문제입니다.');
+		// }
 		throw new Error(error.message);
 	}
 }

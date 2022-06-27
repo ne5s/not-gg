@@ -1,4 +1,4 @@
-import { summonerFlexModel } from '../db';
+import { summonerFlexModel, userModel } from '../db';
 
 class SummonerFlexService {
 	// 본 파일의 맨 아래에서, new UserService(userModel) 하면, 이 함수의 인자로 전달됨
@@ -12,7 +12,7 @@ class SummonerFlexService {
 		const { summonerName } = flexInfo;
 
 		// 아이디 중복 확인
-		const user = await this.summonerFlexModel.findBysummonerName(summonerName);
+		const user = await userModel.findBySummonerName(summonerName);
 		if (user) {
 			throw new Error(
 				'이 소환사명은 현재 사용중입니다. 다른 소환사명을 입력해 주세요.',
@@ -27,7 +27,7 @@ class SummonerFlexService {
 	}
 
 	async getFlexBySummonerName(summonerName) {
-		const userFlex = await this.summonerFlexModel.findBysummonerName(
+		const userFlex = await this.summonerFlexModel.findBySummonerName(
 			summonerName,
 		);
 		return userFlex;
@@ -42,7 +42,7 @@ class SummonerFlexService {
 	// 전적 갱신 시
 	async setFlex(summonerName, toUpdate) {
 		// 우선 해당 summonerName이 db에 있는지 확인
-		let userFlex = await this.summonerFlexModel.findBysummonerName(
+		let userFlex = await this.summonerFlexModel.findBySummonerName(
 			summonerName,
 		);
 

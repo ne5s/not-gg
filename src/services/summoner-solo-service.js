@@ -1,4 +1,4 @@
-import { summonerSoloModel } from '../db';
+import { summonerSoloModel, userModel } from '../db';
 
 class SummonerSoloService {
 	// 본 파일의 맨 아래에서, new UserService(userModel) 하면, 이 함수의 인자로 전달됨
@@ -10,24 +10,22 @@ class SummonerSoloService {
 	async addSummonerSolo(soloInfo) {
 		// 객체 destructuring
 		const { summonerName } = soloInfo;
-
+		console.log(summonerName);
 		// 아이디 중복 확인
-		const user = await this.summonerSoloModel.findBysummonerName(summonerName);
+		const user = await userModel.findBySummonerName(summonerName);
 		if (user) {
 			throw new Error(
 				'이 소환사명은 현재 사용중입니다. 다른 소환사명을 입력해 주세요.',
 			);
 		}
-
 		// 소환사명 중복은 이제 아니므로, DB 추가
 
 		const createdNewSolo = await this.summonerSoloModel.create(soloInfo);
-
 		return createdNewSolo;
 	}
 
 	async getSoloBySummonerName(summonerName) {
-		const userSolo = await this.summonerSoloModel.findBysummonerName(
+		const userSolo = await this.summonerSoloModel.findBySummonerName(
 			summonerName,
 		);
 		return userSolo;
@@ -42,7 +40,7 @@ class SummonerSoloService {
 	// 전적 갱신 시
 	async setSolo(summonerName, toUpdate) {
 		// 우선 해당 summonerName이 db에 있는지 확인
-		let userSolo = await this.summonerSoloModel.findBysummonerName(
+		let userSolo = await this.summonerSoloModel.findBySummonerName(
 			summonerName,
 		);
 
