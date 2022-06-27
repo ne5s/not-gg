@@ -29,3 +29,19 @@
 // 		return data;
 // 	})
 // 	.then((res) => log(res));
+
+// topbutton
+let topBtn = document.querySelector('.top-circle');
+
+window.addEventListener('scroll', () => {
+	if (this.scrollY > 200) {
+		topBtn.classList.add('on');
+	} else {
+		topBtn.classList.remove('on');
+	}
+});
+
+topBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+	window.scrollTo({ top: 0, behavior: 'smooth' });
+});
