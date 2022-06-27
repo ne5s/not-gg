@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>이상한 리그의 엘리스</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/elice-rabbit-favicon.png"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="../common.css" />
+    <link rel="stylesheet" href="./signup.css" />
+    <script src="signup.js" type="module" defer></script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div class="header-logo">
+      <a class="navbar-logo" href="/">이상한<br /><span class="color-red">리그</span>의<br />엘리스</a>
+    </div>
+
+    <div class="container">
+      <h1>회원가입</h1>
+      <form action="" class="form-box">
+        <div class="form-group">
+          <label for="idInput">아이디</label>
+          <input type="text" placeholder="아이디" id="idInput">
+          <div class="fail failid-message hide">
+            아이디는 4글자 이상이어야 합니다.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="passwordInput">비밀번호</label>
+          <input type="password" placeholder="비밀번호" id="passwordInput">
+          <div class="fail failpass-message hide">
+            비밀번호는 4글자 이상이어야 합니다.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="passwordConfirmInput">비밀번호 확인</label>
+          <input id="passwordConfirmInput" type="password" placeholder="비밀번호 확인">
+          <div class="fail failpassconfirm-message hide">
+            비밀번호와 일치하지 않습니다.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="fullNameInput">이름</label>
+          <input type="text" placeholder="이름" id="fullNameInput">
+          <div class="fail failname-message hide">
+            이름은 2글자 이상이어야 합니다.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="summonerInput">소환사 닉네임</label>
+          <input id="summonerInput" type="text" placeholder="소환사 닉네임">
+        </div>
+        <input type="submit" value="회원가입" class="submit" id="submitButton">
+      </form>
+    </div>
+  </body>
+</html>

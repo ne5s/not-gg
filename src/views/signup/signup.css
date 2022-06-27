@@ -46,13 +46,11 @@ input:-webkit-autofill {
 }
 
 .submit {
-  margin: 20px 0 20px;
+  margin: 20px 0 0px;
 }
-.container > span {
-  font-size: 14px;
-  color: #999999;
-}
-.atag {
-  color: #6667AB;
-  border-bottom: 1px solid #6667AB;
+
+.fail {
+  font-size: 12px;
+  color: #D31A45;
+  padding-top: 10px;
 }
