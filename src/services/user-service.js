@@ -12,10 +12,10 @@ class UserService {
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring
-    const { email, fullName, password } = userInfo;
+    const { id, password, name, summonerName } = userInfo;
 
-    // 이메일 중복 확인
-    const user = await this.userModel.findByEmail(email);
+    // 아이디 중복 확인
+    const user = await this.userModel.findById(id);
     if (user) {
       throw new Error(
         '이 이메일은 현재 사용중입니다. 다른 이메일을 입력해 주세요.'
@@ -27,7 +27,7 @@ class UserService {
     // 우선 비밀번호 해쉬화(암호화)
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUserInfo = { fullName, email, password: hashedPassword };
+    const newUserInfo = { ...userInfo, password: hashedPassword };
 
     // db에 저장
     const createdNewUser = await this.userModel.create(newUserInfo);
@@ -38,17 +38,17 @@ class UserService {
   // 로그인
   async getUserToken(loginInfo) {
     // 객체 destructuring
-    const { email, password } = loginInfo;
+    const { id, password } = loginInfo;
 
-    // 우선 해당 이메일의 사용자 정보가  db에 존재하는지 확인
-    const user = await this.userModel.findByEmail(email);
+    // 우선 해당 id가  db에 존재하는지 확인
+    const user = await this.userModel.findById(id);
     if (!user) {
       throw new Error(
-        '해당 이메일은 가입 내역이 없습니다. 다시 한 번 확인해 주세요.'
+        '해당 ID는 가입 내역이 없습니다. 다시 한 번 확인해 주세요.'
       );
     }
 
-    // 이제 이메일은 문제 없는 경우이므로, 비밀번호를 확인함
+    // 이제 ID는 문제 없는 경우이므로, 비밀번호를 확인함
 
     // 비밀번호 일치 여부 확인
     const correctPasswordHash = user.password; // db에 저장되어 있는 암호화된 비밀번호
@@ -74,7 +74,7 @@ class UserService {
     return { token };
   }
 
-  // 사용자 목록을 받음.
+  // 사용자 전체 목록을 받음.
   async getUsers() {
     const users = await this.userModel.findAll();
     return users;
@@ -83,10 +83,10 @@ class UserService {
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
   async setUser(userInfoRequired, toUpdate) {
     // 객체 destructuring
-    const { userId, currentPassword } = userInfoRequired;
+    const { id, currentPassword } = userInfoRequired;
 
     // 우선 해당 id의 유저가 db에 있는지 확인
-    let user = await this.userModel.findById(userId);
+    let user = await this.userModel.findById(id);
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!user) {
@@ -120,12 +120,39 @@ class UserService {
 
     // 업데이트 진행
     user = await this.userModel.update({
-      userId,
+      id,
       update: toUpdate,
     });
 
     return user;
   }
+  
+  // 계정 찾기(by id)
+  async getUser(id) {
+    const user = await this.userModel.findById(id);
+    return user;
+  }
+
+  // 계정 찾기(by name)
+  async getUser(name) {
+    const user = await this.userModel.findByName(name);
+    return user;
+  }
+
+  // 계정 찾기(by summonerName)
+  async getUser(summonerName) {
+    const user = await this.userModel.findBySummonerName(summonerName);
+    return user;
+  }
+
+  // 유저 삭제
+  async deleteUser(id) {
+    await this.userModel.delete(id);
+    return;
+  }
+
+
+
 }
 
 const userService = new UserService(userModel);

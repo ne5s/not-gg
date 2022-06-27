@@ -1,0 +1,116 @@
+/* common */
+@font-face {
+	font-family: 'PyeongChangPeace-Bold';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
+.border-none {
+	border: none;
+}
+.border-none:hover {
+	border: none;
+}
+.navbar-toggler:focus {
+	box-shadow: none;
+}
+.SLE-logo {
+	line-height: 1em;
+	font-family: 'PyeongChangPeace-Bold';
+}
+.bg-color-VeryPeri {
+	background-color: #6667ab;
+}
+.bg-color-white {
+	background-color: #ffffff;
+}
+.bg-color-gray {
+	background-color: #efefef;
+}
+.color-VeryPeri {
+	color: #6667ab;
+}
+.fs-14 {
+	font-size: 14px;
+}
+.fs-24 {
+	font-size: 24px;
+}
+.fs-20 {
+	font-size: 20px;
+}
+.fs-40 {
+	font-size: 40px;
+}
+.fs-48 {
+	font-size: 48px;
+}
+.color-red {
+	color: #d31a45;
+}
+.color-gary-bold {
+	color: #6c6c6c;
+}
+.color-gary {
+	color: #9e9e9e;
+}
+.color-green {
+	color: #3abe87;
+}
+.font-inter-bold {
+	font-family: 'Inter';
+	font-weight: bold;
+}
+.margin-lr-10 {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.box-space-around {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	justify-content: space-around;
+}
+.box-space-evenly {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	justify-content: space-evenly;
+}
+.box-space-between {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	justify-content: space-between;
+}
+/* Nav 바 */
+
+.DocSearch-Search-Icon {
+	stroke-width: 1.6;
+}
+
+.btn-sign-up:hover {
+	color: #ffffff;
+	background-color: #6667ab;
+	border-color: #ffffff;
+}
+@media (min-width: 992px) {
+	.control-input {
+		width: 420px !important;
+		height: 50px;
+	}
+	.control-display-mobile {
+		display: none !important;
+	}
+}
+@media (max-width: 992px) {
+	.control-display-web {
+		display: none !important;
+	}
+}
+.col {
+	padding: 0;
+}
