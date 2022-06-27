@@ -63,13 +63,12 @@ async function handleSubmit(e) {
   const isIdValid = id.length >= 4;
   const isFullNameValid = fullName.length >= 2;
   const isPasswordValid = password.length >= 4;
-  const isPasswordSame = password === passwordConfirm;
 
   if (!isIdValid || !isFullNameValid || !isPasswordValid) {
     return alert('이름은 2글자 이상, 아이디/비밀번호는 4글자 이상이어야 합니다.');
   }
 
-  if (!isPasswordSame) {
+  if (!Match(password, passwordConfirm)) {
     return alert('비밀번호가 일치하지 않습니다.');
   }
 
@@ -86,7 +85,7 @@ async function handleSubmit(e) {
 
     localStorage.setItem('token', token);
 
-    // 로그인 페이지 이동
+    // 홈페이지 이동
     window.location.href = '/';
   } catch (err) {
     console.error(err.stack);
