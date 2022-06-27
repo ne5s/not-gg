@@ -9,6 +9,7 @@ export const RIGHT_USER_MENUS = [
 
 export const LEFT_MENUS = [
 	{ name: '홈', to: '/' },
+	{ name: '전적', to: '/pvplog' },
 	{ name: '랭킹조회', to: '/rank' },
 	{ name: '듀오', to: '/duo' },
 	{ name: '내전', to: '/scrim' },

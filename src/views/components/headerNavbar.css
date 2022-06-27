@@ -1,0 +1,37 @@
+/* common */
+@font-face {
+	font-family: 'PyeongChangPeace-Bold';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
+/* Nav 바 */
+
+.DocSearch-Search-Icon {
+	stroke-width: 1.6;
+}
+
+.btn-sign-up:hover {
+	color: #ffffff;
+	background-color: #6667ab;
+	border-color: #ffffff;
+}
+@media (min-width: 992px) {
+	.control-input {
+		width: 420px !important;
+		height: 50px;
+	}
+	.control-display-mobile {
+		display: none !important;
+	}
+}
+@media (max-width: 992px) {
+	.control-display-web {
+		display: none !important;
+	}
+}
+.col {
+	padding: 0;
+}
