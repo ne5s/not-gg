@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>이상한 리그의 엘리스</title>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"
+        defer></script>
+    <!-- navbar -->
+    <script src="../components/headerNavbar.js" type="module" defer></script>
+    <link rel="stylesheet" href="../components/headerNavbar.css" />
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="../common.css" />
+    <link rel="stylesheet" href="duo.css" />
+    <script src="duo.js" type="module" defer></script>
+    </head>
+<body>
+    <!-- Navbar.js -->
+
+    <!-- contents -->
+    <section class="section">
+        <div class="container">
+            <div class="title-box">
+                <h1>듀오</h1>
+                <button class="submit">듀오 등록하기</button>
+            </div>
+            <div class="table-row-group">
+                <div class="table-title">
+                    <p class="table-cell">소환사 이름</p>
+                    <p class="table-cell">주 포지션</p>
+                    <p class="table-cell">티어</p>
+                    <p class="table-cell">코멘트</p>
+                    <p class="table-cell">등록일시</p>
+                    <p class="table-cell">등록취소</p>
+                </div>
+                <!-- render되는 부분 -->
+                <div class="duo-forms-box" id="duoFormsBox">
+                    <ul class="duo-forms-item-box">
+                        <li>
+                            <span class="components">아파요 머리가</span>
+                            <span>님이</span>
+                            <span class="components">챌린저 정글러</span>
+                            <span>를 찾고 있습니다</span>
+                        </li>
+                        <li>
+                            <img src="../img/정글.png" alt="">
+                        </li>
+                        <li>Platinum4</li>
+                        <li>
+                            <span class="comment">정글러 구합니다</span>
+                        </li>
+                        <li>1분전</li>
+                        <!-- 본인이 등록한 경우 삭제버튼 추가 -->
+                        <li>
+                            <div class="btn--delete">
+                                <span class="material-icons">
+                                clear
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
