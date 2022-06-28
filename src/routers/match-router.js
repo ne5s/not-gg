@@ -8,7 +8,7 @@ const matchRouter = Router();
 // 아직 구현x
 
 // 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
-matchRouter.post(
+/* matchRouter.post(
 	'/register',
 	async (req, res, next) => {
 		try {
@@ -80,6 +80,6 @@ userRouter.get('/userlist', loginRequired, async function (req, res, next) {
 	} catch (error) {
 		next(error);
 	}
-});
+}); */
 
 export { matchRouter };

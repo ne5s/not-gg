@@ -11,6 +11,10 @@ const SummonerSoloSchema = new Schema(
 		rank: {
 			type: String,
 		},
+		tierToNumber: {
+			// 0 : CHALLENGER, 1 : GRANDMASTER, 2 : MASTER, 3 : DIAMOND, 4 : PLATINUM, 5 : GOLD, 6 : SILVER, 7 : BRONZE, 8 : IRON
+			type: Number,
+		},
 		leaguePoints: {
 			type: Number,
 		},
@@ -37,6 +41,54 @@ const SummonerSoloSchema = new Schema(
 				},
 			),
 			required: false,
+		},
+		matchFor20Games: {
+			type: new Schema(
+				{
+					wins: Number,
+					losses: Number,
+					winRate: Number,
+					killAverage: Number,
+					deathAverage: Number,
+					assistsAverage: Number,
+					kdaAverage: String,
+					killParticipationAverage: Number,
+				},
+				{
+					_id: false,
+				},
+			),
+		},
+		sortedPlayChampsFor20Games: [
+			{
+				type: new Schema(
+					{
+						championName: String,
+						counts: Number,
+						wins: Number,
+						losses: Number,
+						kda: Number,
+						championImageURL: String,
+					},
+					{
+						_id: false,
+					},
+				),
+			},
+		],
+		playLineFor20Games: {
+			type: new Schema(
+				{
+					TOP: Number,
+					JUNGLE: Number,
+					MIDDLE: Number,
+					BOTTOM: Number,
+					UTILITY: Number,
+				},
+				{
+					_id: false,
+				},
+			),
 		},
 		updateDate: {
 			// 전적 갱신 일자
