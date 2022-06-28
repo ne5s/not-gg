@@ -21,7 +21,7 @@ h1 {
 }
 .table-row-group {
     background-color: #F7F7F9;
-    height: calc(100vh - 230px);
+    padding-bottom: 50px;
 }
 .table-title {
     display: grid;
