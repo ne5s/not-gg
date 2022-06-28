@@ -18,8 +18,8 @@ db.on('error', (error) =>
 // 이렇게 하면, 나중에 import 할 때 코드가 짧아짐
 // 예시로, import userModel from '../db/models/user-model' 대신 from '../db' 가 됨
 // '../db/index.js' 에서 index.js 는 생략 가능하므로, '../db' 면 됨 (index는 특별한 용어)
-export * from './models/duo-model';
 export * from './models/user-model';
+export * from './models/duo-model';
 export * from './models/match-model';
 export * from './models/summoner-solo-model';
 export * from './models/summoner-flex-model';
