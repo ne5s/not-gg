@@ -117,3 +117,6 @@ a {
     font-size: 16px;
     color: #6667AB;
 }
+.hide {
+    display: none;
+  }
