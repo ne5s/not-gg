@@ -11,6 +11,10 @@ const SummonerFlexSchema = new Schema(
 		rank: {
 			type: String,
 		},
+		tierToNumber: {
+			// 0 : CHALLENGER, 1 : GRANDMASTER, 2 : MASTER, 3 : DIAMOND, 4 : PLATINUM, 5 : GOLD, 6 : SILVER, 7 : BRONZE, 8 : IRON
+			type: Number,
+		},
 		leaguePoints: {
 			type: Number,
 		},
