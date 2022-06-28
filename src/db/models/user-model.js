@@ -14,10 +14,10 @@ export class UserModel {
 		return user;
 	}
 
-  async findBySummonerName(summonerName) {
-    const user = await User.findOne({summonerName});
-    return user;
-  }
+	async findBySummonerName(summonerName) {
+		const user = await User.findOne({ summonerName });
+		return user;
+	}
 
 	async create(userInfo) {
 		const createdNewUser = await User.create(userInfo);
@@ -31,6 +31,14 @@ export class UserModel {
 
 	async update({ id, update }) {
 		const filter = { id };
+		const option = { returnOriginal: false };
+
+		const updatedUser = await User.findOneAndUpdate(filter, update, option);
+		return updatedUser;
+	}
+
+	async updateBySummonerName({ summonerName, update }) {
+		const filter = { summonerName };
 		const option = { returnOriginal: false };
 
 		const updatedUser = await User.findOneAndUpdate(filter, update, option);

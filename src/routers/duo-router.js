@@ -2,7 +2,7 @@ import { Router } from 'express';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from '../middlewares';
-import { userService } from '../services';
+import { summonerSoloService } from '../services';
 import { duoService } from '../services'
 
 const DouRouter = Router();
@@ -21,16 +21,22 @@ DouRouter.get('/duo', async function (req,res,next) {
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
 DouRouter.post(
   '/duo/:id',
-//   loginRequired,
+  // loginRequired,
   async function (req, res, next) {
     try {
       // params로부터 id를 가져옴
+      // const summonerName = req.currentSummonerName
+      const SummonerName = "DK ShowMaker"
+      console.log(SummonerName)
+      let MyTier = await summonerSoloService.getSoloBySummonerName(SummonerName)
+      MyTier = MyTier.tier
+      console.log(MyTier)
       const id = req.params.id;
       console.log(id)
-      const MyTier = "Bronze"
       const { MainPosition, SearchTier, SearchPosition, DuoComment } = req.body
-      // console.log(MainPosition, SearchTier, SearchPosition, DuoComment)
+      console.log(MainPosition, SearchTier, SearchPosition, DuoComment)
       const newDuo = await duoService.addUser({
+        SummonerName,
         MainPosition, 
         SearchTier, 
         SearchPosition, 

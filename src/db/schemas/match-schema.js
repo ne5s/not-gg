@@ -1,429 +1,459 @@
 import { Schema } from 'mongoose';
 
 const MatchSchema = new Schema(
-  {
-    matchId : {
-      type : String,
-      required: true,
-    },
-    gameCreation : { // 게임 만들어진 시간(miliseconds)
-      type : String,
-      required: true,
-    },
-    gameDuration : { // 게임 시간(seconds)
-      type : String,
-      required: true,
-    },
-    gameCreation : { // 게임 시작시간(miliseconds)
-      type : String,
-      required: true,
-    },
-    queueId : { // 420 -> 솔로랭크, 440 -> 자유랭크, 450 -> 칼바람, 430 -> 일반
-      type : String,
-      required: true,
-    },
-    blueBans : [   // 벤, 블루팀/레드팀 여부, 승리/패배 기록
-      { 
-        type : new Schema(
-          {
-            champId : String,
-            banUser : Number, // 1, 2, 3, 4, 5
-          },
-          {
-            _id : false,
-          },
-        ),
-        required : false,
-      }
-    ],
-    redBans : [   // 벤, 블루팀/레드팀 여부, 승리/패배 기록
-      { 
-        type : new Schema(
-          {
-            champId : String,
-            banUser : Number, // 6, 7, 8, 9, 10
-          },
-          {
-            _id : false,
-          },
-        ),
-        required : false,
-      }
-    ],
-    // teamId : { // 100 : 블루팀, 200 : 레드팀
-    //   type : Number,
-    //   required : false,
-    // },
-    win : {
-      type:String, // blue / red
-      required : false,
-    },
-    // user 1~5 (blue team), user6~10 (red team)
-    user1 : {
-      type : new Schema(
-        {
-          championName : String,
-          champLevel : Number,
-          kills : Number,
-          death : Number,
-          assists : Number,
-          lane : String,
-          summonerName : String,
-          summonerLevel : Number,
-          win : Boolean,
-          kda : Number,
-          goldEarned : Number,
-          totalDamageDealt : Number, // 총 딜량
-          totalDamageDealtToChampions : Number, // 챔피언 딜량
-          totalDamageTaken : Number, // 받은 피해량
-          visionWardsBoughtInGame : Number, // 제어와드 구매수
-          wardsKilled : Number, // 와드 파괴수
-          wardsPlaced : Number, // 와드 설치 수
-          cs : Number, // 미니언 + 정글(총 cs)
-          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
-          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
-          item1 : Number,
-          item2 : Number,
-          item3 : Number,
-          item4 : Number, // 0이면 빈 칸
-          item5 : Number,
-          item6 : Number, // 장신구
-          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
-          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
-          spell1 : Number, // 스펠 D
-          spell2 : Number, // 스펠 F
-        }
-      )
-    },
-    user2 : {
-      type : new Schema(
-        {
-          championName : String,
-          champLevel : Number,
-          kills : Number,
-          death : Number,
-          assists : Number,
-          lane : String,
-          summonerName : String,
-          summonerLevel : Number,
-          win : Boolean,
-          kda : Number,
-          goldEarned : Number,
-          totalDamageDealt : Number, // 총 딜량
-          totalDamageDealtToChampions : Number, // 챔피언 딜량
-          totalDamageTaken : Number, // 받은 피해량
-          visionWardsBoughtInGame : Number, // 제어와드 구매수
-          wardsKilled : Number, // 와드 파괴수
-          wardsPlaced : Number, // 와드 설치 수
-          cs : Number, // 미니언 + 정글(총 cs)
-          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
-          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
-          item1 : Number,
-          item2 : Number,
-          item3 : Number,
-          item4 : Number, // 0이면 빈 칸
-          item5 : Number,
-          item6 : Number, // 장신구
-          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
-          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
-          spell1 : Number, // 스펠 D
-          spell2 : Number, // 스펠 F
-        }
-      )
-    },
-    user3 : {
-      type : new Schema(
-        {
-          championName : String,
-          champLevel : Number,
-          kills : Number,
-          death : Number,
-          assists : Number,
-          lane : String,
-          summonerName : String,
-          summonerLevel : Number,
-          win : Boolean,
-          kda : Number,
-          goldEarned : Number,
-          totalDamageDealt : Number, // 총 딜량
-          totalDamageDealtToChampions : Number, // 챔피언 딜량
-          totalDamageTaken : Number, // 받은 피해량
-          visionWardsBoughtInGame : Number, // 제어와드 구매수
-          wardsKilled : Number, // 와드 파괴수
-          wardsPlaced : Number, // 와드 설치 수
-          cs : Number, // 미니언 + 정글(총 cs)
-          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
-          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
-          item1 : Number,
-          item2 : Number,
-          item3 : Number,
-          item4 : Number, // 0이면 빈 칸
-          item5 : Number,
-          item6 : Number, // 장신구
-          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
-          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
-          spell1 : Number, // 스펠 D
-          spell2 : Number, // 스펠 F
-        }
-      )
-    },
-    user4 : {
-      type : new Schema(
-        {
-          championName : String,
-          champLevel : Number,
-          kills : Number,
-          death : Number,
-          assists : Number,
-          lane : String,
-          summonerName : String,
-          summonerLevel : Number,
-          win : Boolean,
-          kda : Number,
-          goldEarned : Number,
-          totalDamageDealt : Number, // 총 딜량
-          totalDamageDealtToChampions : Number, // 챔피언 딜량
-          totalDamageTaken : Number, // 받은 피해량
-          visionWardsBoughtInGame : Number, // 제어와드 구매수
-          wardsKilled : Number, // 와드 파괴수
-          wardsPlaced : Number, // 와드 설치 수
-          cs : Number, // 미니언 + 정글(총 cs)
-          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
-          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
-          item1 : Number,
-          item2 : Number,
-          item3 : Number,
-          item4 : Number, // 0이면 빈 칸
-          item5 : Number,
-          item6 : Number, // 장신구
-          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
-          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
-          spell1 : Number, // 스펠 D
-          spell2 : Number, // 스펠 F
-        }
-      )
-    },
-    user5 : {
-      type : new Schema(
-        {
-          championName : String,
-          champLevel : Number,
-          kills : Number,
-          death : Number,
-          assists : Number,
-          lane : String,
-          summonerName : String,
-          summonerLevel : Number,
-          win : Boolean,
-          kda : Number,
-          goldEarned : Number,
-          totalDamageDealt : Number, // 총 딜량
-          totalDamageDealtToChampions : Number, // 챔피언 딜량
-          totalDamageTaken : Number, // 받은 피해량
-          visionWardsBoughtInGame : Number, // 제어와드 구매수
-          wardsKilled : Number, // 와드 파괴수
-          wardsPlaced : Number, // 와드 설치 수
-          cs : Number, // 미니언 + 정글(총 cs)
-          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
-          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
-          item1 : Number,
-          item2 : Number,
-          item3 : Number,
-          item4 : Number, // 0이면 빈 칸
-          item5 : Number,
-          item6 : Number, // 장신구
-          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
-          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
-          spell1 : Number, // 스펠 D
-          spell2 : Number, // 스펠 F
-        }
-      )
-    },
-    user6 : {
-      type : new Schema(
-        {
-          championName : String,
-          champLevel : Number,
-          kills : Number,
-          death : Number,
-          assists : Number,
-          lane : String,
-          summonerName : String,
-          summonerLevel : Number,
-          win : Boolean,
-          kda : Number,
-          goldEarned : Number,
-          totalDamageDealt : Number, // 총 딜량
-          totalDamageDealtToChampions : Number, // 챔피언 딜량
-          totalDamageTaken : Number, // 받은 피해량
-          visionWardsBoughtInGame : Number, // 제어와드 구매수
-          wardsKilled : Number, // 와드 파괴수
-          wardsPlaced : Number, // 와드 설치 수
-          cs : Number, // 미니언 + 정글(총 cs)
-          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
-          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
-          item1 : Number,
-          item2 : Number,
-          item3 : Number,
-          item4 : Number, // 0이면 빈 칸
-          item5 : Number,
-          item6 : Number, // 장신구
-          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
-          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
-          spell1 : Number, // 스펠 D
-          spell2 : Number, // 스펠 F
-        }
-      )
-    },
-    user7 : {
-      type : new Schema(
-        {
-          championName : String,
-          champLevel : Number,
-          kills : Number,
-          death : Number,
-          assists : Number,
-          lane : String,
-          summonerName : String,
-          summonerLevel : Number,
-          win : Boolean,
-          kda : Number,
-          goldEarned : Number,
-          totalDamageDealt : Number, // 총 딜량
-          totalDamageDealtToChampions : Number, // 챔피언 딜량
-          totalDamageTaken : Number, // 받은 피해량
-          visionWardsBoughtInGame : Number, // 제어와드 구매수
-          wardsKilled : Number, // 와드 파괴수
-          wardsPlaced : Number, // 와드 설치 수
-          cs : Number, // 미니언 + 정글(총 cs)
-          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
-          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
-          item1 : Number,
-          item2 : Number,
-          item3 : Number,
-          item4 : Number, // 0이면 빈 칸
-          item5 : Number,
-          item6 : Number, // 장신구
-          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
-          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
-          spell1 : Number, // 스펠 D
-          spell2 : Number, // 스펠 F
-        }
-      )
-    },
-    user8 : {
-      type : new Schema(
-        {
-          championName : String,
-          champLevel : Number,
-          kills : Number,
-          death : Number,
-          assists : Number,
-          lane : String,
-          summonerName : String,
-          summonerLevel : Number,
-          win : Boolean,
-          kda : Number,
-          goldEarned : Number,
-          totalDamageDealt : Number, // 총 딜량
-          totalDamageDealtToChampions : Number, // 챔피언 딜량
-          totalDamageTaken : Number, // 받은 피해량
-          visionWardsBoughtInGame : Number, // 제어와드 구매수
-          wardsKilled : Number, // 와드 파괴수
-          wardsPlaced : Number, // 와드 설치 수
-          cs : Number, // 미니언 + 정글(총 cs)
-          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
-          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
-          item1 : Number,
-          item2 : Number,
-          item3 : Number,
-          item4 : Number, // 0이면 빈 칸
-          item5 : Number,
-          item6 : Number, // 장신구
-          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
-          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
-          spell1 : Number, // 스펠 D
-          spell2 : Number, // 스펠 F
-        }
-      )
-    },
-    user9 : {
-      type : new Schema(
-        {
-          championName : String,
-          champLevel : Number,
-          kills : Number,
-          death : Number,
-          assists : Number,
-          lane : String,
-          summonerName : String,
-          summonerLevel : Number,
-          win : Boolean,
-          kda : Number,
-          goldEarned : Number,
-          totalDamageDealt : Number, // 총 딜량
-          totalDamageDealtToChampions : Number, // 챔피언 딜량
-          totalDamageTaken : Number, // 받은 피해량
-          visionWardsBoughtInGame : Number, // 제어와드 구매수
-          wardsKilled : Number, // 와드 파괴수
-          wardsPlaced : Number, // 와드 설치 수
-          cs : Number, // 미니언 + 정글(총 cs)
-          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
-          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
-          item1 : Number,
-          item2 : Number,
-          item3 : Number,
-          item4 : Number, // 0이면 빈 칸
-          item5 : Number,
-          item6 : Number, // 장신구
-          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
-          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
-          spell1 : Number, // 스펠 D
-          spell2 : Number, // 스펠 F
-        }
-      )
-    },
-    user10 : {
-      type : new Schema(
-        {
-          championName : String,
-          champLevel : Number,
-          kills : Number,
-          death : Number,
-          assists : Number,
-          lane : String,
-          summonerName : String,
-          summonerLevel : Number,
-          win : Boolean,
-          kda : Number,
-          goldEarned : Number,
-          totalDamageDealt : Number, // 총 딜량
-          totalDamageDealtToChampions : Number, // 챔피언 딜량
-          totalDamageTaken : Number, // 받은 피해량
-          visionWardsBoughtInGame : Number, // 제어와드 구매수
-          wardsKilled : Number, // 와드 파괴수
-          wardsPlaced : Number, // 와드 설치 수
-          cs : Number, // 미니언 + 정글(총 cs)
-          killParticipation : Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
-          item0 : Number, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
-          item1 : Number,
-          item2 : Number,
-          item3 : Number,
-          item4 : Number, // 0이면 빈 칸
-          item5 : Number,
-          item6 : Number, // 장신구
-          primaryStyle : Number, // 주 소환사 룬 (선제공격, 집중공격 ...)
-          subStyle : Number, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)
-          spell1 : Number, // 스펠 D
-          spell2 : Number, // 스펠 F
-        }
-      )
-    }
-  },
-  {
-    collection: 'match',
-    timestamps: true,
-  }
+	{
+		matchId: {
+			type: String,
+			required: true,
+		},
+		gameStartTimestamp: {
+			// 게임 만들어진 시간(miliseconds)
+			type: String,
+			required: true,
+		},
+		gameDuration: {
+			// 게임 시간(seconds)
+			type: String,
+			required: true,
+		},
+		gameEndTimestamp: {
+			// 게임 종료시간(miliseconds)
+			type: String,
+			required: true,
+		},
+		queueId: {
+			// 420 -> 솔로랭크, 440 -> 자유랭크, 450 -> 칼바람, 430 -> 일반
+			type: String,
+			required: true,
+		},
+		blueBans: [
+			// 벤, 블루팀/레드팀 여부, 승리/패배 기록
+			{
+				type: new Schema(
+					{
+						champId: String,
+						banUser: Number, // 1, 2, 3, 4, 5
+					},
+					{
+						_id: false,
+					},
+				),
+				required: false,
+			},
+		],
+		redBans: [
+			// 벤, 블루팀/레드팀 여부, 승리/패배 기록
+			{
+				type: new Schema(
+					{
+						champId: String,
+						banUser: Number, // 6, 7, 8, 9, 10
+					},
+					{
+						_id: false,
+					},
+				),
+				required: false,
+			},
+		],
+		// teamId : { // 100 : 블루팀, 200 : 레드팀
+		//   type : Number,
+		//   required : false,
+		// },
+		win: {
+			type: String, // blue / red
+			required: false,
+		},
+		gameSimply: {
+			type: new Schema({
+				user1Id: String, // 아이디
+				user1Image: String, // 챔프 이미지 URL
+				user2Id: String,
+				user2Image: String,
+				user3Id: String,
+				user3Image: String,
+				user4Id: String,
+				user4Image: String,
+				user5Id: String,
+				user5Image: String,
+				user6Id: String,
+				user6Image: String,
+				user7Id: String,
+				user7Image: String,
+				user8Id: String,
+				user8Image: String,
+				user9Id: String,
+				user9Image: String,
+				user10Id: String,
+				user10Image: String,
+			}),
+		},
+		// user 1~5 (blue team), user6~10 (red team)
+		user1: {
+			type: new Schema({
+				championName: String,
+				championImageURL: String,
+				champLevel: Number,
+				kills: Number,
+				deaths: Number,
+				assists: Number,
+				lane: String,
+				summonerName: String,
+				summonerLevel: Number,
+				win: Boolean,
+				kda: Number,
+				goldEarned: Number,
+				totalDamageDealt: Number, // 총 딜량
+				totalDamageDealtToChampions: Number, // 챔피언 딜량
+				totalDamageTaken: Number, // 받은 피해량
+				visionWardsBoughtInGame: Number, // 제어와드 구매수
+				wardsKilled: Number, // 와드 파괴수
+				wardsPlaced: Number, // 와드 설치 수
+				cs: Number, // 미니언 + 정글(총 cs)
+				csByMinute: Number, // 분당 cs
+				killParticipation: Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+				item0: String, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+				item1: String,
+				item2: String, // URL 임.
+				item3: String,
+				item4: String, //  API 받아온 값이 0이면 빈 칸
+				item5: String,
+				item6: String, // 장신구
+				primaryStyle: String, // 주 소환사 룬 (선제공격, 집중공격 ...)  -> 이미지 URL
+				subStyle: String, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)  -> 이미지 URL
+				spell1: String, // 스펠 D -> 이미지 URL
+				spell2: String, // 스펠 F -> 이미지 URL
+			}),
+		},
+		user2: {
+			type: new Schema({
+				championName: String,
+				championImageURL: String,
+				champLevel: Number,
+				kills: Number,
+				deaths: Number,
+				assists: Number,
+				lane: String,
+				summonerName: String,
+				summonerLevel: Number,
+				win: Boolean,
+				kda: Number,
+				goldEarned: Number,
+				totalDamageDealt: Number, // 총 딜량
+				totalDamageDealtToChampions: Number, // 챔피언 딜량
+				totalDamageTaken: Number, // 받은 피해량
+				visionWardsBoughtInGame: Number, // 제어와드 구매수
+				wardsKilled: Number, // 와드 파괴수
+				wardsPlaced: Number, // 와드 설치 수
+				cs: Number, // 미니언 + 정글(총 cs)
+				csByMinute: Number, // 분당 cs
+				killParticipation: Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+				item0: String, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+				item1: String,
+				item2: String, // URL 임.
+				item3: String,
+				item4: String, //  API 받아온 값이 0이면 빈 칸
+				item5: String,
+				item6: String, // 장신구
+				primaryStyle: String, // 주 소환사 룬 (선제공격, 집중공격 ...)  -> 이미지 URL
+				subStyle: String, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)  -> 이미지 URL
+				spell1: String, // 스펠 D -> 이미지 URL
+				spell2: String, // 스펠 F -> 이미지 URL
+			}),
+		},
+		user3: {
+			type: new Schema({
+				championName: String,
+				championImageURL: String,
+				champLevel: Number,
+				kills: Number,
+				deaths: Number,
+				assists: Number,
+				lane: String,
+				summonerName: String,
+				summonerLevel: Number,
+				win: Boolean,
+				kda: Number,
+				goldEarned: Number,
+				totalDamageDealt: Number, // 총 딜량
+				totalDamageDealtToChampions: Number, // 챔피언 딜량
+				totalDamageTaken: Number, // 받은 피해량
+				visionWardsBoughtInGame: Number, // 제어와드 구매수
+				wardsKilled: Number, // 와드 파괴수
+				wardsPlaced: Number, // 와드 설치 수
+				cs: Number, // 미니언 + 정글(총 cs)
+				csByMinute: Number, // 분당 cs
+				killParticipation: Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+				item0: String, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+				item1: String,
+				item2: String, // URL 임.
+				item3: String,
+				item4: String, //  API 받아온 값이 0이면 빈 칸
+				item5: String,
+				item6: String, // 장신구
+				primaryStyle: String, // 주 소환사 룬 (선제공격, 집중공격 ...)  -> 이미지 URL
+				subStyle: String, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)  -> 이미지 URL
+				spell1: String, // 스펠 D -> 이미지 URL
+				spell2: String, // 스펠 F -> 이미지 URL
+			}),
+		},
+		user4: {
+			type: new Schema({
+				championName: String,
+				championImageURL: String,
+				champLevel: Number,
+				kills: Number,
+				deaths: Number,
+				assists: Number,
+				lane: String,
+				summonerName: String,
+				summonerLevel: Number,
+				win: Boolean,
+				kda: Number,
+				goldEarned: Number,
+				totalDamageDealt: Number, // 총 딜량
+				totalDamageDealtToChampions: Number, // 챔피언 딜량
+				totalDamageTaken: Number, // 받은 피해량
+				visionWardsBoughtInGame: Number, // 제어와드 구매수
+				wardsKilled: Number, // 와드 파괴수
+				wardsPlaced: Number, // 와드 설치 수
+				cs: Number, // 미니언 + 정글(총 cs)
+				csByMinute: Number, // 분당 cs
+				killParticipation: Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+				item0: String, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+				item1: String,
+				item2: String, // URL 임.
+				item3: String,
+				item4: String, //  API 받아온 값이 0이면 빈 칸
+				item5: String,
+				item6: String, // 장신구
+				primaryStyle: String, // 주 소환사 룬 (선제공격, 집중공격 ...)  -> 이미지 URL
+				subStyle: String, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)  -> 이미지 URL
+				spell1: String, // 스펠 D -> 이미지 URL
+				spell2: String, // 스펠 F -> 이미지 URL
+			}),
+		},
+		user5: {
+			type: new Schema({
+				championName: String,
+				championImageURL: String,
+				champLevel: Number,
+				kills: Number,
+				deaths: Number,
+				assists: Number,
+				lane: String,
+				summonerName: String,
+				summonerLevel: Number,
+				win: Boolean,
+				kda: Number,
+				goldEarned: Number,
+				totalDamageDealt: Number, // 총 딜량
+				totalDamageDealtToChampions: Number, // 챔피언 딜량
+				totalDamageTaken: Number, // 받은 피해량
+				visionWardsBoughtInGame: Number, // 제어와드 구매수
+				wardsKilled: Number, // 와드 파괴수
+				wardsPlaced: Number, // 와드 설치 수
+				cs: Number, // 미니언 + 정글(총 cs)
+				csByMinute: Number, // 분당 cs
+				killParticipation: Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+				item0: String, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+				item1: String,
+				item2: String, // URL 임.
+				item3: String,
+				item4: String, //  API 받아온 값이 0이면 빈 칸
+				item5: String,
+				item6: String, // 장신구
+				primaryStyle: String, // 주 소환사 룬 (선제공격, 집중공격 ...)  -> 이미지 URL
+				subStyle: String, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)  -> 이미지 URL
+				spell1: String, // 스펠 D -> 이미지 URL
+				spell2: String, // 스펠 F -> 이미지 URL
+			}),
+		},
+		user6: {
+			type: new Schema({
+				championName: String,
+				championImageURL: String,
+				champLevel: Number,
+				kills: Number,
+				deaths: Number,
+				assists: Number,
+				lane: String,
+				summonerName: String,
+				summonerLevel: Number,
+				win: Boolean,
+				kda: Number,
+				goldEarned: Number,
+				totalDamageDealt: Number, // 총 딜량
+				totalDamageDealtToChampions: Number, // 챔피언 딜량
+				totalDamageTaken: Number, // 받은 피해량
+				visionWardsBoughtInGame: Number, // 제어와드 구매수
+				wardsKilled: Number, // 와드 파괴수
+				wardsPlaced: Number, // 와드 설치 수
+				cs: Number, // 미니언 + 정글(총 cs)
+				csByMinute: Number, // 분당 cs
+				killParticipation: Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+				item0: String, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+				item1: String,
+				item2: String, // URL 임.
+				item3: String,
+				item4: String, //  API 받아온 값이 0이면 빈 칸
+				item5: String,
+				item6: String, // 장신구
+				primaryStyle: String, // 주 소환사 룬 (선제공격, 집중공격 ...)  -> 이미지 URL
+				subStyle: String, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)  -> 이미지 URL
+				spell1: String, // 스펠 D -> 이미지 URL
+				spell2: String, // 스펠 F -> 이미지 URL
+			}),
+		},
+		user7: {
+			type: new Schema({
+				championName: String,
+				championImageURL: String,
+				champLevel: Number,
+				kills: Number,
+				deaths: Number,
+				assists: Number,
+				lane: String,
+				summonerName: String,
+				summonerLevel: Number,
+				win: Boolean,
+				kda: Number,
+				goldEarned: Number,
+				totalDamageDealt: Number, // 총 딜량
+				totalDamageDealtToChampions: Number, // 챔피언 딜량
+				totalDamageTaken: Number, // 받은 피해량
+				visionWardsBoughtInGame: Number, // 제어와드 구매수
+				wardsKilled: Number, // 와드 파괴수
+				wardsPlaced: Number, // 와드 설치 수
+				cs: Number, // 미니언 + 정글(총 cs)
+				csByMinute: Number, // 분당 cs
+				killParticipation: Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+				item0: String, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+				item1: String,
+				item2: String, // URL 임.
+				item3: String,
+				item4: String, //  API 받아온 값이 0이면 빈 칸
+				item5: String,
+				item6: String, // 장신구
+				primaryStyle: String, // 주 소환사 룬 (선제공격, 집중공격 ...)  -> 이미지 URL
+				subStyle: String, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)  -> 이미지 URL
+				spell1: String, // 스펠 D -> 이미지 URL
+				spell2: String, // 스펠 F -> 이미지 URL
+			}),
+		},
+		user8: {
+			type: new Schema({
+				championName: String,
+				championImageURL: String,
+				champLevel: Number,
+				kills: Number,
+				deaths: Number,
+				assists: Number,
+				lane: String,
+				summonerName: String,
+				summonerLevel: Number,
+				win: Boolean,
+				kda: Number,
+				goldEarned: Number,
+				totalDamageDealt: Number, // 총 딜량
+				totalDamageDealtToChampions: Number, // 챔피언 딜량
+				totalDamageTaken: Number, // 받은 피해량
+				visionWardsBoughtInGame: Number, // 제어와드 구매수
+				wardsKilled: Number, // 와드 파괴수
+				wardsPlaced: Number, // 와드 설치 수
+				cs: Number, // 미니언 + 정글(총 cs)
+				csByMinute: Number, // 분당 cs
+				killParticipation: Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+				item0: String, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+				item1: String,
+				item2: String, // URL 임.
+				item3: String,
+				item4: String, //  API 받아온 값이 0이면 빈 칸
+				item5: String,
+				item6: String, // 장신구
+				primaryStyle: String, // 주 소환사 룬 (선제공격, 집중공격 ...)  -> 이미지 URL
+				subStyle: String, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)  -> 이미지 URL
+				spell1: String, // 스펠 D -> 이미지 URL
+				spell2: String, // 스펠 F -> 이미지 URL
+			}),
+		},
+		user9: {
+			type: new Schema({
+				championName: String,
+				championImageURL: String,
+				champLevel: Number,
+				kills: Number,
+				deaths: Number,
+				assists: Number,
+				lane: String,
+				summonerName: String,
+				summonerLevel: Number,
+				win: Boolean,
+				kda: Number,
+				goldEarned: Number,
+				totalDamageDealt: Number, // 총 딜량
+				totalDamageDealtToChampions: Number, // 챔피언 딜량
+				totalDamageTaken: Number, // 받은 피해량
+				visionWardsBoughtInGame: Number, // 제어와드 구매수
+				wardsKilled: Number, // 와드 파괴수
+				wardsPlaced: Number, // 와드 설치 수
+				cs: Number, // 미니언 + 정글(총 cs)
+				csByMinute: Number, // 분당 cs
+				killParticipation: Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+				item0: String, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+				item1: String,
+				item2: String, // URL 임.
+				item3: String,
+				item4: String, //  API 받아온 값이 0이면 빈 칸
+				item5: String,
+				item6: String, // 장신구
+				primaryStyle: String, // 주 소환사 룬 (선제공격, 집중공격 ...)  -> 이미지 URL
+				subStyle: String, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)  -> 이미지 URL
+				spell1: String, // 스펠 D -> 이미지 URL
+				spell2: String, // 스펠 F -> 이미지 URL
+			}),
+		},
+		user10: {
+			type: new Schema({
+				championName: String,
+				championImageURL: String,
+				champLevel: Number,
+				kills: Number,
+				deaths: Number,
+				assists: Number,
+				lane: String,
+				summonerName: String,
+				summonerLevel: Number,
+				win: Boolean,
+				kda: Number,
+				goldEarned: Number,
+				totalDamageDealt: Number, // 총 딜량
+				totalDamageDealtToChampions: Number, // 챔피언 딜량
+				totalDamageTaken: Number, // 받은 피해량
+				visionWardsBoughtInGame: Number, // 제어와드 구매수
+				wardsKilled: Number, // 와드 파괴수
+				wardsPlaced: Number, // 와드 설치 수
+				cs: Number, // 미니언 + 정글(총 cs)
+				csByMinute: Number, // 분당 cs
+				killParticipation: Number, // 킬 관여율(0.5172...Number(killParticipation.toFixed(2)) 필요 )
+				item0: String, // http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/1001.png
+				item1: String,
+				item2: String, // URL 임.
+				item3: String,
+				item4: String, //  API 받아온 값이 0이면 빈 칸
+				item5: String,
+				item6: String, // 장신구
+				primaryStyle: String, // 주 소환사 룬 (선제공격, 집중공격 ...)  -> 이미지 URL
+				subStyle: String, // 부 소환사룬 특성(지배,정밀,영감,결의,마법)  -> 이미지 URL
+				spell1: String, // 스펠 D -> 이미지 URL
+				spell2: String, // 스펠 F -> 이미지 URL
+			}),
+		},
+	},
+	{
+		collection: 'match',
+		timestamps: true,
+	},
 );
 
 export { MatchSchema };

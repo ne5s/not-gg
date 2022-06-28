@@ -2,6 +2,10 @@ import { Schema } from 'mongoose';
 
 const DuoSchema = new Schema(
   {
+    SummonerName:{
+      type:String,
+      required: true,
+    },
     MainPosition: {
       type: String,
       required: true,
