@@ -2,7 +2,7 @@ import * as Api from '/api.js';
 import { getUserData } from '/utils/user.js';
 const ProfileIconimg = document.querySelector('.profile-icon');
 const ProfileTierIcon = document.querySelector('.profile-tier-icon');
-getUserData();
+
 const TopIcon = document.querySelector('.top-icon');
 const AdIcon = document.querySelector('.ad-icon');
 const MidIcon = document.querySelector('.mid-icon');
@@ -33,13 +33,16 @@ const getLogintoken = async () => {
 	const data = {
 		id,
 		password: '12345',
+		summonerName: 'JUGKlNG',
 	};
 	const result = await Api.post('/api/login', data);
 	localStorage.setItem('token', result.token);
 	console.log(result.token);
+	getUserData();
 };
 getLogintoken();
-addEvent();
+
+// addEvent();
 const PvPLog = () => {
 	const main = `
 	<div class="row">

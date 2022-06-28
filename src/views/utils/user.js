@@ -1,4 +1,5 @@
-import { summonerSoloService } from '../../services';
+// import jwt_decode from 'jwt-decode';
+// const jwt_decode = required('jwt-decode');
 
 export const getUserData = () => {
 	const token = localStorage.getItem('token');
@@ -14,7 +15,6 @@ export const getUserData = () => {
 				})
 				.join(''),
 		);
-		console.log(JSON.parse(jsonPayload));
 		return JSON.parse(jsonPayload);
 	} else {
 		return { userId: '', role: '', summonerName: '' };
