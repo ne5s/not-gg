@@ -28,23 +28,54 @@ h1 {
 }
 
 .last-match {
+    width: 100%;
     border: none;
     background-color: #F7F7F9;
     padding: 10px;
-    color: #9E9E9E;
+    color: #6C6C6C;
 }
 .scrim-inner-box {
     background-color: #fff;
     width: 1095px;
     margin: 0 auto;
 }
-.scrim-date {
-    padding: 15px 35px;
+.scrim-item-box {
+    padding: 0 35px;
     border-bottom: 1px solid #E5E5E5;
+    display: flex;
+    flex-direction: row;
+}
+.scrim-item-box:last-child {
+    border-bottom: none;
+}
+.scrim-date {
+    padding-top: 20px;
+    font-weight: 600;
+    font-size: 20px;
+    width: 100px;
 }
 .scrim-inner {
+    width: 100%;
+}
+.scrim-inner > ul {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    margin: 15px 0;
+}
+.scrim-member {
+    padding: 10px 18px;
+    background: #6667AB;
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+}
+
+.close {
+    background: #E5E5E5;
+    border: none;
+    color: #6C6C6C;
 }
