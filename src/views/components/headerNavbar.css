@@ -114,3 +114,7 @@
 .col {
 	padding: 0;
 }
+.navbar {
+    --bs-navbar-padding-x: 0;
+    --bs-navbar-padding-y: 0;
+}

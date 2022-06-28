@@ -17,6 +17,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- bootstrap -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+    crossorigin="anonymous"
+    />
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"
+        defer
+    ></script>
+    <!-- navbar -->
+    <script src="../components/headerNavbar.js" type="module" defer></script>
+		<link rel="stylesheet" href="../components/headerNavbar.css" />
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="home.css" />
     <link rel="stylesheet" href="../common.css" />
@@ -28,56 +44,27 @@
         <div class="wrapper-img" style="background-image: url(https://www.leagueoflegends.com/static/hud-2-2d4279d50f4fffe4012eda7c7f31b5fd.jpg);"></div>
       </div>
     </div>
-    <header>
-      <nav>
-        <div class="logo"><a href="/">Logo.</a></div>
-        <div>
-          <ul class="nav-list">
-            <li><a href="/ranking/elice">랭킹조회</a></li>
-            <li><a href="#">듀오</a></li>
-            <li><a href="#">내전</a></li>
-          </ul>
-        </div>
-      </nav>
-      <div>
-        <ul class="account">
-          <li><a href="/login" class="btn btn--reverse">로그인</a></li>
-          <li><a href="/singup" class="btn">회원가입</a></li>
-        </ul>
-      </div>
-    </header>
 
     <main>
       <div class="main-container">
         <div class="title">
-          <div>Check</div>
-          <div>Your</div>
-          <span class="text">Ranking</span>
-          <span>.</span>
-        </div>
-        <div class="search-contaienr">
-          <form>
-            <input type="text" placeholder="소환사명 검색">
-          </form>
-          <button type="submit">
-            <span class="material-icons">
-              search
-            </span>
-          </button>
+          <div>Play</div>
+          <div>with</div>
+          <span class="text">Elice</span>
         </div>
       </div>
       <div class="list-card">
-        <section id="card" class="card spread" OnClick="location.href ='/ranking/elice'" style="background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt7d22282a41a3a7a3/5fa99fc097f9f35d942e9bbb/Patch_10_23_Notes_Header_v2.jpg);">
+        <section id="card" class="card spread" OnClick="location.href ='/ranking'" style="background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt7d22282a41a3a7a3/5fa99fc097f9f35d942e9bbb/Patch_10_23_Notes_Header_v2.jpg);">
           <div class="gradient"></div>
-          <span>엘리스<br />랭킹 조회</span>
+          <span>랭킹 조회</span>
         </section>
-        <section id="card" class="card" OnClick="location.href ='/'" style="background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt8979808f7798ecf5/6216ee875fe07272a8a2447a/2021_Key_art.jpg);">
+        <section id="card" class="card" OnClick="location.href ='/duo'" style="background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt8979808f7798ecf5/6216ee875fe07272a8a2447a/2021_Key_art.jpg);">
           <div class="gradient"></div>
-          <span>플레이타입<br />랭킹 조회</span>
+          <span>듀오 찾기</span>
         </section>
-        <section id="card" class="card" OnClick="location.href ='/'" style="background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltf06237d0ebbe32e0/5efc23abee48da0f762bc2f2/LOL_PROMOART_4.jpg);">
+        <section id="card" class="card" OnClick="location.href ='/scrim'" style="background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltf06237d0ebbe32e0/5efc23abee48da0f762bc2f2/LOL_PROMOART_4.jpg);">
           <div class="gradient"></div>
-          <span>티어별<br />랭킹 조회</span>
+          <span>내전 참가</span>
         </section>
       </div>
     </main>

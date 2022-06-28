@@ -25,7 +25,7 @@ function navber() {
   >
   <ul class="navbar-nav mb-lg-0 control-display-mobile">
     <li class="nav-item login">
-      <a href="/login" class="btn loginBtn color-VeryPeri bg-color-white btn-sign-up">
+      <a href="/login" class="btn loginBtn color-VeryPeri bg-color-white btn-login">
         로그인
       </a>
     </li>
@@ -33,30 +33,10 @@ function navber() {
   </ul>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle text-white"
-          href="#"
-          id="navbarDropdown"
-          role="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-          >랭킹조회</a
+      <li class="nav-item">
+        <a class="nav-link active text-white" aria-current="page" href="#"
+          >랭킹</a
         >
-        <ul
-          class="dropdown-menu bg-color-VeryPeri"
-          aria-labelledby="navbarDropdown"
-        >
-          <li>
-            <a class="dropdown-item text-white" href="/rank">티어별랭킹</a>
-          </li>
-          <li>
-            <a class="dropdown-item text-white" href="/rank">엘리스랭킹</a>
-          </li>
-          <li>
-            <a class="dropdown-item text-white" href="/rank">플레이타임</a>
-          </li>
-        </ul>
       </li>
       <li class="nav-item">
         <a class="nav-link active text-white" aria-current="page" href="/duo"
@@ -73,8 +53,13 @@ function navber() {
 
   <ul class="navbar-nav mb-2 mb-lg-0 control-display-web">
     <li class="nav-item login">
-      <a href="/login" class="btn color-VeryPeri bg-color-white btn-sign-up">
+      <a href="/login" class="btn color-VeryPeri bg-color-white btn-login">
         로그인
+      </a>
+    </li>
+    <li class="nav-item signup">
+      <a href="/signup" class="btn color-VeryPeri bg-color-white btn-sign-up">
+        회원가입
       </a>
     </li>
     

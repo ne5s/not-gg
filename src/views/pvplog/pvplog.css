@@ -64,6 +64,10 @@ hr {
 	height: 40px;
 	width: 40px;
 }
+.h45w45 {
+	height: 45px;
+	width: 45px;
+}
 .h140w140 {
 	height: 140px;
 	width: 140px;
@@ -71,6 +75,9 @@ hr {
 .h28w28 {
 	height: 28px;
 	width: 28px;
+}
+.border-circle {
+	border-radius: 50%;
 }
 .h14w14 {
 	height: 14px;
@@ -349,6 +356,14 @@ hr {
 	padding: 0;
 	width: 20px;
 	height: 74px;
+	background-color: #444444;
+	margin: 0 auto;
+	position: relative;
+}
+.line-pick-rate {
+	padding: 0;
+	width: 20px;
+	position: absolute;
 	background-color: #efefef;
 	margin: 0 auto;
 }
