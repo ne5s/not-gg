@@ -22,7 +22,6 @@ export class SummonerSoloModel {
 	async update({ summonerName, update }) {
 		const filter = { summonerName };
 		const option = { returnOriginal: false };
-
 		const updatedUser = await SummonerSolo.findOneAndUpdate(
 			filter,
 			update,
@@ -34,6 +33,15 @@ export class SummonerSoloModel {
 	async delete(summonerName) {
 		await SummonerSolo.deleteOne({ summonerName });
 		return;
+	}
+
+	async findAllForRanking() {
+		const users = await SummonerSolo.find({}).sort({
+			tierToNumber: 1,
+			rank: 1,
+			leaguePoints: -1,
+		});
+		return users;
 	}
 }
 

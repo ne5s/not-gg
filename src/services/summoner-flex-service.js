@@ -12,7 +12,7 @@ class SummonerFlexService {
 		const { summonerName } = flexInfo;
 
 		// 아이디 중복 확인
-		const user = await userModel.findBySummonerName(summonerName);
+		const user = await this.summonerFlexModel.findBySummonerName(summonerName);
 		if (user) {
 			throw new Error(
 				'이 소환사명은 현재 사용중입니다. 다른 소환사명을 입력해 주세요.',

@@ -14,6 +14,25 @@ async function findMatches(req, res, next) {
 		let db_solo_rank = {};
 		let db_flex_rank = {};
 		let db_matchId_list = [];
+		// 이걸로 winRateFor20Games 구하기(승률),
+		let winAndLossFor20Games = {
+			summonerName: '',
+			userNum: '',
+			wins: 0,
+			losses: 0,
+			kills: 0,
+			deaths: 0,
+			assists: 0,
+			killParticipation: 0,
+		};
+		let playChampsFor20Games = []; // 안에 {championName : 'nidalee', counts : 1, wins : 1, losses : 0, kda : 0}
+		let playLineFor20Games = {
+			TOP: 0,
+			JUNGLE: 0,
+			MIDDLE: 0,
+			BOTTOM: 0,
+			UTILITY: 0,
+		}; // 20판 동안 한 라인
 
 		const recent_json = await axios.get(
 			`https://ddragon.leagueoflegends.com/api/versions.json`,
@@ -75,6 +94,17 @@ async function findMatches(req, res, next) {
 		);
 		const { tier, rank, summonerName, leaguePoints, wins, losses, miniSeries } =
 			InfoData.data[0];
+		let tierToNumber;
+		// 0 : CHALLENGER, 1 : GRANDMASTER, 2 : MASTER, 3 : DIAMOND, 4 : PLATINUM, 5 : GOLD, 6 : SILVER, 7 : BRONZE, 8 : IRON
+		if (tier === 'CHALLENGER') tierToNumber = 0;
+		else if (tier === 'GRANDMASTER') tierToNumber = 1;
+		else if (tier === 'MASTER') tierToNumber = 2;
+		else if (tier === 'DIAMOND') tierToNumber = 3;
+		else if (tier === 'PLATINUM') tierToNumber = 4;
+		else if (tier === 'GOLD') tierToNumber = 5;
+		else if (tier === 'SILVER') tierToNumber = 6;
+		else if (tier === 'BRONZE') tierToNumber = 7;
+		else if (tier === 'IRON') tierToNumber = 8;
 		// console.log(
 		// 	tier,
 		// 	rank,
@@ -87,11 +117,12 @@ async function findMatches(req, res, next) {
 		db_solo_rank = {
 			tier,
 			rank,
+			tierToNumber,
 			summonerName,
 			leaguePoints,
 			wins,
 			losses,
-			winRate: (wins / (wins + losses)).toFixed(4) * 100,
+			winRate: ((wins / (wins + losses)).toFixed(4) * 100).toFixed(2),
 			...(miniSeries && { miniSeries }), // 없을 수 있어서
 		};
 
@@ -110,6 +141,17 @@ async function findMatches(req, res, next) {
 				losses: losses2,
 				miniSeries: miniSeries2,
 			} = InfoData.data[1];
+			let tierToNumber2;
+			// 0 : CHALLENGER, 1 : GRANDMASTER, 2 : MASTER, 3 : DIAMOND, 4 : PLATINUM, 5 : GOLD, 6 : SILVER, 7 : BRONZE, 8 : IRON
+			if (tier2 === 'CHALLENGER') tierToNumber2 = 0;
+			else if (tier2 === 'GRANDMASTER') tierToNumber2 = 1;
+			else if (tier2 === 'MASTER') tierToNumber2 = 2;
+			else if (tier2 === 'DIAMOND') tierToNumber2 = 3;
+			else if (tier2 === 'PLATINUM') tierToNumber2 = 4;
+			else if (tier2 === 'GOLD') tierToNumber2 = 5;
+			else if (tier2 === 'SILVER') tierToNumber2 = 6;
+			else if (tier2 === 'BRONZE') tierToNumber2 = 7;
+			else if (tier2 === 'IRON') tierToNumber2 = 8;
 			// console.log(
 			// 	tier2,
 			// 	rank2,
@@ -122,11 +164,12 @@ async function findMatches(req, res, next) {
 			db_flex_rank = {
 				tier: tier2,
 				rank: rank2,
+				tierToNumber: tierToNumber2,
 				summonerName: summonerName2,
 				leaguePoints: leaguePoints2,
 				wins: wins2,
 				losses: losses2,
-				winRate: (wins2 / (wins2 + losses2)).toFixed(4) * 100,
+				winRate: ((wins2 / (wins2 + losses2)).toFixed(4) * 100).toFixed(2),
 				...(miniSeries2 && { miniSeries: miniSeries2 }), // 없을 수 있어서
 			};
 			// 자유랭크 DB 넣기
@@ -171,6 +214,7 @@ async function findMatches(req, res, next) {
 			let users = [];
 			let whoIsWin = '';
 			const game_user_dict = {};
+			// 유저 1명씩 정보 가져옴 (블루 탑 --> 레드 서폿 순으로 내려감)
 			for (let i of match_data) {
 				console.log(i.champLevel);
 				const champLevel = i.champLevel;
@@ -286,16 +330,80 @@ async function findMatches(req, res, next) {
 			}
 
 			for (let j = 0; j < 5; j++) {
-				const killParticipation =
+				const killParticipation = Math.round(
 					((users[j].kills + users[j].assists) / blueTotalKills).toFixed(2) *
-					100;
-				users[j][killParticipation] = killParticipation;
+						100,
+				);
+				users[j]['killParticipation'] = killParticipation;
 			}
 			for (let j = 5; j < 10; j++) {
-				const killParticipation =
+				const killParticipation = Math.round(
 					((users[j].kills + users[j].assists) / redTotalKills).toFixed(2) *
-					100;
-				users[j][killParticipation] = killParticipation;
+						100,
+				);
+				users[j]['killParticipation'] = killParticipation;
+			}
+			// console.log(users);
+
+			for (let [idx, p] of users.entries()) {
+				if (p.summonerName === joinedSummonerName) {
+					winAndLossFor20Games['killParticipation'] += p.killParticipation;
+					winAndLossFor20Games['summonerName'] = p.summonerName;
+					winAndLossFor20Games['userNum'] = `user${idx}`;
+					if (p.win) {
+						winAndLossFor20Games['wins']++;
+					} else {
+						winAndLossFor20Games['losses']++;
+					}
+					winAndLossFor20Games['kills'] += p.kills;
+					winAndLossFor20Games['deaths'] += p.deaths;
+					winAndLossFor20Games['assists'] += p.assists;
+					// 다음 것. 있으면 count/수치들만 +
+					let flag = false;
+					for (let c of playChampsFor20Games) {
+						if (c.championName === p.championName) {
+							c['counts']++;
+							c['kda'] += Number(p.kda.toFixed(2));
+							if (p.win) {
+								c['wins']++;
+							} else {
+								c['losses']++;
+							}
+							flag = true;
+							break;
+						}
+					}
+					// [] 안에 없는 것이었다면 새로 push
+					if (!flag) {
+						let wins = 0;
+						let losses = 0;
+						if (p.win) {
+							wins++;
+						} else {
+							losses++;
+						}
+						playChampsFor20Games.push({
+							championName: p.championName,
+							counts: 1,
+							wins: wins,
+							losses: losses,
+							kda: Number(p.kda.toFixed(2)),
+							championImageURL: `https://ddragon.leagueoflegends.com/cdn/${recent_version}/img/champion/${p.championName}.png`,
+						});
+					}
+					// playLineFor20Games
+					if (p.lane === 'TOP') {
+						playLineFor20Games['TOP']++;
+					} else if (p.lane === 'JUNGLE') {
+						playLineFor20Games['JUNGLE']++;
+					} else if (p.lane === 'MIDDLE') {
+						playLineFor20Games['MIDDLE']++;
+					} else if (p.lane === 'BOTTOM') {
+						playLineFor20Games['BOTTOM']++;
+					} else {
+						playLineFor20Games['UTILITY']++;
+					}
+				}
 			}
 			console.log(game_user_dict);
 			const listForGameSimply = Object.entries(game_user_dict);
@@ -342,7 +450,45 @@ async function findMatches(req, res, next) {
 			};
 			const createdMatch = await matchService.addMatch(db_match_data);
 		}
-		console.log('match 데이터까지 저장 완료');
+		console.log('match 데이터 저장 완료');
+
+		// summonerSolo 에 20경기에 대한 data 삽입
+		let matchFor20Games = {
+			wins: winAndLossFor20Games.wins,
+			losses: winAndLossFor20Games.losses,
+			winRate:
+				(winAndLossFor20Games.wins /
+					(winAndLossFor20Games.wins + winAndLossFor20Games.losses)) *
+				100,
+			killAverage: Number((winAndLossFor20Games.kills / 20).toFixed(1)),
+			deathAverage: Number((winAndLossFor20Games.deaths / 20).toFixed(1)),
+			assistAverage: Number((winAndLossFor20Games.assists / 20).toFixed(1)),
+			kdaAverage:
+				(
+					(Number((winAndLossFor20Games.kills / 20).toFixed(1)) +
+						Number((winAndLossFor20Games.assists / 20).toFixed(1))) /
+					Number((winAndLossFor20Games.deaths / 20).toFixed(1))
+				).toFixed(2) + ':1',
+			killParticipationAverage: Math.round(
+				winAndLossFor20Games.killParticipation / 20,
+			),
+		};
+		const sortedPlayChampsFor20Games = playChampsFor20Games.sort(function (
+			a,
+			b,
+		) {
+			return b.counts - a.counts;
+		});
+		console.log('sortedPlayChampsFor20Games', sortedPlayChampsFor20Games);
+		// playLineFor20Games
+
+		const updatedSolo = await summonerSoloService.setSolo(joinedSummonerName, {
+			matchFor20Games: matchFor20Games,
+			sortedPlayChampsFor20Games: sortedPlayChampsFor20Games,
+			playLineFor20Games: playLineFor20Games,
+		});
+
+		console.log('20경기 데이터 저장 완료');
 	} catch (error) {
 		// if (error.response.status === 403) {
 		// 	throw new Error('RIOT API Key 문제입니다.');
