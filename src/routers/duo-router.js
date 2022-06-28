@@ -9,9 +9,8 @@ const DouRouter = Router();
 
 DouRouter.get('/duo', async function (req,res,next) {
   try {
-    const page = Number(req.query.page)
+    const page = Number((req.query.page).replace('/', ''))
     const DouPageData = await duoService.getDuos(page)
-    console.log(DouPageData)
     res.status(200).json(DouPageData);
   } catch (error) {
     next(error);
