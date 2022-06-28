@@ -6,6 +6,7 @@ const passwordInput = document.querySelector('#passwordInput');
 const passwordConfirmInput = document.querySelector('#passwordConfirmInput');
 const fullNameInput = document.querySelector('#fullNameInput');
 const submitButton = document.querySelector('#submitButton');
+const summonerInput = document.querySelector('#summonerInput');
 
 const failidMessage = document.querySelector('.failid-message');
 const failpassMessage = document.querySelector('.failpass-message');
@@ -55,6 +56,7 @@ async function handleSubmit(e) {
   e.preventDefault();
 
   const id = idInput.value;
+  const summonerName = summonerInput.value;
   const fullName = fullNameInput.value;
   const password = passwordInput.value;
   const passwordConfirm = passwordConfirmInput.value;
@@ -74,13 +76,13 @@ async function handleSubmit(e) {
 
   // 회원가입 api 요청
   try {
-    const data = { fullName, id, password };
+    const data = { name: fullName, id, password, summonerName };
 
-    await Api.post('/api/signup', data);
+    await Api.post('/api/register', data);
 
     alert(`정상적으로 회원가입되었습니다.`);
 
-    const result = await Api.post('/api/user/login', {id, password})
+    const result = await Api.post('/api/login', {id, password})
     const token = result.token;
 
     localStorage.setItem('token', token);

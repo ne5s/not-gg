@@ -175,10 +175,10 @@ class UserService {
 		return user;
 	}
 
-  async getSoloUser(summonerName){
-    const user = await this.userModel.findBySummonerName(summonerName);
+	async getSoloUser(summonerName) {
+		const user = await this.userModel.findBySummonerName(summonerName);
 		return user;
-  }
+	}
 
 	// 유저 삭제
 	async deleteUser(id) {
