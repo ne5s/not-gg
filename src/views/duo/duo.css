@@ -60,7 +60,7 @@ h1 {
     text-align: start;
 }
 .duo-forms-item-box > li:last-child {
-    text-align: end;
+    text-align: center;
 }
 .duo-forms-item-box > li > img {
     width: 35px;
