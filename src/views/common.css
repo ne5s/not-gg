@@ -117,35 +117,3 @@ a {
     font-size: 16px;
     color: #6667AB;
 }
-
-/* HEADER */
-.background {
-    width: 100%;
-    height: 100vh;
-    z-index: -1;
-    position: absolute;
-}
-.wrapper {
-    position: relative;
-    bottom: 0px;
-    width: 100%;
-    height: 100%;
-}
-.wrapper-img {
-    position: relative;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50% 0%;
-    width: 100%;
-    height: 100%;
-}
-.account {
-    display: flex;
-    align-items: center;
-}
-.account > li {
-    margin-left: 10px;
-}
-.hide {
-    display: none;
-}
