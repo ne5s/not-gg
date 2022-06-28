@@ -1,34 +1,83 @@
-// opgg 크롤링 연습
+import * as Api from '/api.js';
 
-// const axios = require('axios');
-// const cheerio = require('cheerio');
-// const log = console.log;
+const duoFormsBox = document.getElementById('duoFormsBox');
+console.log(duoFormsBox);
+addAllElements();
 
-// const getHtml = async () => {
-// 	try {
-// 		return await axios.get('https://www.op.gg/leaderboards/tier?region=kr');
-// 	} catch (error) {
-// 		console.error(error);
-// 	}
-// };
+const duoDatas = await Api.get('/api/duo?page=0');
+console.log(duoDatas);
+makeDuo();
 
-// getHtml()
-// 	.then((html) => {
-// 		let ulList = [];
-// 		const $ = cheerio.load(html.data);
-// 		const $bodyList = $('tbody').children('tr');
+function makeDuo() {
+	duoDatas.forEach((data) => {
+		const duoComment = data.DuoComment;
+		const MainPosition = data.MainPosition;
+		const myTier = data.MyTier;
+		const searchPosition = data.SearchPosition;
+		const searchTier = data.SearchTier;
+		const summonerName = data.SummonerName;
+		const createdAt = data.createdAt;
 
-// 		$bodyList.each(function (i, elem) {
-// 			ulList[i] = {
-// 				summoner: $(this).find('strong.summoner-name').text(),
-// 				tier: $(this).find('td.css-1gm6o8r e1g3wlsd6').text(),
-// 			};
-// 		});
+		let tierIcon = '';
+		switch (MainPosition) {
+			case 'TOP':
+				tierIcon = '탑';
+				break;
+			case 'JUNGLE':
+				tierIcon = '정글';
+				break;
+			case 'MIDDLE':
+				tierIcon = '미드';
+				break;
+			case 'BOTTOM':
+				tierIcon = '원딜';
+				break;
+			case 'UTILITY':
+				tierIcon = '서폿';
+				break;
+		}
 
-// 		const data = ulList.filter((n) => n.title);
-// 		return data;
-// 	})
-// 	.then((res) => log(res));
+		duoFormsBox.innerHTML += `
+            <ul class="duo-forms-item-box">
+                <li>
+                    <span class="components">아파요 머리가</span>
+                    <span>님이</span>
+                    <span class="components">${searchTier} ${searchPosition}</span>
+                    <span>를 찾고 있습니다</span>
+                </li>
+                <li>
+                    <img src="../img/${tierIcon}.png" alt="">
+                </li>
+                <li>${myTier}</li>
+                <li>
+                    <span class="comment">${duoComment}</span>
+                </li>
+                <li>1분전</li>
+                <li>
+                    <div class="btn--delete">
+                        <span class="material-icons">
+                        clear
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        `;
+	});
+}
+
+async function addAllElements() {
+	getDuoDatas();
+}
+
+async function getDuoDatas() {
+	//듀오 폼 가져와서
+	//renderDuoForms으로 forEach
+}
+
+function renderDuoData(object) {
+	//듀오 폼 하나하나 렌더링
+	const DuoComment = duoDatas;
+}
 
 // topbutton
 let topBtn = document.querySelector('.top-circle');
