@@ -1,4 +1,4 @@
-// import { getUserData, removeUser } from '../utils/user.js';
+// import { getUserData, removeUser } from '/utils/user.js';
 function navber() {
 	// 유저 데이터 가져와서 렌더링 후 작업 필요
 	//   render: () => {
@@ -16,7 +16,7 @@ function navber() {
     aria-expanded="false"
     aria-label="Toggle navigation "
   >
-    <img src="../img/toggler.png" width="36px" height="24px" />
+    <img src="/img/toggler.png" width="36px" height="24px" />
   </button>
   <a class="navbar-brand text-white mb-2 mt-2 SLE-logo" href="/"
     >이상한<br />
