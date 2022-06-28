@@ -48,151 +48,57 @@
 		<script src="../components/headerNavbar.js" type="module" defer></script>
 		<link rel="stylesheet" href="../components/headerNavbar.css" />
 		<!-- 커스텀 css, js -->
-		<!-- <link rel="stylesheet" href="../common.css" /> -->
+		<link rel="stylesheet" href="../common.css" />
 		<link rel="stylesheet" href="scrim.css" />
 		<script src="scrim.js" type="module" defer></script>
 	</head>
 	<body>
-		<br />
-		<div class="container" id="scrim-head">
-			<h3 id="scrim-title"><strong>내전</strong></h3>
-			<button class="purple-btn" id="scrim-register">
-				<span class="scrim-content">내전 모집하기</span>
-			</button>
-		</div>
-		<section class="section" id="scrim-body">
-			<div class="container" id="gray-container">
-				<div class="container">
-					<p id="last-match">...지난경기 더보기</p>
+		<section class="section">
+			<div class="container" id="scrim-head">
+				<div class="title-box">
+				<h1>내전</h1>
+				<button class="submit">내전 모집하기</button>
 				</div>
-					<div class="container" id="white-container">
-						<ul class="ul">
+			</div>
+			<div class="scrim-body" id="scrim-body">
+				<button class="last-match" id="last-match">...지난경기 더보기</button>
+				<div class="scrim-inner-box" id="white-container">
+					<div class="scrim-date">
+						<ul class="scrim-inner">
 							<li>
-								<button class="gray-btn" id="summoner-name">
-									<span class="gray-content">아파요 머리가</span>
-								</button>
+								<span class="components">아파요 머리가</span>
 								<span>님의</span>
-								<button class="gray-btn">
-									<span class="gray-content" id="scrim-date"
-										>6월21일(화) PM9:00</span
-									>
-								</button>
+								<span class="components" id="scrim-date">6월21일(화) PM9:00</span>
 								<span>내전 모집이 마감되었습니다.</span>
 							</li>
 							<li id="scrim-member">
-								<button class="gray-btn">
-									<span class="gray-content">1/10</span>
-								</button>
+								<button class="components components--gray">1/10</button>
 							</li>
 						</ul>
-						<ul class="ul">
+					</div>
+					<div class="scrim-date">
+						<ul class="scrim-inner">
 							<li>
-								<button class="gray-btn" id="summoner-name">
-									<span class="gray-content">아파요 머리가</span>
-								</button>
+								<span class="components">아파요 머리가</span>
 								<span>님의</span>
-								<button class="gray-btn">
-									<span class="gray-content" id="scrim-date"
-										>6월21일(화) PM9:00</span
-									>
-								</button>
-								<span>내전 모집이 마감되었습니다.</span>
-							</li>
-							<li id="scrim-member">
-								<button class="gray-btn">
-									<span class="gray-content">9/10</span>
-								</button>
-							</li>
-						</ul>
-						<ul class="ul">
-							<li>
-								<button class="gray-btn" id="summoner-name">
-									<span class="gray-content">아파요 머리가</span>
-								</button>
-								<span>님의</span>
-								<button class="gray-btn">
-									<span class="gray-content" id="scrim-date"
-										>6월21일(화) PM9:00</span
-									>
-								</button>
-								<span>내전 모집이 마감되었습니다.</span>
-							</li>
-							<li id="scrim-member">
-								<button class="gray-btn">
-									<span class="gray-content">10/10</span>
-								</button>
-							</li>
-						</ul>
-						<hr></hr>
-						<ul class="ul">
-							<li>
-								<button class="light-purple-btn" id="summoner-name">
-									<span class="light-purple-content">아파요 머리가</span>
-								</button>
-								<span>님의</span>
-								<button class="light-purple-btn">
-									<span class="light-purple-content" id="scrim-date"
-										>6월22일(수) PM9:00</span
-									>
-								</button>
+								<span class="components" id="scrim-date">6월22일(수) PM9:00</span>
 								<span>내전을 모집중입니다.</span>
 							</li>
 							<li id="scrim-member">
-								<button class="purple-btn">
-									<span class="purple-content">3/10</span>
-								</button>
+								<button class="btn">3/10</button>
 							</li>
 						</ul>
-						<ul class="ul">
+					</div>
+					<div class="scrim-date">
+						<ul class="scrim-inner">
 							<li>
-								<button class="light-purple-btn" id="summoner-name">
-									<span class="light-purple-content">아파요 머리가</span>
-								</button>
-								<span>님의</span>
-								<button class="light-purple-btn">
-									<span class="light-purple-content" id="scrim-date"
-										>6월22일(수) PM9:00</span
-									>
-								</button>
-								<span>내전을 모집중입니다.</span>
-							</li>
-							<li id="scrim-member">
-								<button class="purple-btn">
-									<span class="purple-content">3/10</span>
-								</button>
-							</li>
-						</ul>
-						<hr></hr>
-						<ul class="ul">
-							<li>
-								<button class="light-purple-btn" id="summoner-name">
-									<span class="light-purple-content">아파요 머리가</span>
-								</button>
-								<span>님의</span>
-								<button class="light-purple-btn">
-									<span class="light-purple-content" id="scrim-date"
-										>6월21일(목) PM10:00</span
-									>
-								</button>
-								<span>내전을 모집중입니다.</span>
-							</li>
-							<li id="scrim-member">
-								<button class="purple-btn">
-									<span class="purple-content">3/10</span>
-								</button>
-							</li>
-						</ul>
-						<hr>
-						<ul class="ul">
-							<li>
-								<button class="purple-btn">
-									<span class="purple-content">모집하기</span>
-								</button>
+								<button class="btn">모집하기</button>
 							</li>
 						</ul>
 					</div>
 				</div>
-			</div>
+				</div>
+			</section>
 		</section>
 	</body>
 </html>
