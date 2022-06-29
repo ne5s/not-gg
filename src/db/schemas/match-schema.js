@@ -64,6 +64,9 @@ const MatchSchema = new Schema(
 			type: String, // blue / red
 			required: false,
 		},
+		gameEndedInEarlySurrender: {
+			type: Boolean,
+		},
 		gameSimply: {
 			type: new Schema({
 				user1Id: String, // 아이디

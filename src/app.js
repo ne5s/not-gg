@@ -1,7 +1,12 @@
 import cors from 'cors';
 import express from 'express';
-
-import { viewsRouter, userRouter, riotRouter, soloRouter, DouRouter } from './routers';
+import {
+	viewsRouter,
+	userRouter,
+	riotRouter,
+	soloRouter,
+	DouRouter,
+} from './routers';
 import { errorHandler } from './middlewares';
 
 const app = express();

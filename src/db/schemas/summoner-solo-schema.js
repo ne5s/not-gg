@@ -50,7 +50,7 @@ const SummonerSoloSchema = new Schema(
 					winRate: Number,
 					killAverage: Number,
 					deathAverage: Number,
-					assistsAverage: Number,
+					assistAverage: Number,
 					kdaAverage: String,
 					killParticipationAverage: Number,
 				},
