@@ -1,31 +1,40 @@
 import * as Api from '/api.js';
+import { addCommas } from '/useful-functions.js';
 
+//table 랜더링
 const fetchRankingList = async () => {
 	try {
 		const RankingList = await Api.get('/api/soloRanking');
-		document.querySelector('#Rank-item-table').insertAdjacentHTML(
+		console.log(RankingList);
+		document.querySelector('#rank-item-table').insertAdjacentHTML(
 			'afterbegin',
-			`${RankingList
-				.map(
-					(ranking) =>
-						`
+			`${RankingList.map(
+				(ranking, index) =>
+					`
 						<tr>
-						<th scope="row">1</th>
-						<td class="summoner-name">어리고 싶다</td>
-						<td>Challenger</td>
-						<td>1144 LP</td>
+						<th scope="row">${index + 1}</th>
+						<td class="summoner-name" data-summoner-name="${ranking.summonerName}">${
+						ranking.summonerName
+					}</td>
+						<td>${ranking.tier} ${ranking.rank}</td>
+						<td>${addCommas(ranking.leaguePoints)}LP</td>
 						<td>
 							<div class="most3">
-								<div class="circle"></div>
-								<div class="circle"></div>
-								<div class="circle"></div>
+								<div class="circle"><img src="${
+									ranking.sortedPlayChampsFor20Games[0].championImageURL
+								}"></div>
+								<div class="circle"><img src="${
+									ranking.sortedPlayChampsFor20Games[1].championImageURL
+								}"></div>
+								<div class="circle"><img src="${
+									ranking.sortedPlayChampsFor20Games[2].championImageURL
+								}"></div>
 							</div>
 						</td>
-						<td>56%</td>
+						<td>${Math.floor(ranking.winRate)}%</td>
 					</tr>
 				`,
-				)
-				.join('')}`,
+			).join('')}`,
 		);
 	} catch (err) {
 		console.error(err.stack);
@@ -38,8 +47,8 @@ const attachEvent = () => {
 	const items = document.querySelectorAll('.summoner-name');
 	items.forEach((item) => {
 		item.addEventListener('click', function () {
-			const sumomonerName = this.getAttribute('data-product-name');
-			window.location.href = `/product_detail/?name=${productName}`;
+			const sumomonerName = this.getAttribute('data-summoner-name');
+			window.location.href = `/pvplog/${sumomonerName}`;
 		});
 	});
 };
@@ -51,10 +60,10 @@ attachEvent();
 let topBtn = document.querySelector('.top-circle');
 
 window.addEventListener('scroll', () => {
-	if (this.scrollY > 200) {
-		topBtn.classList.add('on');
+	if (window.scrollY > 300) {
+		topBtn.classList.add('active');
 	} else {
-		topBtn.classList.remove('on');
+		topBtn.classList.remove('active');
 	}
 });
 
