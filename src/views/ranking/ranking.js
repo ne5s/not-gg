@@ -60,10 +60,10 @@ attachEvent();
 let topBtn = document.querySelector('.top-circle');
 
 window.addEventListener('scroll', () => {
-	if (window.scrollY > 300) {
-		topBtn.classList.add('active');
+	if (window.scrollY > 200) {
+		topBtn.classList.add('on');
 	} else {
-		topBtn.classList.remove('active');
+		topBtn.classList.remove('on');
 	}
 });
 
