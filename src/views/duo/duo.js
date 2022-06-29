@@ -1,7 +1,7 @@
 import * as Api from '/api.js';
+import { timeForToday } from '/useful-functions.js';
 
 const duoFormsBox = document.getElementById("duoFormsBox")
-console.log(duoFormsBox)
 addAllElements();
 
 const duoDatas = await Api.get('/api/duo?page=0')
@@ -37,12 +37,64 @@ function makeDuo() {
                 break;
         }
 
+        let krPosition = ''
+        switch(searchPosition) {
+            case 'TOP':
+                krPosition = '탑';
+                break;
+            case 'JUNGLE':
+                krPosition = '정글';
+                break;
+            case 'MIDDLE':
+                krPosition = '미드';
+                break;
+            case 'BOTTOM':
+                krPosition = '원딜';
+                break;
+            case 'UTIL':
+                krPosition = '서폿';
+                break;
+        }
+
+        let krTier = ''
+        switch(searchTier) {
+            case 'IRON':
+                krTier = '아이언';
+                break;
+            case 'BRONZE':
+                krTier = '브론즈';
+                break;
+            case 'SILVER':
+                krTier = '실버';
+                break;
+            case 'GOLD':
+                krTier = '골드';
+                break;
+            case 'PLATINUM':
+                krTier = '플래티넘';
+                break;
+            case 'DIAMOND':
+                krTier = '다이아';
+                break;
+            case 'MASTER':
+                krTier = '마스터';
+                break;
+            case 'GRANDMASTER':
+                krTier = '그마';
+                break;
+            case 'CHALLENGER':
+                krTier = '챌린저';
+                break;
+        }
+
+        let time = timeForToday(createdAt)
+
         duoFormsBox.innerHTML += `
             <ul class="duo-forms-item-box">
                 <li>
-                    <span class="components">아파요 머리가</span>
+                    <span class="components">${summonerName}</span>
                     <span>님이</span>
-                    <span class="components">${searchTier} ${searchPosition}</span>
+                    <span class="components">${krPosition} ${krTier}</span>
                     <span>를 찾고 있습니다</span>
                 </li>
                 <li>
@@ -52,7 +104,7 @@ function makeDuo() {
                 <li>
                     <span class="comment">${duoComment}</span>
                 </li>
-                <li>1분전</li>
+                <li>${time}</li>
                 <li>
                     <div class="btn--delete">
                         <span class="material-icons">

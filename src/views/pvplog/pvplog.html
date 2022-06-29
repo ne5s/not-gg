@@ -26,8 +26,8 @@
 			crossorigin="anonymous"
 		></script>
 		<!-- navbar -->
-		<script src="../components/headerNavbar.js" type="module" defer></script>
-		<link rel="stylesheet" href="../components/headerNavbar.css" />
+		<script src="/components/headerNavbar.js" type="module" defer></script>
+		<link rel="stylesheet" href="/components/headerNavbar.css" />
 		<!-- 커스텀 css, js -->
 		<link rel="stylesheet" href="pvplog.css" />
 		<script src="pvplog.js" type="module" defer></script>
@@ -48,7 +48,9 @@
 						<div class="name-renewal-box">
 							<div class="profile-name">Hide On push</div>
 							<div class="profile-ranking">래더 랭킹 163위</div>
-							<button class="btn btn-renewal">전적갱신</button>
+							<button class="btn btn-renewal" id="pvplogRenewal">
+								전적갱신
+							</button>
 						</div>
 					</div>
 				</div>
@@ -127,7 +129,10 @@
 							<div class="col">
 								플래이한 챔피언
 								<div class="box-space-evenly" style="margin-top: 10px">
-									<img class="champ h45w45" src="../img/미드.png" />
+									<img
+										class="champ h45w45 border-circle"
+										src="/img/미드.png"
+									/>
 									<div class="champ-win-rate">80%</div>
 									<div class="champ-play-games">(5게임)</div>
 									<div class="champ-kda-rate">3.99:1평점</div>
@@ -136,7 +141,7 @@
 								<div class="box-space-evenly">
 									<img
 										class="champ h45w45 border-circle"
-										src="../img/미드.png"
+										src="/img/미드.png"
 									/>
 									<div class="champ-win-rate">80%</div>
 									<div class="champ-play-games">(5게임)</div>
@@ -145,9 +150,9 @@
 								<div class="box-space-evenly">
 									<img
 										class="champ h45w45 border-circle"
-										src="../img/미드.png"
+										src="/img/미드.png"
 									/>
-									<div class="champ-win-rate border-circle">80%</div>
+									<div class="champ-win-rate">80%</div>
 									<div class="champ-play-games">(5게임)</div>
 									<div class="champ-kda-rate">3.99:1평점</div>
 								</div>
@@ -161,31 +166,31 @@
 											<div class="line-pick-rate" style="height: 80%"></div>
 										</div>
 
-										<img class="top-icon" src="../img/탑.png" />
+										<img class="top-icon" src="/img/탑.png" />
 									</div>
 									<div class="line-rate">
 										<div class="line-pick">
 											<div class="line-pick-rate"></div>
 										</div>
-										<img class="jungle-icon" src="../img/정글.png" />
+										<img class="jungle-icon" src="/img/정글.png" />
 									</div>
 									<div class="line-rate">
 										<div class="line-pick">
 											<div class="line-pick-rate"></div>
 										</div>
-										<img class="mid-icon" src="../img/미드.png" />
+										<img class="mid-icon" src="/img/미드.png" />
 									</div>
 									<div class="line-rate">
 										<div class="line-pick">
 											<div class="line-pick-rate"></div>
 										</div>
-										<img class="ad-icon" src="../img/원딜.png" />
+										<img class="ad-icon" src="/img/원딜.png" />
 									</div>
 									<div class="line-rate">
 										<div class="line-pick">
 											<div class="line-pick-rate"></div>
 										</div>
-										<img class="sup-icon" src="../img/서폿.png" />
+										<img class="sup-icon" src="/img/서폿.png" />
 									</div>
 								</div>
 							</div>
@@ -251,7 +256,7 @@
 							<div class="flex-center-center">
 								<div class="controlward">
 									<img
-										src="../img/controlWard.png"
+										src="/img/controlWard.png"
 										style="width: 16px; height: 16px; border-radius: 50%"
 										alt=""
 										srcset=""
@@ -369,7 +374,7 @@
 							<div class="flex-center-center">
 								<div class="controlward">
 									<img
-										src="../img/controlWard.png"
+										src="/img/controlWard.png"
 										style="width: 16px; height: 16px; border-radius: 50%"
 										alt=""
 										srcset=""
@@ -487,7 +492,7 @@
 							<div class="flex-center-center">
 								<div class="controlward">
 									<img
-										src="../img/controlWard.png"
+										src="/img/controlWard.png"
 										style="width: 16px; height: 16px; border-radius: 50%"
 										alt=""
 										srcset=""
