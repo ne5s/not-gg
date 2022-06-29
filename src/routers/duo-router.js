@@ -19,19 +19,14 @@ DouRouter.get('/duo', async function (req,res,next) {
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
 DouRouter.post(
-  '/duo/:id',
-  // loginRequired,
+  '/duo',
+  loginRequired,
   async function (req, res, next) {
     try {
       // params로부터 id를 가져옴
-      // const summonerName = req.currentSummonerName
-      const SummonerName = "DK ShowMaker"
-      console.log(SummonerName)
+      const SummonerName = req.currentSummonerName
       let MyTier = await summonerSoloService.getSoloBySummonerName(SummonerName)
       MyTier = MyTier.tier
-      console.log(MyTier)
-      const id = req.params.id;
-      console.log(id)
       const { MainPosition, SearchTier, SearchPosition, DuoComment } = req.body
       console.log(MainPosition, SearchTier, SearchPosition, DuoComment)
       const newDuo = await duoService.addUser({
