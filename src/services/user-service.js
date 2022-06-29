@@ -138,8 +138,8 @@ class UserService {
 		return user;
 	}
 
-	// matchIdList 업데이트
-	async setMatchIdList(summonerName, toUpdate) {
+	// matchIdList 업데이트용, 레벨, 프로필 iconURL 넣는용
+	async updateUserBySummonerName(summonerName, toUpdate) {
 		// 우선 해당 summonerName의 유저가 db에 있는지 확인
 		let user = await this.userModel.findBySummonerName(summonerName);
 
@@ -158,27 +158,22 @@ class UserService {
 	}
 
 	// 계정 찾기(by id)
-	async getUser(id) {
+	async getUserById(id) {
 		const user = await this.userModel.findById(id);
 		return user;
 	}
 
 	// 계정 찾기(by name)
-	async getUser(name) {
+	async getUserByName(name) {
 		const user = await this.userModel.findByName(name);
 		return user;
 	}
 
 	// 계정 찾기(by summonerName)
-	async getUser(summonerName) {
+	async getUserBySummonerName(summonerName) {
 		const user = await this.userModel.findBySummonerName(summonerName);
 		return user;
 	}
-
-  async getSoloUser(summonerName){
-    const user = await this.userModel.findBySummonerName(summonerName);
-		return user;
-  }
 
 	// 유저 삭제
 	async deleteUser(id) {
