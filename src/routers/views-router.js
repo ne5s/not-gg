@@ -10,9 +10,10 @@ viewsRouter.use('/', serveStatic('home'));
 viewsRouter.use('/signup', serveStatic('signup'));
 viewsRouter.use('/login', serveStatic('login'));
 viewsRouter.use('/pvplog/:id', serveStatic('pvplog'));
-viewsRouter.use('/duo', serveStatic('duo'));
 viewsRouter.use('/scrim', serveStatic('scrim'));
+viewsRouter.use('/scrim/signup', serveStatic('scrimsignup'));
 viewsRouter.use('/ranking', serveStatic('ranking'));
+viewsRouter.use('/duo', serveStatic('duo'));
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use('/', serveStatic(''));
 

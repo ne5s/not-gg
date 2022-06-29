@@ -57,7 +57,43 @@
 			<div class="container" id="scrim-head">
 				<div class="title-box">
 				<h1>내전</h1>
-				<button class="submit">내전 모집하기</button>
+				<!-- Button trigger modal -->
+				<button class="submit" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">내전 모집하기</button>
+		
+				<!-- Modal -->
+				<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">내전 모집하기</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p class="modal-title" id="staticBackdropLabel">내전 시간</p>
+							<form>
+								<p><input type="date"></p>
+								<p><input type="time"></p>
+							</form>
+
+							<br>
+							<p class="modal-title" id="staticBackdropLabel">*경고메시지(악용하지 마세요)</p>
+							<br>
+							<p class="modal-title" id="staticBackdropLabel">등록할 포지션</p>
+							<div>
+								<img class="top-icon" src="../img/탑.png">
+								<img class="jungle-icon" src="../img/정글.png">
+								<img class="mid-icon" src="../img/미드.png">
+								<img class="ad-icon" src="../img/원딜.png">
+								<img class="sup-icon" src="../img/서폿.png">
+							</div>
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="scrim-member close" data-bs-dismiss="modal">닫기</button>
+						<button type="button" class="scrim-member open">등록</button>
+						</div>
+					</div>
+					</div>
+				</div>
 				</div>
 			</div>
 			<div class="scrim-body" id="scrim-body">

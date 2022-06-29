@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>랭킹</title>
+		<title>내전</title>
 		<!-- bootstrap -->
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
@@ -48,45 +48,33 @@
 		<script src="/components/headerNavbar.js" type="module" defer></script>
 		<link rel="stylesheet" href="/components/headerNavbar.css" />
 		<!-- 커스텀 css, js -->
-		<link rel="stylesheet" href="ranking.css" />
-		<script src="ranking.js" type="module" defer></script>
+		<link rel="stylesheet" href="/common.css" />
+		<link rel="stylesheet" href="/scrimsignup/scrimsignup.css" />
+		<script src="scrimsignup.js" type="module" defer></script>
 	</head>
 	<body>
-		<br />
-		<div class="container" id="rank-head">
-			<h3><strong>엘리스 랭킹</strong></h3>
-		</div>
-		<br />
-		<div class="table-responsive" id="rank-container">
-			<div class="top-circle"><div class="arrow arrow--top"></div></div>
-			<table class="table" id="rank-table">
-				<thead>
-					<tr style="border-bottom: 1px solid #6667ab; background: #f7f7f9">
-						<th scope="col">#</th>
-						<th scope="col">소환사</th>
-						<th scope="col">티어</th>
-						<th scope="col">LP</th>
-						<th scope="col">모스트 챔피언</th>
-						<th scope="col">승률</th>
-					</tr>
-				</thead>
-				<tbody id="rank-item-table">
-					<!-- <tr>
-						<th scope="row">1</th>
-						<td class="summoner-name">어리고 싶다</td>
-						<td>Challenger</td>
-						<td>1144 LP</td>
-						<td>
-							<div class="most3">
-								<div class="circle"></div>
-								<div class="circle"></div>
-								<div class="circle"></div>
-							</div>
-						</td>
-						<td>56%</td>
-					</tr> -->
-				</tbody>
-			</table>
-		</div>
+		<section class="section">
+			<div class="container" id="scrim-head">
+				<div class="title-box">
+				<h1 class="title">내전 정보</h1>
+				<button class="submit">디스코드로 공유하기</button>
+				</div>
+			</div>
+			<div class="scrim-body" id="scrim-body">
+        <div class="scrim-header">
+          <div class="scrim-inf">
+            <div class="scrim-constructor">아파요 머리가</div>
+            <span>님이</span>
+            <div class="scrim-pickeddate"></div>
+            <span>내전을 모집중입니다.</span>
+          </div>
+          <button class="delete-scrim btn" id="last-match">내전 삭제</button>
+        </div>
+        
+
+				</div>
+				</div>
+			</section>
+		</section>
 	</body>
 </html>

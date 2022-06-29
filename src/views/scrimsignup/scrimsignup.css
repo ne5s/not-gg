@@ -1,0 +1,39 @@
+.section {
+	margin: 60px 0 0;
+}
+.container {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	max-width: 100%;
+}
+.scrim-inf {
+	display: flex;
+}
+.scrim-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+/* 아래 수정 */
+.title-box {
+	display: flex;
+	background-color: #fff;
+	width: 100%;
+	margin: 0 auto 20px;
+	justify-content: space-between;
+	padding: 0 40px;
+}
+h1 {
+	font-weight: 700;
+	font-size: 36px;
+}
+.scrim-body {
+	background-color: #f7f7f9;
+
+	padding-bottom: 20px;
+}
+.scrim-header {
+	padding: 20px 40px 0 40px;
+}

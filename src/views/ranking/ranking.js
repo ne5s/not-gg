@@ -1,40 +1,66 @@
-// opgg 크롤링 연습
+import * as Api from '/api.js';
+import { addCommas } from '/useful-functions.js';
 
-// const axios = require('axios');
-// const cheerio = require('cheerio');
-// const log = console.log;
+//table 랜더링
+const fetchRankingList = async () => {
+	try {
+		const RankingList = await Api.get('/api/soloRanking');
+		console.log(RankingList);
+		document.querySelector('#rank-item-table').insertAdjacentHTML(
+			'afterbegin',
+			`${RankingList.map(
+				(ranking, index) =>
+					`
+						<tr>
+						<th scope="row">${index + 1}</th>
+						<td class="summoner-name" data-summoner-name="${ranking.summonerName}">${
+						ranking.summonerName
+					}</td>
+						<td>${ranking.tier} ${ranking.rank}</td>
+						<td>${addCommas(ranking.leaguePoints)}LP</td>
+						<td>
+							<div class="most3">
+								<div class="circle"><img src="${
+									ranking.sortedPlayChampsFor20Games[0].championImageURL
+								}"></div>
+								<div class="circle"><img src="${
+									ranking.sortedPlayChampsFor20Games[1].championImageURL
+								}"></div>
+								<div class="circle"><img src="${
+									ranking.sortedPlayChampsFor20Games[2].championImageURL
+								}"></div>
+							</div>
+						</td>
+						<td>${Math.floor(ranking.winRate)}%</td>
+					</tr>
+				`,
+			).join('')}`,
+		);
+	} catch (err) {
+		console.error(err.stack);
+		alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+	}
+};
 
-// const getHtml = async () => {
-// 	try {
-// 		return await axios.get('https://www.op.gg/leaderboards/tier?region=kr');
-// 	} catch (error) {
-// 		console.error(error);
-// 	}
-// };
+// 소환사 이름 클릭시 상세 페이지로 이동
+const attachEvent = () => {
+	const items = document.querySelectorAll('.summoner-name');
+	items.forEach((item) => {
+		item.addEventListener('click', function () {
+			const sumomonerName = this.getAttribute('data-summoner-name');
+			window.location.href = `/pvplog/${sumomonerName}`;
+		});
+	});
+};
 
-// getHtml()
-// 	.then((html) => {
-// 		let ulList = [];
-// 		const $ = cheerio.load(html.data);
-// 		const $bodyList = $('tbody').children('tr');
-
-// 		$bodyList.each(function (i, elem) {
-// 			ulList[i] = {
-// 				summoner: $(this).find('strong.summoner-name').text(),
-// 				tier: $(this).find('td.css-1gm6o8r e1g3wlsd6').text(),
-// 			};
-// 		});
-
-// 		const data = ulList.filter((n) => n.title);
-// 		return data;
-// 	})
-// 	.then((res) => log(res));
+await fetchRankingList();
+attachEvent();
 
 // topbutton
 let topBtn = document.querySelector('.top-circle');
 
 window.addEventListener('scroll', () => {
-	if (this.scrollY > 200) {
+	if (window.scrollY > 200) {
 		topBtn.classList.add('on');
 	} else {
 		topBtn.classList.remove('on');

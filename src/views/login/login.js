@@ -1,8 +1,7 @@
 import * as Api from '/api.js';
-import { validateEmail } from '/useful-functions.js';
 
 // 요소(element), input 혹은 상수
-const emailInput = document.querySelector('#emailInput');
+const idInput = document.querySelector('#idInput');
 const passwordInput = document.querySelector('#passwordInput');
 const submitButton = document.querySelector('#submitButton');
 
@@ -20,15 +19,16 @@ function addAllEvents() {
 // 로그인 진행
 async function handleSubmit(e) {
   e.preventDefault();
+  console.log(12)
 
-  const email = emailInput.value;
+  const id = idInput.value;
   const password = passwordInput.value;
 
   // 잘 입력했는지 확인
-  const isEmailValid = validateEmail(email);
+  const isIdValid = id.length >= 4;
   const isPasswordValid = password.length >= 4;
 
-  if (!isEmailValid || !isPasswordValid) {
+  if (!isIdValid || !isPasswordValid) {
     return alert(
       '비밀번호가 4글자 이상인지, 이메일 형태가 맞는지 확인해 주세요.'
     );
@@ -36,14 +36,14 @@ async function handleSubmit(e) {
 
   // 로그인 api 요청
   try {
-    const data = { email, password };
+    const data = { id, password };
 
     const result = await Api.post('/api/login', data);
     const token = result.token;
 
     // 로그인 성공, 토큰을 세션 스토리지에 저장
     // 물론 다른 스토리지여도 됨
-    sessionStorage.setItem('token', token);
+    localStorage.setItem('token', token);
 
     alert(`정상적으로 로그인되었습니다.`);
 

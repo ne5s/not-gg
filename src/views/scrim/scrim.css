@@ -79,3 +79,9 @@ h1 {
     border: none;
     color: #6C6C6C;
 }
+
+.modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
