@@ -4,4 +4,5 @@
 export * from './views-router';
 export * from './user-router';
 export * from './riot-router';
+export * from './summoner-solo-router';
 export * from './duo-router';

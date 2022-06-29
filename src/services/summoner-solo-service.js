@@ -12,7 +12,7 @@ class SummonerSoloService {
 		const { summonerName } = soloInfo;
 		console.log(summonerName);
 		// 아이디 중복 확인
-		const user = await userModel.findBySummonerName(summonerName);
+		const user = await this.summonerSoloModel.findBySummonerName(summonerName);
 		if (user) {
 			throw new Error(
 				'이 소환사명은 현재 사용중입니다. 다른 소환사명을 입력해 주세요.',
@@ -48,13 +48,11 @@ class SummonerSoloService {
 		if (!userSolo) {
 			throw new Error('이 유저의 Solo Rank 정보가 등록되지 않았습니다.');
 		}
-
 		// 업데이트 진행
-		updatedUserSolo = await this.summonerSoloModel.update({
+		const updatedUserSolo = await this.summonerSoloModel.update({
 			summonerName,
 			update: toUpdate,
 		});
-
 		return updatedUserSolo;
 	}
 
@@ -62,6 +60,11 @@ class SummonerSoloService {
 	async deleteSolo(summonerName) {
 		await this.summonerSoloModel.delete(summonerName);
 		return;
+	}
+
+	async getUsersForRanking() {
+		const users = await this.summonerSoloModel.findAllForRanking();
+		return users;
 	}
 }
 
