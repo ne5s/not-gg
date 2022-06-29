@@ -1,17 +1,43 @@
 import * as Api from '/api.js';
 
-soloRouter.get('/soloRanking', loginRequired, async function (req, res, next) {
+const fetchProductList = async () => {
 	try {
-		// 전체 사용자 목록(랭킹으로 sort된) 얻음
-		const users = await summonerSoloService.getUsersForRanking();
-
-		// 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
-		res.status(200).json(users);
-	} catch (error) {
-		next(error);
-	}
-});
-console.log(users);
+	  const productList = await Api.get('/api/product/list');
+document.querySelector('#producItemContainer').insertAdjacentHTML(
+	'afterbegin',
+	`${productList
+	  .map(
+		(product) =>
+		  `
+		  <div class="message product-item imageSort" data-category-name="${
+			product.productCategory
+		  }" data-product-name="${product.productName}">
+			<div class="media-left">
+			  <figure class="image">
+				<img src="${product.productImage}" alt="제품 이미지" />
+			  </figure>
+			</div>
+			<div class="media-content">
+				<div class="content">
+				  <p class="title">
+					${product.productName}
+				  </p>
+				  <p class="description">
+					${product.productShortDes}
+				  </p>
+				  <p class="price">${addCommas(product.productPrice)}원</p>
+				</div>
+			  </div>  
+			</div>
+		  `
+	  )
+	  .join('')}`
+  );
+} catch (err) {
+  console.error(err.stack);
+  alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+}
+};
 
 // topbutton
 let topBtn = document.querySelector('.top-circle');
