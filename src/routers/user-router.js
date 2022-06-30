@@ -389,6 +389,7 @@ userRouter.patch('/users', async (req, res, next) => {
 
 		// 한 경기마다 정보 가져와서 DB 삽입
 		for (let idx = 0; idx < matches.data.length; idx++) {
+			let gameEndedInEarlySurrender = '';
 			const matchId = matches.data[idx];
 			const match = await axios.get(
 				`https://asia.api.riotgames.com/lol/match/v5/matches/${matches.data[idx]}`,
@@ -483,7 +484,8 @@ userRouter.patch('/users', async (req, res, next) => {
 				const { visionWardsBoughtInGame, wardsKilled, wardsPlaced } = i;
 				// console.log(i.win);
 				const win = i.win;
-				const gameEndedInEarlySurrender = i.gameEndedInEarlySurrender;
+				gameEndedInEarlySurrender = i.gameEndedInEarlySurrender;
+				console.log('gameEndedInEarlySurrender', gameEndedInEarlySurrender);
 				const user_nickname = i.summonerName;
 				const user_level = i.summonerLevel;
 				const user_icon = `https://ddragon.leagueoflegends.com/cdn/${recent_version}/img/champion/${i.championName}.png`;
@@ -507,7 +509,6 @@ userRouter.patch('/users', async (req, res, next) => {
 					summonerName: user_nickname,
 					summonerLevel: user_level,
 					win,
-					gameEndedInEarlySurrender,
 					goldEarned,
 					totalDamageDealt,
 					totalDamageDealtToChampions,
@@ -658,6 +659,7 @@ userRouter.patch('/users', async (req, res, next) => {
 				gameStartTimestamp,
 				gameEndTimestamp,
 				queueId,
+				gameEndedInEarlySurrender,
 				win: whoIsWin,
 				user1: users[0],
 				user2: users[1],

@@ -25,8 +25,25 @@ scrimRouter.get('/scrims', loginRequired, async function (req, res, next) {
 		next(error);
 	}
 });
+// 스크림 상세보기 클릭 시, scrimId는 req.params로 전달
+scrimRouter.get(
+	'/scrimDetail/:scrimId',
+	loginRequired,
+	async function (req, res, next) {
+		try {
+			// 해당 내전 상세보기 데이터를 가져옴
+			const { scrimId } = req.params;
+			const scrimDetail =
+				await scrimDetailService.getScrimDetailByScrimObjectId(scrimId);
 
-scrimRouter.post('/scrim', async function (req, res, next) {
+			res.status(200).json(scrimDetail);
+		} catch (error) {
+			next(error);
+		}
+	},
+);
+
+scrimRouter.post('/scrim', loginRequired, async function (req, res, next) {
 	try {
 		if (is.emptyObject(req.body)) {
 			throw new Error(
@@ -104,31 +121,35 @@ scrimRouter.patch(
 );
 
 // scrimDetail 페이지에서 X버튼 클릭 시
-scrimRouter.patch('/cancelScrimDetail', async function (req, res, next) {
-	try {
-		if (is.emptyObject(req.body)) {
-			throw new Error(
-				'headers의 Content-Type을 application/json으로 설정해주세요',
+scrimRouter.patch(
+	'/cancelScrimDetail',
+	loginRequired,
+	async function (req, res, next) {
+		try {
+			if (is.emptyObject(req.body)) {
+				throw new Error(
+					'headers의 Content-Type을 application/json으로 설정해주세요',
+				);
+			}
+
+			const { scrimId, matchDate, matchTime, summonerName, selectedPosition } =
+				req.body;
+
+			// 수정하기에서는 selectedPosition이 team + 1 or 2 + TOP 이런식으로 오도록 요청
+			const toUpdate = {
+				...(selectedPosition && { [selectedPosition]: '' }),
+			};
+
+			const updatedScrimDetail = await scrimDetailService.setScrimDetail(
+				scrimId,
+				toUpdate,
 			);
+
+			res.status(200).json({ status: 'ok' });
+		} catch (error) {
+			next(error);
 		}
-
-		const { scrimId, matchDate, matchTime, summonerName, selectedPosition } =
-			req.body;
-
-		// 수정하기에서는 selectedPosition이 team + 1 or 2 + TOP 이런식으로 오도록 요청
-		const toUpdate = {
-			...(selectedPosition && { [selectedPosition]: '' }),
-		};
-
-		const updatedScrimDetail = await scrimDetailService.setScrimDetail(
-			scrimId,
-			toUpdate,
-		);
-
-		res.status(200).json({ status: 'ok' });
-	} catch (error) {
-		next(error);
-	}
-});
+	},
+);
 
 export { scrimRouter };
