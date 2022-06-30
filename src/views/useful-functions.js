@@ -51,3 +51,31 @@ export const timeForToday = (value) => {
 
   return `${Math.floor(betweenTimeDay / 365)}년전`;
 }
+
+// TOP -> 탑 으로 변경해주는 함수
+export const makePositionKR = (position) => {
+  const positionKR = {
+      TOP : "탑",
+      JUNGLE : "정글", 
+      MIDDLE : "미드",
+      BOTTOM : "원딜",
+      UTIL : "서폿"
+  }
+  return positionKR[position]
+}
+
+// GOLD -> 골드 로 변경해주는 함수
+export const makeTierKR = (tier) => {
+  const tierKR = {
+      IRON : "아이언",
+      BRONZE : "브론즈", 
+      SILVER : "실버",
+      GOLD : "골드",
+      PLATINUM : "플래티넘",
+      DIAMOND : "다이아",
+      MASTER : "마스터",
+      GRANDMASTER : "그마",
+      CHALLENGER : "챌린저"
+  }
+  return tierKR[tier]
+}
