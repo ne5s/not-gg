@@ -16,11 +16,12 @@ hr {
 .waitapi {
 	color: #000;
 	text-align: center;
-	margin-top: 300px;
+	margin-top: 80px;
 }
 .waitapi > img {
-	width: 200px;
-	height: 200px;
+	width: 150px;
+	height: 150px;
+	margin-bottom: 50px;
 }
 .border-none {
 	border: none;
@@ -529,8 +530,4 @@ hr {
 		width: auto;
 		margin-left: 3px;
 	}
-}
-img {
-	width: 20px;
-	height: 20px;
 }

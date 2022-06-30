@@ -27,7 +27,7 @@ const loadingrenewal = `
 
 const nodata = (id) => `
 <div class='waitapi'>
-<img src="../img/미드.png" alt="미아핑">
+<img src="/img/mia.png" alt="미아핑">
 <div> 2022 솔랭 정보가 없습니다. ${id}님 솔랭 한판 해주시길 바랍니다. </div>
 </div>
 `;
