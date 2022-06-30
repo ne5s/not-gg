@@ -1,27 +1,43 @@
 import * as Api from '/api.js';
 import { getUserData } from '/utils/user.js';
-import * as Useful from '/useful-functions.js';
+import { wait, timeForToday } from '/useful-functions.js';
+
+//전적갱신 버튼 태그
 const pvplogRenewalBtn = document.querySelector('#pvplogRenewal');
 
 // 선호 포지션
 const preferlinerate = document.getElementsByClassName('line-pick-rate');
-//
+
+// 전적 갱신 포지션
 const pvplogbox = document.querySelector('.pvplogbox');
 
 const addEvent = () => {
-	pvplogRenewalBtn.addEventListener('click', loading);
+	pvplogRenewalBtn.addEventListener('click', pvpdatapatch);
 };
-const loading = async () => {};
+
+//전적 갱신 버튼
+const pvpdatapatch = async () => {
+	const url = location.pathname.replace(/\/pvplog\/([\d\w]*)\/?/g, '$1');
+	const id = decodeURI(url).replace('/', '');
+};
+
+// api 데이터 값 추출
+
+// 20게임  데이터 추출
 const getLogintoken = async () => {
 	const url = location.pathname.replace(/\/pvplog\/([\d\w]*)\/?/g, '$1');
 	const id = decodeURI(url).replace('/', '');
-	const data = await Api.get('/api/userlist');
-	const data2 = await Api.get('/api/soloRanking');
-	const user = data.filter((res) => res.summonerName === id);
-	const elicerank = data2.findIndex((res) => res.summonerName === id) + 1;
-	const userinf = data2.filter((res) => res.summonerName === id);
-	console.log(user, userinf, elicerank);
-	const { summonerName, matchIdList, summonerLevel } = user[0];
+
+	// user, match, soloRank data
+	const data3 = await Api.get(`/api/search/${id}`);
+
+	//	엘리스 순위 등록을 위한 get
+	const data2 = await Api.get(`/api/soloRanking`);
+	const elicerank = data2.findIndex((res) => res.summonerName === id);
+	console.log(data3);
+	// 데이터 정리
+	const { summonerName, summonerLevel } = data3.user;
+	const matches = data3.match;
 	const {
 		leaguePoints,
 		matchFor20Games,
@@ -29,11 +45,10 @@ const getLogintoken = async () => {
 		rank,
 		sortedPlayChampsFor20Games,
 		tier,
-		tierToNumber,
 		updatedAt,
 		winRate,
-	} = userinf[0];
-	// console.log(userinf, summonerName, matchIdList);
+	} = data3.soloRank;
+
 	return {
 		leaguePoints,
 		matchFor20Games,
@@ -42,22 +57,21 @@ const getLogintoken = async () => {
 		rank,
 		sortedPlayChampsFor20Games,
 		tier,
-		tierToNumber,
 		updatedAt,
 		winRate,
 		summonerName,
-		matchIdList,
 		elicerank,
+		matches,
 	};
 };
+
+//데이터 추출
 const userdata = await getLogintoken();
 
-//예시
-
-// addEvent();
-const PvPLog = (userdata) => {
+// 화면 구현 함수();
+const putPvPLog = (userdata) => {
 	console.log(userdata);
-	const not = 'notdb';
+
 	const {
 		leaguePoints,
 		matchFor20Games,
@@ -65,23 +79,23 @@ const PvPLog = (userdata) => {
 		rank,
 		sortedPlayChampsFor20Games,
 		tier,
-		tierToNumber,
 		updatedAt,
 		summonerLevel,
 		winRate,
 		summonerName,
-		matchIdList,
 		elicerank,
+		matches,
 	} = userdata;
 	const playgamestate = Object.values(playLineFor20Games).reduce(
 		(a, b) => a + b,
 	);
-	const currentplaydata = [];
+	// 챔프 모스트 3개
+	const most3champdata = [];
 	for (let i = 0; i < 3; i++) {
 		if (sortedPlayChampsFor20Games[i]) {
 			let a = `<div class="box-space-evenly" style="margin-top: 10px">
 						<img
-							class="champ h45w45 border-circle"
+							class="champ h40w40 border-circle"
 							src=${sortedPlayChampsFor20Games[i].championImageURL}
 						/>
 						<div class="champ-win-rate" style='width:40px'>${Math.floor(
@@ -99,657 +113,368 @@ const PvPLog = (userdata) => {
 							.toFixed(1)
 							.replace('.', ':')} 평점</div>
 					</div>`;
-			currentplaydata.push(a);
+			most3champdata.push(a);
 		}
 	}
+	// 최근 20게임 데이터
 	let current20games = [];
-	// for() {
-	// 	if (){
-	// 		let game = `
-	// 		<div class="box-space-between pd-1 topborder">
-	// 			<div class="wincolorline"></div>
-	// 			<div class="game-winlose-playtime flex-center-center-column">
-	// 				<div class="winlose">승리</div>
-	// 				<div class="playtime">15분 14초</div>
-	// 			</div>
-	// 			<div class="pick-champ-img h40w40">
-	// 				<img
-	// 					src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-	// 					alt=""
-	// 				/>
-	// 			</div>
-	// 			<div class="flex-center-center-column game-spells">
-	// 				<img class="spell h28w28" />
-	// 				<img class="spell h28w28" />
-	// 			</div>
-	// 			<div class="flex-center-center-column game-runes">
-	// 				<img
-	// 					class="rune h28w28"
-	// 					src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-	// 				/>
-	// 				<img
-	// 					class="rune h28w28"
-	// 					src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/FirstStrike/FirstStrike.png"
-	// 				/>
-	// 			</div>
-	// 			<div class="flex-center-center-column game-kda">
-	// 				<div>
-	// 					<span class="game-kill">1</span> /
-	// 					<span class="game-die">2</span> /
-	// 					<span class="game-assist">2</span>
-	// 				</div>
-	// 				<span class="game-kda-rate">0.80:1 평점</span>
-	// 			</div>
-	// 			<div
-	// 				class="flex-center-center-column game-level-cs-killInvolvement"
-	// 			>
-	// 				<span class="game-level">레벨 16</span>
-	// 				<span class="game-cs">253(8.1)CS</span>
-	// 				<span class="game-killInvolvement">킬관여 45%</span>
-	// 			</div>
-	// 			<div class="flex-center-center game-items">
-	// 				<img class="item h28w28" />
-	// 				<img class="item h28w28" />
-	// 				<img class="item h28w28" />
-	// 				<img class="item h28w28" />
-	// 				<img class="item h28w28" />
-	// 				<img class="item h28w28" />
-	// 				<img class="accessory h28w28" />
-	// 			</div>
-	// 			<div class="flex-center-center">
-	// 				<div class="controlward">
-	// 					<img
-	// 						src="/img/controlWard.png"
-	// 						style="width: 16px; height: 16px; border-radius: 50%"
-	// 						alt=""
-	// 						srcset=""
-	// 					/>
-	// 					<div style="margin: 0 4px">제어와드</div>
-	// 					<span>4</span>
-	// 				</div>
-	// 			</div>
-	// 			<div class="flex">
-	// 				<div class="blueteams">
-	// 					<div class="blueteam flex">
-	// 						<img src="" class="champImg h14w14" />
-	// 						<div class="blue-summoner-1"></div>
-	// 					</div>
-	// 					<div class="blueteam flex">
-	// 						<img src="" class="champImg h14w14" />
-	// 						<div class="blue-summoner-2"></div>
-	// 					</div>
-	// 					<div class="blueteam flex">
-	// 						<img src="" class="champImg h14w14" />
-	// 						<div class="blue-summoner-3"></div>
-	// 					</div>
-	// 					<div class="blueteam flex">
-	// 						<img
-	// 							src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-	// 							class="champImg h14w14"
-	// 						/>
-	// 						<div class="blue-summoner-4"></div>
-	// 					</div>
-	// 					<div class="blueteam flex">
-	// 						<img
-	// 							src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-	// 							class="champImg h14w14"
-	// 						/>
-	// 						<div class="blue-summoner-5">입도열지마도구주제</div>
-	// 					</div>
-	// 				</div>
-	// 				<div class="redteams">
-	// 					<div class="redteam flex">
-	// 						<img src="" class="champImg h14w14" />
-	// 						<div class="blue-summoner-1"></div>
-	// 					</div>
-	// 					<div class="redteam flex">
-	// 						<img src="" class="champImg h14w14" />
-	// 						<div class="blue-summoner-2"></div>
-	// 					</div>
-	// 					<div class="redteam flex">
-	// 						<img src="" class="champImg h14w14" />
-	// 						<div class="blue-summoner-3"></div>
-	// 					</div>
-	// 					<div class="redteam flex">
-	// 						<img src="" class="champImg h14w14" />
-	// 						<div class="blue-summoner-4"></div>
-	// 					</div>
-	// 					<div class="redteam flex">
-	// 						<img
-	// 							src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-	// 							class="champImg h14w14"
-	// 						/>
-	// 						<div class="blue-summoner-5">입도열지마도구주제</div>
-	// 					</div>
-	// 				</div>
-	// 			</div>
-	// 		</div>
-	// 		`
-	// 	}
-	// }
-	console.log(currentplaydata.join(''));
-	const main = `
-	<div class="row">
-	<div class="col">
-		<div class="item-name">
-			<div class="icon-level-box">
-				<img class="profile-icon" />
-				<div class="profile-level">${summonerLevel}</div>
-			</div>
-			<div class="name-renewal-box">
-				<div class="profile-name">${summonerName}</div>
-				<div class="profile-ranking">엘레스 랭킹 ${elicerank}위</div>
-				<div class='renewal'><button class="btn btn-renewal" id="pvplogRenewal">
-				전적갱신
-			</button><div class='renewaltime'>${Useful.timeForToday(updatedAt)}</div></div>
-				
-				
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col">
-		<div class="item-box">
-			<div class="solo-rank-inf-box">
-				<div class="profile-currunt-ranking fs-20">S2022 솔로랭크</div>
-				<hr />
-				<div class="flex player-tier-inf">
-					<div class="icon-tier-box">
-						<img class="profile-tier-icon h140w140" />
-					</div>
-					<div class="rank-inf-box">
-						<span class="profile-tier-name fs-24 font-inter-bold"
-							>${tier}
-							<span class="profile-tier-level fs-24 font-inter-bold"
-								>${rank}</span
-							></span
-						>
+	for (let j = 0; j < matches.length; j++) {
+		if (matches[j]) {
+			let playedAt = timeForToday(matches[0].gameEndTimestamp);
+			let gameSimply = matches[j].gameSimply;
+			let userimg =
+				Object.values(gameSimply).findIndex((res) => res === summonerName) / 2 +
+				1;
+			let userInf = matches[j][`user${userimg}`];
 
-						<div class="profile-league-point fs-14">
-							리그 포인트 : ${leaguePoints}LP
+			let userteam = 'blue';
+			let teamwinlose = false;
+			if (userimg > 5) {
+				userteam = 'red';
+				if (matches[j].win === userteam) {
+					teamwinlose = true;
+				}
+			}
+
+			let gamebox = `
+			<div class="box-space-between pd-1 topborder" style='color: #555e5e'>
+				<div class=${teamwinlose ? 'wincolorline' : 'losecolorline'}></div>
+				<div class="game-winlose-playtime flex-center-center-column">
+				<div class='soloranktext ${
+					teamwinlose ? 'color-win' : 'color-lose'
+				}' >솔랭</div>
+				<div class="updatetimeAt soloranktext">${playedAt}</div>
+					<div class="winlose soloranktext2 ${
+						teamwinlose ? 'color-win' : 'color-lose'
+					}">${teamwinlose ? '승리' : '패배'}</div>
+					<div class="playtime soloranktext2" style='width:71px;'>${
+						matches[j].gameDuration
+					}</div>
+					
+				</div>
+				<div class="pick-champ-img h40w40">
+					<img
+						class='h40w40'
+						src="${gameSimply[`user${userimg}Image`]}"
+						alt=""
+					/>
+				</div>
+				<div style='display:flex;'>				
+					<div class="flex-center-center-column game-spells">
+						<img class="spell h28w28" src=${userInf.spell1} />
+						<img class="spell h28w28" src=${userInf.spell2} />
+					</div>
+					<div class="flex-center-center-column game-runes" style='margin-left:4px;'>
+						<img class="rune h28w28" src=${userInf.primaryStyle} />
+						<img class="rune h28w28" src=${userInf.subStyle} />
+					</div>
+				</div>
+				<div class="flex-center-center-column game-kda">
+					<div>
+						<span class="game-kill " >${userInf.kills} /</span> 
+						<span class="game-die" style='color:#C6443E'>${userInf.deaths} </span> 
+						<span class="game-assist" >/ ${userInf.assists}</span>
+					</div>
+					<span class="game-kda-rate" >${userInf.kda}:1 평점</span>
+				</div>
+				<div
+					class="flex-center-center-column game-level-cs-killInvolvement"
+				>
+					<span class="game-level" >레벨 ${userInf.champLevel}</span>
+					<span class="game-cs" >${userInf.cs}(${userInf.csByMinute})CS</span>
+					<span class="game-killInvolvement" style='color:#C6443E'>킬관여 ${
+						userInf.killParticipation
+					}%</span>
+				</div>
+				<div class="flex-center-center game-items">
+					<img class="item h28w28" src=${
+						userInf.item0
+							? userInf.item0
+							: 'https://thumb.photo-ac.com/50/5000224d5e1b9e40199bc53e1104d7ee_t.jpeg'
+					} />
+					<img class="item h28w28" src=${
+						userInf.item1
+							? userInf.item1
+							: 'https://thumb.photo-ac.com/50/5000224d5e1b9e40199bc53e1104d7ee_t.jpeg'
+					} />
+					<img class="item h28w28" src=${
+						userInf.item2
+							? userInf.item2
+							: 'https://thumb.photo-ac.com/50/5000224d5e1b9e40199bc53e1104d7ee_t.jpeg'
+					} />
+					<img class="item h28w28" src=${
+						userInf.item3
+							? userInf.item3
+							: 'https://thumb.photo-ac.com/50/5000224d5e1b9e40199bc53e1104d7ee_t.jpeg'
+					} />
+					<img class="item h28w28" src=${
+						userInf.item4
+							? userInf.item4
+							: 'https://thumb.photo-ac.com/50/5000224d5e1b9e40199bc53e1104d7ee_t.jpeg'
+					} />
+					<img class="item h28w28" src=${
+						userInf.item5
+							? userInf.item5
+							: 'https://thumb.photo-ac.com/50/5000224d5e1b9e40199bc53e1104d7ee_t.jpeg'
+					} />
+					
+					<img class="accessory h28w28" src=${userInf.item6} />
+				</div>
+				<div class="flex-center-center">
+					<div class="controlward">
+						<img
+							src="/img/controlWard.png"
+							style="width: 16px; height: 16px; border-radius: 50%"
+							alt=""
+							srcset=""
+						/>
+						<div style="margin: 0 4px">제어와드</div>
+						<span>${userInf.visionWardsBoughtInGame}</span>
+					</div>
+				</div>
+				<div class="flex">
+					<div class="blueteams">
+						<div class="blueteam flex">
+							<img src=${gameSimply.user1Image} class="champImg h14w14" />
+							<div class="blue-summoner-1" ${
+								userimg === 1 ? "style = 'color:black; font-weight: bold;'" : ''
+							} >${gameSimply.user1Id}</div>
 						</div>
-						<span class="profile-win-rate fs-14">승률 :</span>
-						<span class="profile-win-rate-number fs-14">53.33%</span>
+						<div class="blueteam flex">
+							<img src=${gameSimply.user2Image} class="champImg h14w14" />
+							<div class="blue-summoner-2" ${
+								userimg === 2 ? "style = 'color:black; font-weight: bold;'" : ''
+							}>${gameSimply.user2Id}</div>
+						</div>
+						<div class="blueteam flex">
+							<img src=${gameSimply.user3Image} class="champImg h14w14" />
+							<div class="blue-summoner-3" ${
+								userimg === 3 ? "style = 'color:black; font-weight: bold;'" : ''
+							}>${gameSimply.user3Id}</div>
+						</div>
+						<div class="blueteam flex">
+							<img src=${gameSimply.user4Image} class="champImg h14w14"	/>
+							<div class="blue-summoner-4" ${
+								userimg === 4 ? "style = 'color:black; font-weight: bold;'" : ''
+							}>${gameSimply.user4Id}</div>
+						</div>
+						<div class="blueteam flex">
+							<img src=${gameSimply.user5Image} class="champImg h14w14"	/>
+							<div class="blue-summoner-5" ${
+								userimg === 5 ? "style = 'color:black; font-weight: bold;'" : ''
+							}>${gameSimply.user5Id}</div>
+						</div>
+					</div>
+					<div class="redteams">
+						<div class="redteam flex">
+							<img src=${gameSimply.user6Image} class="champImg h14w14" />
+							<div class="blue-summoner-1" ${
+								userimg === 6 ? "style = 'color:black; font-weight: bold;'" : ''
+							}>${gameSimply.user6Id}</div>
+						</div>
+						<div class="redteam flex">
+							<img src=${gameSimply.user7Image} class="champImg h14w14" />
+							<div class="blue-summoner-2" ${
+								userimg === 7 ? "style = 'color:black; font-weight: bold;'" : ''
+							}>${gameSimply.user7Id}</div>
+						</div>
+						<div class="redteam flex">
+							<img src=${gameSimply.user8Image} class="champImg h14w14" />
+							<div class="blue-summoner-3" ${
+								userimg === 8 ? "style = 'color:black; font-weight: bold;'" : ''
+							}>${gameSimply.user8Id}</div>
+						</div>
+						<div class="redteam flex">
+							<img src=${gameSimply.user9Image} class="champImg h14w14" />
+							<div class="blue-summoner-4" ${
+								userimg === 9 ? "style = 'color:black; font-weight: bold;'" : ''
+							}>${gameSimply.user9Id}</div>
+						</div>
+						<div class="redteam flex">
+							<img src=${gameSimply.user10Image} class="champImg h14w14"/>
+							<div class="blue-summoner-5" ${
+								userimg === 10
+									? "style = 'color:black; font-weight: bold;'"
+									: ''
+							}>${gameSimply.user10Id}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			`;
+			current20games.push(gamebox);
+		}
+	}
+
+	const main = `
+		<div class="row">
+			<div class="col">
+				<div class="item-name">
+					<div class="icon-level-box">
+						<img class="profile-icon" />
+						<div class="profile-level">${summonerLevel}</div>
+					</div>
+					<div class="name-renewal-box">
+						<div class="profile-name">${summonerName}</div>
+						<div class="profile-ranking">엘레스 랭킹 ${elicerank}위</div>
+						<div class='renewal'><button class="btn btn-renewal" id="pvplogRenewal">
+						전적갱신
+					</button><div class='renewaltime'>${timeForToday(updatedAt)}</div></div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="margin-lr-10 gamebox">
-		<div class="contentsbox">
-			<div class="fs-20 color-505050">솔로랭크 (최근 20게임)</div>
-			<hr />
-			<div class="row">
-				<div class="col">
-					<div class="current-20game-winrate"  style='margin-left:12px'>${
-						matchFor20Games.wins + matchFor20Games.losses
-					}전 ${matchFor20Games.wins}승 ${matchFor20Games.losses}패</div>
-					<div class="box-space-evenly" style="margin-top: 20px">
-						<div
-							class="pie-chart2"
-							style="
-								display: inline-block;
-								position: relative;
-								width: 110px;
-								height: 110px;
-								background: conic-gradient(
-									#4990e2 0% ${matchFor20Games.winRate}%,
-									#fa576f ${matchFor20Games.winRate}% 100%
-								);
-								border-radius: 50%;
-							"
-						>
-							<span
-								class="center"
-								style="
-									position: absolute;
-									width: 82px;
-									height: 82px;
-									background: #fff;
-									border-radius: 50%;
-									top: 14px;
-									left: 14px;
-									display: flex;
-									justify-content: center;
-									align-items: center;
-								"
-								><div>${matchFor20Games.winRate}%</div></span
-							>
+		<div class="row">
+			<div class="col">
+				<div class="item-box">
+					<div class="solo-rank-inf-box">
+						<div class="profile-currunt-ranking fs-20">S2022 솔로랭크</div>
+						<hr />
+						<div class="flex player-tier-inf">
+							<div class="icon-tier-box">
+								<img class="profile-tier-icon h140w140" />
+							</div>
+							<div class="rank-inf-box">
+								<span class="profile-tier-name fs-24 font-inter-bold"
+									>${tier}
+									<span class="profile-tier-level fs-24 font-inter-bold"
+										>${rank}</span
+									></span
+								>
+
+								<div class="profile-league-point fs-14">
+									리그 포인트 : ${leaguePoints}LP
+								</div>
+								<span class="profile-win-rate fs-14">승률 :</span>
+								<span class="profile-win-rate-number fs-14">${winRate}%</span>
+							</div>
 						</div>
-						<div class="current-20game-winrate">
-							<div class="current-20game-kda">${matchFor20Games.killAverage}/${
+					</div>
+				</div>
+			</div>
+			<div class="margin-lr-10 gamebox">
+				<div class="contentsbox">
+					<div class="fs-20 color-505050">솔로랭크 (최근 20게임)</div>
+					<hr />
+					<div class="row">
+						<div class="col">
+							<div class="current-20game-winrate"  style='margin-left:12px'>${
+								matchFor20Games.wins + matchFor20Games.losses
+							}전 ${matchFor20Games.wins}승 ${matchFor20Games.losses}패</div>
+							<div class="box-space-evenly" style="margin-top: 20px">
+								<div
+									class="pie-chart2"
+									style="
+										display: inline-block;
+										position: relative;
+										width: 110px;
+										height: 110px;
+										background: conic-gradient(
+											#4990e2 0% ${matchFor20Games.winRate}%,
+											#fa576f ${matchFor20Games.winRate}% 100%
+										);
+										border-radius: 50%;
+									"
+								>
+									<span
+										class="center"
+										style="
+											position: absolute;
+											width: 82px;
+											height: 82px;
+											background: #fff;
+											border-radius: 50%;
+											top: 14px;
+											left: 14px;
+											display: flex;
+											justify-content: center;
+											align-items: center;
+										"
+										><div>${matchFor20Games.winRate}%</div></span
+									>
+								</div>
+								<div class="current-20game-winrate">
+									<div class="current-20game-kda">${matchFor20Games.killAverage}/${
 		matchFor20Games.deathAverage
 	}/${matchFor20Games.assistAverage}</div>
-							<div class="current-20game-kdarate">${matchFor20Games.kdaAverage}</div>
-							<div class="current-20game-killInvolvement">킬관여 ${
-								matchFor20Games.killParticipationAverage
-							}%</div>
+									<div class="current-20game-kdarate">${matchFor20Games.kdaAverage}</div>
+									<div class="current-20game-killInvolvement">킬관여 ${
+										matchFor20Games.killParticipationAverage
+									}%</div>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
 
-				<div class="col">
-					<div style='margin-left:12px'>플래이한 챔피언
-					${currentplaydata.join('')}</div></div>
-				
+						<div class="col">
+							<div style='margin-left:12px'>플래이한 챔피언
+							${most3champdata.join('')}</div></div>
+						
 
-				<div class="col">
-					<div style='margin-left:12px'>선호 포지션</div>
-					<div class="box-space-evenly" style="margin-top: 20px">
-						<div class="line-rate">
-							<div class="line-pick">
-								<div class="line-pick-rate" style="height: ${
-									100 + (playLineFor20Games.TOP / playgamestate) * -100
-								}%"></div>
-							</div>
+						<div class="col">
+							<div style='margin-left:12px'>선호 포지션</div>
+							<div class="box-space-evenly" style="margin-top: 20px">
+								<div class="line-rate">
+									<div class="line-pick">
+										<div class="line-pick-rate" style="height: ${
+											100 + (playLineFor20Games.TOP / playgamestate) * -100
+										}%"></div>
+									</div>
 
-							<img class="top-icon" src="/img/탑.png" />
-						</div>
-						<div class="line-rate">
-							<div class="line-pick">
-								<div class="line-pick-rate" style="height: ${
-									100 + (playLineFor20Games.JUNGLE / playgamestate) * -100
-								}%"></div>
+									<img class="top-icon" src="/img/탑.png" />
+								</div>
+								<div class="line-rate">
+									<div class="line-pick">
+										<div class="line-pick-rate" style="height: ${
+											100 + (playLineFor20Games.JUNGLE / playgamestate) * -100
+										}%"></div>
+									</div>
+									<img class="jungle-icon" src="/img/정글.png" />
+								</div>
+								<div class="line-rate">
+									<div class="line-pick">
+										<div class="line-pick-rate" style="height: ${
+											100 + (playLineFor20Games.MIDDLE / playgamestate) * -100
+										}%"></div>
+									</div>
+									<img class="mid-icon" src="/img/미드.png" />
+								</div>
+								<div class="line-rate">
+									<div class="line-pick">
+										<div class="line-pick-rate" style="height: ${
+											100 + (playLineFor20Games.BOTTOM / playgamestate) * -100
+										}%"></div>
+									</div>
+									<img class="ad-icon" src="/img/원딜.png" />
+								</div>
+								<div class="line-rate">
+									<div class="line-pick">
+										<div class="line-pick-rate" style="height: ${
+											100 + (playLineFor20Games.UTILITY / playgamestate) * -100
+										}%"></div>
+									</div>
+									<img class="sup-icon" src="/img/서폿.png" />
+								</div>
 							</div>
-							<img class="jungle-icon" src="/img/정글.png" />
-						</div>
-						<div class="line-rate">
-							<div class="line-pick">
-								<div class="line-pick-rate" style="height: ${
-									100 + (playLineFor20Games.MIDDLE / playgamestate) * -100
-								}%"></div>
-							</div>
-							<img class="mid-icon" src="/img/미드.png" />
-						</div>
-						<div class="line-rate">
-							<div class="line-pick">
-								<div class="line-pick-rate" style="height: ${
-									100 + (playLineFor20Games.BOTTOM / playgamestate) * -100
-								}%"></div>
-							</div>
-							<img class="ad-icon" src="/img/원딜.png" />
-						</div>
-						<div class="line-rate">
-							<div class="line-pick">
-								<div class="line-pick-rate" style="height: ${
-									100 + (playLineFor20Games.UTILITY / playgamestate) * -100
-								}%"></div>
-							</div>
-							<img class="sup-icon" src="/img/서폿.png" />
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-</div>
-<div class="container">
-<div class="row">
-	<div class="col margin-lr-10">
-		<div class="gamelogbox">
-			<div class="box-space-between pd-1 topborder">
-				<div class="wincolorline"></div>
-				<div class="game-winlose-playtime flex-center-center-column">
-					<div class="winlose">승리</div>
-					<div class="playtime">15분 14초</div>
-				</div>
-				<div class="pick-champ-img h40w40">
-					<img
-						src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-						alt=""
-					/>
-				</div>
-				<div class="flex-center-center-column game-spells">
-					<img class="spell h28w28" />
-					<img class="spell h28w28" />
-				</div>
-				<div class="flex-center-center-column game-runes">
-					<img
-						class="rune h28w28"
-						src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-					/>
-					<img
-						class="rune h28w28"
-						src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/FirstStrike/FirstStrike.png"
-					/>
-				</div>
-				<div class="flex-center-center-column game-kda">
-					<div>
-						<span class="game-kill">1</span> /
-						<span class="game-die">2</span> /
-						<span class="game-assist">2</span>
-					</div>
-					<span class="game-kda-rate">0.80:1 평점</span>
-				</div>
-				<div
-					class="flex-center-center-column game-level-cs-killInvolvement"
-				>
-					<span class="game-level">레벨 16</span>
-					<span class="game-cs">253(8.1)CS</span>
-					<span class="game-killInvolvement">킬관여 45%</span>
-				</div>
-				<div class="flex-center-center game-items">
-					<img class="item h28w28" />
-					<img class="item h28w28" />
-					<img class="item h28w28" />
-					<img class="item h28w28" />
-					<img class="item h28w28" />
-					<img class="item h28w28" />
-					<img class="accessory h28w28" />
-				</div>
-				<div class="flex-center-center">
-					<div class="controlward">
-						<img
-							src="/img/controlWard.png"
-							style="width: 16px; height: 16px; border-radius: 50%"
-							alt=""
-							srcset=""
-						/>
-						<div style="margin: 0 4px">제어와드</div>
-						<span>4</span>
-					</div>
-				</div>
-				<div class="flex">
-					<div class="blueteams">
-						<div class="blueteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-1"></div>
-						</div>
-						<div class="blueteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-2"></div>
-						</div>
-						<div class="blueteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-3"></div>
-						</div>
-						<div class="blueteam flex">
-							<img
-								src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-								class="champImg h14w14"
-							/>
-							<div class="blue-summoner-4"></div>
-						</div>
-						<div class="blueteam flex">
-							<img
-								src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-								class="champImg h14w14"
-							/>
-							<div class="blue-summoner-5">입도열지마도구주제</div>
-						</div>
-					</div>
-					<div class="redteams">
-						<div class="redteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-1"></div>
-						</div>
-						<div class="redteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-2"></div>
-						</div>
-						<div class="redteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-3"></div>
-						</div>
-						<div class="redteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-4"></div>
-						</div>
-						<div class="redteam flex">
-							<img
-								src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-								class="champImg h14w14"
-							/>
-							<div class="blue-summoner-5">입도열지마도구주제</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="box-space-between pd-1 topborder">
-				<div class="wincolorline"></div>
-				<div class="game-winlose-playtime flex-center-center-column">
-					<div class="winlose">승리</div>
-					<div class="playtime">15분 14초</div>
-				</div>
-				<div class="pick-champ-img h40w40">
-					<img
-						src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-						alt=""
-					/>
-				</div>
-				<div class="flex-center-center-column game-spells">
-					<img class="spell h28w28" />
-					<img class="spell h28w28" />
-				</div>
-				<div class="flex-center-center-column game-runes">
-					<img
-						class="rune h28w28"
-						src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-					/>
-					<img
-						class="rune h28w28"
-						src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/FirstStrike/FirstStrike.png"
-					/>
-				</div>
-				<div class="flex-center-center-column game-kda">
-					<div>
-						<span class="game-kill">1</span> /
-						<span class="game-die">2</span> /
-						<span class="game-assist">2</span>
-					</div>
-					<span class="game-kda-rate">0.80:1 평점</span>
-				</div>
-				<div
-					class="flex-center-center-column game-level-cs-killInvolvement"
-				>
-					<span class="game-level">레벨 16</span>
-					<span class="game-cs">253(8.1)CS</span>
-					<span class="game-killInvolvement">킬관여 45%</span>
-				</div>
-				<div class="flex-center-center game-items">
-					<img class="item h28w28" />
-					<img class="item h28w28" />
-					<img class="item h28w28" />
-					<img class="item h28w28" />
-					<img class="item h28w28" />
-					<img class="item h28w28" />
-					<img class="accessory h28w28" />
-				</div>
-				<div class="flex-center-center">
-					<div class="controlward">
-						<img
-							src="/img/controlWard.png"
-							style="width: 16px; height: 16px; border-radius: 50%"
-							alt=""
-							srcset=""
-						/>
-						<div style="margin: 0 4px">제어와드</div>
-						<span>4</span>
-					</div>
-				</div>
-				<div class="flex">
-					<div class="blueteams">
-						<div class="blueteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-1"></div>
-						</div>
-						<div class="blueteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-2"></div>
-						</div>
-						<div class="blueteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-3"></div>
-						</div>
-						<div class="blueteam flex">
-							<img
-								src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-								class="champImg h14w14"
-							/>
-							<div class="blue-summoner-4"></div>
-						</div>
-						<div class="blueteam flex">
-							<img
-								src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-								class="champImg h14w14"
-							/>
-							<div class="blue-summoner-5">입도열지마도구주제</div>
-						</div>
-					</div>
-					<div class="redteams">
-						<div class="redteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-1"></div>
-						</div>
-						<div class="redteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-2"></div>
-						</div>
-						<div class="redteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-3"></div>
-						</div>
-						<div class="redteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-4"></div>
-						</div>
-						<div class="redteam flex">
-							<img
-								src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-								class="champImg h14w14"
-							/>
-							<div class="blue-summoner-5">입도열지마도구주제</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="box-space-between pd-1 topborder">
-				<div class="wincolorline"></div>
-				<div class="game-winlose-playtime flex-center-center-column">
-					<div class="winlose">승리</div>
-					<div class="playtime">15분 14초</div>
-				</div>
-				<div class="pick-champ-img h40w40">
-					<img
-						src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-						alt=""
-					/>
-				</div>
-				<div class="flex-center-center-column game-spells">
-					<img class="spell h28w28" />
-					<img class="spell h28w28" />
-				</div>
-				<div class="flex-center-center-column game-runes">
-					<img
-						class="rune h28w28"
-						src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-					/>
-					<img
-						class="rune h28w28"
-						src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/FirstStrike/FirstStrike.png"
-					/>
-				</div>
-				<div class="flex-center-center-column game-kda">
-					<div>
-						<span class="game-kill">1</span> /
-						<span class="game-die">2</span> /
-						<span class="game-assist">2</span>
-					</div>
-					<span class="game-kda-rate">0.80:1 평점</span>
-				</div>
-				<div
-					class="flex-center-center-column game-level-cs-killInvolvement"
-				>
-					<span class="game-level">레벨 16</span>
-					<span class="game-cs">253(8.1)CS</span>
-					<span class="game-killInvolvement">킬관여 45%</span>
-				</div>
-				<div class="flex-center-center game-items">
-					<img class="item h28w28" />
-					<img class="item h28w28" />
-					<img class="item h28w28" />
-					<img class="item h28w28" />
-					<img class="item h28w28" />
-					<img class="item h28w28" />
-					<img class="accessory h28w28" />
-				</div>
-				<div class="flex-center-center">
-					<div class="controlward">
-						<img
-							src="/img/controlWard.png"
-							style="width: 16px; height: 16px; border-radius: 50%"
-							alt=""
-							srcset=""
-						/>
-						<div style="margin: 0 4px">제어와드</div>
-						<span>4</span>
-					</div>
-				</div>
-				<div class="flex">
-					<div class="blueteams">
-						<div class="blueteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-1"></div>
-						</div>
-						<div class="blueteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-2"></div>
-						</div>
-						<div class="blueteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-3"></div>
-						</div>
-						<div class="blueteam flex">
-							<img
-								src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-								class="champImg h14w14"
-							/>
-							<div class="blue-summoner-4"></div>
-						</div>
-						<div class="blueteam flex">
-							<img
-								src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-								class="champImg h14w14"
-							/>
-							<div class="blue-summoner-5">입도열지마도구주제</div>
-						</div>
-					</div>
-					<div class="redteams">
-						<div class="redteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-1"></div>
-						</div>
-						<div class="redteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-2"></div>
-						</div>
-						<div class="redteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-3"></div>
-						</div>
-						<div class="redteam flex">
-							<img src="" class="champImg h14w14" />
-							<div class="blue-summoner-4"></div>
-						</div>
-						<div class="redteam flex">
-							<img
-								src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png"
-								class="champImg h14w14"
-							/>
-							<div class="blue-summoner-5">입도열지마도구주제</div>
-						</div>
-					</div>
+		</div>
+		<div class="container">
+		<div class="row">
+			<div class="col margin-lr-10">
+				<div class="gamelogbox">
+						${current20games.join('')}
 				</div>
 			</div>
 		</div>
-	</div>
-</div>`;
-	pvplogbox.innerHTML = main;
+		`;
+	pvplogbox.insertAdjacentHTML('beforeend', main);
 	PutIcons(userdata.tier);
 };
 
+// 티어 이미지 반영 함수
 const PutIcons = (tier) => {
 	const ProfileIconimg = document.querySelector('.profile-icon');
 	const ProfileTierIcon = document.querySelector('.profile-tier-icon');
@@ -797,4 +522,5 @@ const PutIcons = (tier) => {
 	JungleIcon.src = '/img/정글.png';
 	SupporterIcon.src = '/img/서폿.png';
 };
-PvPLog(userdata);
+
+putPvPLog(userdata);
