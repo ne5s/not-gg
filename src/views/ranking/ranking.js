@@ -21,14 +21,14 @@ const fetchRankingList = async () => {
 						<td>
 							<div class="most3">
 								<div class="circle"><img src="${
-									ranking.sortedPlayChampsFor20Games[0].championImageURL
-								}"></div>
+									ranking.sortedPlayChampsFor20Games[0]?.championImageURL
+								}"onerror="this.style.display='none'"></div>
 								<div class="circle"><img src="${
-									ranking.sortedPlayChampsFor20Games[1].championImageURL
-								}"></div>
+									ranking.sortedPlayChampsFor20Games[1]?.championImageURL
+								}"onerror="this.style.display='none'"></div>
 								<div class="circle"><img src="${
-									ranking.sortedPlayChampsFor20Games[2].championImageURL
-								}"></div>
+									ranking.sortedPlayChampsFor20Games[2]?.championImageURL
+								}"onerror="this.style.display='none'"></div>
 							</div>
 						</td>
 						<td>${Math.floor(ranking.winRate)}%</td>
