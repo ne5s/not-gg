@@ -19,7 +19,7 @@ export class DuoModel {
     }
 
 	async delete(id) {
-		const deletedDuo = await Duos.deleteOne({ id });
+		const deletedDuo = await Duos.deleteOne({ _id: id });
 		return deletedDuo;
 	}
 }
