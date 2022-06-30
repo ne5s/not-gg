@@ -84,6 +84,16 @@ a {
     border: 1px solid #6667AB;
     color: #fff;
 }
+.btn--gray {
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    color: #9E9E9E;
+}
+.btn--gray:hover {
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    color: #9E9E9E;
+}
 .submit {
     border: none;
     box-sizing: border-box;
