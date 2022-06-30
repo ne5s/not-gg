@@ -74,6 +74,10 @@ h1 {
 .rank-item-table > tr > th:first-child {
     text-align: start;
 }
+.rank-item-table > tr > th {
+    color: #6C6C6C;
+    font-weight: 400;
+}
 .rank-item-table > tr > td:nth-child(2) {
     text-align: start;
 }
@@ -92,4 +96,9 @@ h1 {
     width: 35px;
     height: 35px;
     border-radius: 50px;
+}
+.summoner-name {
+    cursor: pointer;
+    color: #6667ab;
+    font-weight: 600;
 }

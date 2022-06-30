@@ -70,7 +70,7 @@ const navber = () => {
 						summonerName && role === 'basic-user'
 							? `<li class="nav-item">
               <a href="/pvplog/${summonerName}" class="left-button">
-            ${summonerName}
+            ${summonerName}님
           </a>
           </li>
           <li class="nav-item signup">

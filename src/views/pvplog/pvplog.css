@@ -14,14 +14,13 @@ hr {
 	opacity: 0.25;
 }
 .waitapi {
-	background-color: red;
-	color: #efefef;
-	width: 100%;
-	font-size: 18px;
-	height: 60px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	color: #000;
+	text-align: center;
+	margin-top: 300px;
+}
+.waitapi > img {
+	width: 200px;
+	height: 200px;
 }
 .border-none {
 	border: none;
@@ -516,9 +515,6 @@ hr {
 		height: 18px;
 		width: 18px;
 	}
-	.waitapi {
-		font-size: 14px;
-	}
 	.game-killInvolvement {
 		font-size: 10px;
 	}
@@ -533,4 +529,8 @@ hr {
 		width: auto;
 		margin-left: 3px;
 	}
+}
+img {
+	width: 20px;
+	height: 20px;
 }
