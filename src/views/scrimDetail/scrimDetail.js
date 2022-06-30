@@ -11,7 +11,7 @@ const loadingrenewal = `
 const xbox = (summonerName) =>
 	`<span><button class='cancel-btn' id=${summonerName}>✕</button></span>`;
 
-const url = location.pathname.replace(/\/pvplog\/([\d\w]*)\/?/g, '$1');
+const url = location.pathname.replace(/\/scrimDetail\/([\d\w]*)\/?/g, '$1');
 const scrimId = decodeURI(url).replace('/', '');
 const testId = '62bddbc7d35c503f4c3aa481';
 // 치환기
@@ -27,7 +27,6 @@ const getWeek = (strsDate) => {
 	const weekName = new Array('일', '월', '화', '수', '목', '금', '토');
 	var dayOfWeek = weekName[new Date(strsDate).getDay()];
 	console.log(new Date(strsDate));
-	console.log(strsDate);
 	return dayOfWeek;
 };
 
@@ -45,13 +44,17 @@ const getscrimData = async (id) => {
 };
 //추가 함수
 const signupscrim = async (scrimId, summonerName, selectedPosition) => {
-	const data = { scrimId, summonerName, selectedPosition };
+	const data = {
+		scrimId,
+		summonerName,
+		selectedPosition,
+	};
 	try {
 		await Api.patch('/api/addScrimDetail', '', data);
 	} catch (e) {
 		console.log(e);
 	}
-	// location.reload();
+	location.pathname = '/scrim/';
 };
 //취소 함수
 const cancelscrim = async (scrimId, selectedPosition) => {
@@ -61,12 +64,13 @@ const cancelscrim = async (scrimId, selectedPosition) => {
 	} catch (e) {
 		console.log(e);
 	}
-	location.reload();
+	// location.reload();
 };
 // 삭제 함수
 const deletescrim = async (scrimId, summonerName, writerSummonerName) => {
 	if (summonerName === writerSummonerName) {
-		const canceleddata = await Api.delete('/api/scrim', scrimId);
+		const objects = { scrimId: scrimId };
+		const canceleddata = await Api.delete('/api/scrim', '', objects);
 	}
 };
 // writer 표시 삭제버튼 안보이게 하기
@@ -134,17 +138,19 @@ const renderData = async (scrimId) => {
 		if (userName.find((name) => name === summonerName)) {
 			console.log('이미 신청했던 소환사입니다.');
 			for (let i = 0; i < userArr.length; i++) {
+				console.log(userArr[i][1]);
 				if (userArr[i][1]) {
 					$id(userArr[i][0]).innerHTML = userArr[i][1];
 					$id(userArr[i][0]).classList.remove('recruit');
 					if (userArr[i][1] === summonerName) {
 						// 취소버튼 추가
-						$id(userArr[i][0]).insertAdjacentElement(
+						let selectedPosition = userArr[i][0];
+						$id(userArr[i][0]).insertAdjacentHTML(
 							'beforebegin',
 							xbox(summonerName),
-							취소버튼(scrimId, selectedPosition, summonerName),
 						);
-						$id(userArr[i][0]).style = 'width:250px';
+						취소버튼(summonerName, scrimId, selectedPosition),
+							($id(userArr[i][0]).style = 'width:250px');
 					}
 				} else {
 					$id(userArr[i][0]).innerHTML = '신청하기';
