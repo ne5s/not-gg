@@ -45,17 +45,17 @@ const navber = () => {
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link active text-white" aria-current="page" href="/ranking"
-                ><img src="../img/whitesparkle.png" alt=""> 랭킹</a
+                ><img src="/img/whitesparkle.png" alt=""> 랭킹</a
               >
             </li>
             <li class="nav-item">
               <a class="nav-link active text-white" aria-current="page" href="/duo"
-                ><img src="../img/whitesparkle.png" alt=""> 듀오</a
+                ><img src="/img/whitesparkle.png" alt=""> 듀오</a
               >
             </li>
             <li class="nav-item">
               <a class="nav-link active text-white" aria-current="page" href="/scrim"
-                ><img src="../img/whitesparkle.png" alt=""> 내전</a
+                ><img src="/img/whitesparkle.png" alt=""> 내전</a
               >
             </li>
             <li class="nav-item signup control-display-mobile" style='margin: 10px;'>
