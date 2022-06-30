@@ -55,45 +55,45 @@
 		<script src="/components/headerNavbar.js" type="module" defer></script>
 		<link rel="stylesheet" href="/components/headerNavbar.css" />
 		<!-- 커스텀 css, js -->
+		<link rel="stylesheet" href="../common.css" />
 		<link rel="stylesheet" href="ranking.css" />
 		<script src="ranking.js" type="module" defer></script>
 	</head>
 	<body>
-		<br />
-		<div class="container" id="rank-head">
-			<h3><strong>엘리스 랭킹</strong></h3>
-		</div>
-		<br />
-		<div class="table-responsive" id="rank-container">
-			<div class="top-circle"><div class="arrow arrow--top"></div></div>
-			<table class="table" id="rank-table">
-				<thead>
-					<tr style="border-bottom: 1px solid #6667ab; background: #f7f7f9">
-						<th scope="col">#</th>
-						<th scope="col">소환사</th>
-						<th scope="col">티어</th>
-						<th scope="col">LP</th>
-						<th scope="col">모스트 챔피언</th>
-						<th scope="col">승률</th>
-					</tr>
-				</thead>
-				<tbody id="rank-item-table">
-					<!-- <tr>
-						<th scope="row">1</th>
-						<td class="summoner-name">어리고 싶다</td>
-						<td>Challenger</td>
-						<td>1144 LP</td>
-						<td>
-							<div class="most3">
-								<div class="circle"></div>
-								<div class="circle"></div>
-								<div class="circle"></div>
-							</div>
-						</td>
-						<td>56%</td>
-					</tr> -->
-				</tbody>
-			</table>
-		</div>
+		<section class="section">
+			<div class="container" id="rank-head">
+				<h1>엘리스 랭킹</h1>
+			</div>
+			<div class="table-responsive" id="rank-container">
+				<table class="table" id="rank-table">
+					<thead>
+						<tr>
+							<th class="table-cell" scope="col">#</th>
+							<th class="table-cell" scope="col">소환사</th>
+							<th class="table-cell" scope="col">티어</th>
+							<th class="table-cell" scope="col">LP</th>
+							<th class="table-cell" scope="col">모스트 챔피언</th>
+							<th class="table-cell" scope="col">승률</th>
+						</tr>
+					</thead>
+					<tbody class="rank-item-table" id="rank-item-table">
+						<!-- <tr>
+							<th scope="row">1</th>
+							<td class="summoner-name">어리고 싶다</td>
+							<td>Challenger</td>
+							<td>1144 LP</td>
+							<td>
+								<div class="most3">
+									<div class="circle"></div>
+									<div class="circle"></div>
+									<div class="circle"></div>
+								</div>
+							</td>
+							<td>56%</td>
+						</tr> -->
+					</tbody>
+				</table>
+			</div>
+		</section>
 	</body>
 </html>
