@@ -1,5 +1,6 @@
 import * as Api from '/api.js';
 import { timeForToday, makePositionKR, makeTierKR } from '/useful-functions.js';
+import { getUserData } from '/utils/user.js';
 
 const duoFormsBox = document.getElementById("duoFormsBox")
 const duoSubmitBtn = document.getElementById("duoSubmitBtn")
@@ -43,10 +44,15 @@ async function addHandleSubmit() {
     const myPosition = document.querySelector('input[name="myPosition"]:checked').id
     const SearchTier = document.getElementById("tierSelect").value
     const duoPosition = document.querySelector('input[name="duoPosition"]:checked').id
-    const DuoComment = document.getElementById("duoComment").value
+    const comment = document.getElementById("duoComment").value
 
     let MainPosition = myPosition.slice(10)
     let SearchPosition = duoPosition.slice(11)
+    let DuoComment = comment
+
+    if(DuoComment === null || DuoComment === '' || DuoComment === undefined) {
+        DuoComment = ' '
+    }
 
     // 듀오등록 api 요청
     try {
@@ -67,10 +73,16 @@ async function btnClickEvent(e) {
     const btnDelete = e.target.closest('.btn--delete');
 
     if (btnDelete) {
-        const targetId = btnDelete.name;
-        const res = await Api.delete('/api/duo', '', {targetId});
-        location.reload();
-    }    
+        if (confirm("정말 삭제하시겠습니까??") == true){
+            const targetId = btnDelete.name;
+            console.log(targetId)
+            const res = await Api.delete('/api/duo', '', {targetId});
+
+            location.reload();
+        }else{
+            return false;
+        }
+    } 
 }
 
 // 듀오등록 데이터 목록 렌더링
@@ -81,7 +93,7 @@ function dataRender() {
         const myTier = data.MyTier;
         const searchPosition = data.SearchPosition
         const searchTier = data.SearchTier
-        const summonerName = data.SummonerName
+        const summonerNameDuo = data.SummonerName
         const createdAt = data.createdAt
         const itemId = data._id
 
@@ -90,10 +102,13 @@ function dataRender() {
         let krTier = makeTierKR(searchTier)
         let time = timeForToday(createdAt)
 
-        duoFormsBox.innerHTML += `
+        const { summonerName } = getUserData();
+
+        if(summonerName === summonerNameDuo) {
+            duoFormsBox.innerHTML += `
             <ul class="duo-forms-item-box">
                 <li>
-                    <span class="components">${summonerName}</span>
+                    <span class="components">${summonerNameDuo}</span>
                     <span>님이</span>
                     <span class="components">${krPosition} ${krTier}</span>
                     <span>를 찾고 있습니다</span>
@@ -115,5 +130,29 @@ function dataRender() {
                 </li>
             </ul>
         `
+        } else {
+            duoFormsBox.innerHTML += `
+            <ul class="duo-forms-item-box">
+                <li>
+                    <span class="components">${summonerNameDuo}</span>
+                    <span>님이</span>
+                    <span class="components">${krPosition} ${krTier}</span>
+                    <span>를 찾고 있습니다</span>
+                </li>
+                <li>
+                    <img src="../img/${tierIcon}.png" alt="">
+                </li>
+                <li>${myTier}</li>
+                <li>
+                    <span class="comment">${duoComment}</span>
+                </li>
+                <li>${time}</li>
+                <li id="deleteItem">
+                </li>
+            </ul>
+        `
+        }
+
+        
     })
 }
