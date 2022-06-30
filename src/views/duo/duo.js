@@ -30,9 +30,9 @@ function makeDuo() {
 async function addMakeDuo() {
     duoDataNumber++
     duoDatas = await Api.get(`/api/duo?page=${duoDataNumber}`)
+    console.log(duoDatas)
     if(duoDatas.length < 10 || duoDatas === null) {
         addRenderDuo.classList.add('hide')
-        return
     }
 
     dataRender()
@@ -55,7 +55,7 @@ async function addHandleSubmit() {
         await Api.post('/api/duo', data)
         console.log("등록성공")
 
-        // window.location.href = '/duo';
+        window.location.href = '/duo';
     } catch (err) {
         console.error(err.stack);
         alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
