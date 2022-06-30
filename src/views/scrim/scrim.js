@@ -60,3 +60,15 @@ async function addHandleSubmit() {
 }
 
 scrimSubmitBtn.addEventListener('click', addHandleSubmit);
+
+// 아이디 버튼 누르면 전적 검색 페이지 이동
+
+const attachEvent = () => {
+	const items = document.getElementById('scrim-recruiter');
+	items.forEach((item) => {
+		item.addEventListener('click', function () {
+			const sumomonerName = this.getAttribute('data-summoner-name'); // 랜더링 될 때 설정해주기
+			window.location.href = `/pvplog/${sumomonerName}`;
+		});
+	});
+};
