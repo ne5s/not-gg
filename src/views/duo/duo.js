@@ -6,7 +6,7 @@ const duoSubmitBtn = document.getElementById("duoSubmitBtn")
 const addRenderDuo = document.getElementById("addRenderDuo")
 
 let duoDataNumber = 0
-const duoDatas = await Api.get(`/api/duo?page=${duoDataNumber}`)
+let duoDatas = await Api.get(`/api/duo?page=${duoDataNumber}`)
 
 addAllElements();
 addAllEvents();
@@ -27,11 +27,11 @@ function makeDuo() {
 }
 
 // 더보기 버튼 누르면 데이터 10개 추가
-function addMakeDuo() {
+async function addMakeDuo() {
     duoDataNumber++
-
-    if(duoDatas.length > 10 && duoDatas === null) {
-        addRenderDuo.classList.add("hide")
+    duoDatas = await Api.get(`/api/duo?page=${duoDataNumber}`)
+    if(duoDatas.length < 10 || duoDatas === null) {
+        addRenderDuo.classList.add('hide')
         return
     }
 
