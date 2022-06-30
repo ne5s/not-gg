@@ -81,7 +81,7 @@ const getLogintoken = async () => {
 		const elicerank = data2.findIndex((res) => res.summonerName === id) + 1;
 		console.log(data3);
 		// 데이터 정리
-		const { summonerName, summonerLevel } = data3.user;
+		const { summonerName, summonerLevel, profileIconURL } = data3.user;
 		const matches = data3.match;
 		const {
 			leaguePoints,
@@ -107,6 +107,7 @@ const getLogintoken = async () => {
 			summonerName,
 			elicerank,
 			matches,
+			profileIconURL,
 		};
 	} catch (e) {
 		console.log(e);
@@ -134,6 +135,7 @@ const putPvPLog = (userdata) => {
 		summonerName,
 		elicerank,
 		matches,
+		profileIconURL,
 	} = userdata;
 	const playgamestate = Object.values(playLineFor20Games).reduce(
 		(a, b) => a + b,
@@ -179,6 +181,10 @@ const putPvPLog = (userdata) => {
 			let teamwinlose = false;
 			if (userimg > 5) {
 				userteam = 'red';
+				if (matches[j].win === userteam) {
+					teamwinlose = true;
+				}
+			} else {
 				if (matches[j].win === userteam) {
 					teamwinlose = true;
 				}
@@ -361,7 +367,7 @@ const putPvPLog = (userdata) => {
 			<div class="col">
 				<div class="item-name">
 					<div class="icon-level-box">
-						<img class="profile-icon" />
+						<img class="profile-icon" src=${profileIconURL} />
 						<div class="profile-level">${summonerLevel}</div>
 					</div>
 					<div class="name-renewal-box">
@@ -531,7 +537,6 @@ const putPvPLog = (userdata) => {
 
 // 티어 이미지 반영 함수
 const PutIcons = (tier) => {
-	const ProfileIconimg = document.querySelector('.profile-icon');
 	const ProfileTierIcon = document.querySelector('.profile-tier-icon');
 
 	const TopIcon = document.querySelector('.top-icon');
@@ -539,8 +544,7 @@ const PutIcons = (tier) => {
 	const MidIcon = document.querySelector('.mid-icon');
 	const JungleIcon = document.querySelector('.jungle-icon');
 	const SupporterIcon = document.querySelector('.sup-icon');
-	ProfileIconimg.src =
-		'https://opgg-static.akamaized.net/images/profile_icons/profileIcon6.jpg?image=q_auto&image=q_auto,f_webp,w_auto&v=1655280878465';
+
 	switch (tier) {
 		case 'IRON':
 			ProfileTierIcon.src = '/ranked-emblems/Emblem_Iron.png';
