@@ -3,66 +3,114 @@ import { getUserData } from '/utils/user.js';
 import { wait, timeForToday } from '/useful-functions.js';
 
 //전적갱신 버튼 태그
-const pvplogRenewalBtn = document.querySelector('#pvplogRenewal');
 
 // 선호 포지션
 const preferlinerate = document.getElementsByClassName('line-pick-rate');
 
-// 전적 갱신 포지션
-const pvplogbox = document.querySelector('.pvplogbox');
-
-const addEvent = () => {
-	pvplogRenewalBtn.addEventListener('click', pvpdatapatch);
+const addEvent = (btn) => {
+	btn.addEventListener('click', pvpdatapatch);
 };
+//reload
+const reload = () => {
+	location.reload();
+};
+
+// 대기 메시지
+const waitapi = `
+	<div class='waitapi'>
+		<div>호출량이 많아 갱신이 어렵습니다. 2분 뒤 다시 시도바랍니다.</div>
+	</div>
+`;
+const loadingrenewal = `
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+`;
+
+const nodata = (id) => `
+<div class='waitapi'>
+<div> 2022 솔랭 정보가 없습니다. ${id}님 솔랭 한판 해주시길 바랍니다. </div>
+</div>
+`;
 
 //전적 갱신 버튼
 const pvpdatapatch = async () => {
 	const url = location.pathname.replace(/\/pvplog\/([\d\w]*)\/?/g, '$1');
 	const id = decodeURI(url).replace('/', '');
-};
 
-// api 데이터 값 추출
+	const data = { summonerName: id };
+	const navbar = document.querySelector('.navbar');
+	const pvplogRenewalBtn = document.querySelector('#pvplogRenewal');
+	try {
+		pvplogRenewalBtn.innerHTML = '';
+		pvplogRenewalBtn.disabled = true;
+		pvplogRenewalBtn.insertAdjacentHTML('afterbegin', loadingrenewal);
+		await Api.patch('/api/users', '', data).then((res) => {
+			console.log(res);
+			if (res) {
+				reload();
+			}
+		});
+		const wait = document.querySelector('.waitapi');
+		if (wait) {
+			document.body.removeChild(wait);
+		}
+		pvplogRenewalBtn.disabled = false;
+		pvplogRenewalBtn.innerHTML = '전적갱신';
+	} catch (e) {
+		console.log(e);
+		const wait = document.querySelector('.waitapi');
+		if (wait) {
+			document.body.removeChild(wait);
+		}
+		pvplogRenewalBtn.disabled = false;
+		pvplogRenewalBtn.innerHTML = '전적갱신';
+		navbar.insertAdjacentHTML('afterend', waitapi);
+	}
+};
 
 // 20게임  데이터 추출
 const getLogintoken = async () => {
 	const url = location.pathname.replace(/\/pvplog\/([\d\w]*)\/?/g, '$1');
 	const id = decodeURI(url).replace('/', '');
-
+	console.log(id);
 	// user, match, soloRank data
-	const data3 = await Api.get(`/api/search/${id}`);
+	try {
+		const data3 = await Api.get(`/api/search/${id}`);
+		//	엘리스 순위 등록을 위한 get
+		const data2 = await Api.get(`/api/soloRanking`);
+		const elicerank = data2.findIndex((res) => res.summonerName === id) + 1;
+		console.log(data3);
+		// 데이터 정리
+		const { summonerName, summonerLevel } = data3.user;
+		const matches = data3.match;
+		const {
+			leaguePoints,
+			matchFor20Games,
+			playLineFor20Games,
+			rank,
+			sortedPlayChampsFor20Games,
+			tier,
+			updatedAt,
+			winRate,
+		} = data3.soloRank;
 
-	//	엘리스 순위 등록을 위한 get
-	const data2 = await Api.get(`/api/soloRanking`);
-	const elicerank = data2.findIndex((res) => res.summonerName === id);
-	console.log(data3);
-	// 데이터 정리
-	const { summonerName, summonerLevel } = data3.user;
-	const matches = data3.match;
-	const {
-		leaguePoints,
-		matchFor20Games,
-		playLineFor20Games,
-		rank,
-		sortedPlayChampsFor20Games,
-		tier,
-		updatedAt,
-		winRate,
-	} = data3.soloRank;
-
-	return {
-		leaguePoints,
-		matchFor20Games,
-		playLineFor20Games,
-		summonerLevel,
-		rank,
-		sortedPlayChampsFor20Games,
-		tier,
-		updatedAt,
-		winRate,
-		summonerName,
-		elicerank,
-		matches,
-	};
+		return {
+			leaguePoints,
+			matchFor20Games,
+			playLineFor20Games,
+			summonerLevel,
+			rank,
+			sortedPlayChampsFor20Games,
+			tier,
+			updatedAt,
+			winRate,
+			summonerName,
+			elicerank,
+			matches,
+		};
+	} catch (e) {
+		console.log(e);
+		document.body.insertAdjacentHTML('beforeend', nodata(id));
+	}
 };
 
 //데이터 추출
@@ -92,6 +140,7 @@ const putPvPLog = (userdata) => {
 	// 챔프 모스트 3개
 	const most3champdata = [];
 	for (let i = 0; i < 3; i++) {
+		console.log(sortedPlayChampsFor20Games[i]);
 		if (sortedPlayChampsFor20Games[i]) {
 			let a = `<div class="box-space-evenly" style="margin-top: 10px">
 						<img
@@ -109,9 +158,7 @@ const putPvPLog = (userdata) => {
 						}게임)</div>
 						<div class="champ-kda-rate" style='width:68px'>${sortedPlayChampsFor20Games[
 							i
-						].kda
-							.toFixed(1)
-							.replace('.', ':')} 평점</div>
+						].kda.toFixed(1)}:1 평점</div>
 					</div>`;
 			most3champdata.push(a);
 		}
@@ -147,9 +194,7 @@ const putPvPLog = (userdata) => {
 					<div class="winlose soloranktext2 ${
 						teamwinlose ? 'color-win' : 'color-lose'
 					}">${teamwinlose ? '승리' : '패배'}</div>
-					<div class="playtime soloranktext2" style='width:71px;'>${
-						matches[j].gameDuration
-					}</div>
+					<div class="playtime soloranktext2">${matches[j].gameDuration}</div>
 					
 				</div>
 				<div class="pick-champ-img h40w40">
@@ -186,7 +231,7 @@ const putPvPLog = (userdata) => {
 						userInf.killParticipation
 					}%</span>
 				</div>
-				<div class="flex-center-center game-items">
+				<div class="flex-center-center game-items ">
 					<img class="item h28w28" src=${
 						userInf.item0
 							? userInf.item0
@@ -217,10 +262,13 @@ const putPvPLog = (userdata) => {
 							? userInf.item5
 							: 'https://thumb.photo-ac.com/50/5000224d5e1b9e40199bc53e1104d7ee_t.jpeg'
 					} />
-					
-					<img class="accessory h28w28" src=${userInf.item6} />
+					<img class="accessory h28w28 mobile-none " src=${
+						userInf.item6
+							? userInf.item6
+							: 'https://thumb.photo-ac.com/50/5000224d5e1b9e40199bc53e1104d7ee_t.jpeg'
+					} />
 				</div>
-				<div class="flex-center-center">
+				<div class="flex-center-center visionWardsBoughtInGame">
 					<div class="controlward">
 						<img
 							src="/img/controlWard.png"
@@ -236,31 +284,31 @@ const putPvPLog = (userdata) => {
 					<div class="blueteams">
 						<div class="blueteam flex">
 							<img src=${gameSimply.user1Image} class="champImg h14w14" />
-							<div class="blue-summoner-1" ${
+							<div class="blue-summoner-1 text-ellipsis" ${
 								userimg === 1 ? "style = 'color:black; font-weight: bold;'" : ''
 							} >${gameSimply.user1Id}</div>
 						</div>
 						<div class="blueteam flex">
 							<img src=${gameSimply.user2Image} class="champImg h14w14" />
-							<div class="blue-summoner-2" ${
+							<div class="blue-summoner-2 text-ellipsis" ${
 								userimg === 2 ? "style = 'color:black; font-weight: bold;'" : ''
 							}>${gameSimply.user2Id}</div>
 						</div>
 						<div class="blueteam flex">
 							<img src=${gameSimply.user3Image} class="champImg h14w14" />
-							<div class="blue-summoner-3" ${
+							<div class="blue-summoner-3 text-ellipsis" ${
 								userimg === 3 ? "style = 'color:black; font-weight: bold;'" : ''
 							}>${gameSimply.user3Id}</div>
 						</div>
 						<div class="blueteam flex">
 							<img src=${gameSimply.user4Image} class="champImg h14w14"	/>
-							<div class="blue-summoner-4" ${
+							<div class="blue-summoner-4 text-ellipsis" ${
 								userimg === 4 ? "style = 'color:black; font-weight: bold;'" : ''
 							}>${gameSimply.user4Id}</div>
 						</div>
 						<div class="blueteam flex">
 							<img src=${gameSimply.user5Image} class="champImg h14w14"	/>
-							<div class="blue-summoner-5" ${
+							<div class="blue-summoner-5 text-ellipsis" ${
 								userimg === 5 ? "style = 'color:black; font-weight: bold;'" : ''
 							}>${gameSimply.user5Id}</div>
 						</div>
@@ -268,31 +316,31 @@ const putPvPLog = (userdata) => {
 					<div class="redteams">
 						<div class="redteam flex">
 							<img src=${gameSimply.user6Image} class="champImg h14w14" />
-							<div class="blue-summoner-1" ${
+							<div class="blue-summoner-1 text-ellipsis" ${
 								userimg === 6 ? "style = 'color:black; font-weight: bold;'" : ''
 							}>${gameSimply.user6Id}</div>
 						</div>
 						<div class="redteam flex">
 							<img src=${gameSimply.user7Image} class="champImg h14w14" />
-							<div class="blue-summoner-2" ${
+							<div class="blue-summoner-2 text-ellipsis" ${
 								userimg === 7 ? "style = 'color:black; font-weight: bold;'" : ''
 							}>${gameSimply.user7Id}</div>
 						</div>
 						<div class="redteam flex">
 							<img src=${gameSimply.user8Image} class="champImg h14w14" />
-							<div class="blue-summoner-3" ${
+							<div class="blue-summoner-3 text-ellipsis" ${
 								userimg === 8 ? "style = 'color:black; font-weight: bold;'" : ''
 							}>${gameSimply.user8Id}</div>
 						</div>
 						<div class="redteam flex">
 							<img src=${gameSimply.user9Image} class="champImg h14w14" />
-							<div class="blue-summoner-4" ${
+							<div class="blue-summoner-4 text-ellipsis" ${
 								userimg === 9 ? "style = 'color:black; font-weight: bold;'" : ''
 							}>${gameSimply.user9Id}</div>
 						</div>
 						<div class="redteam flex">
 							<img src=${gameSimply.user10Image} class="champImg h14w14"/>
-							<div class="blue-summoner-5" ${
+							<div class="blue-summoner-5 text-ellipsis" ${
 								userimg === 10
 									? "style = 'color:black; font-weight: bold;'"
 									: ''
@@ -307,6 +355,7 @@ const putPvPLog = (userdata) => {
 	}
 
 	const main = `
+	<div class="container mt-5 pvplogbox">
 		<div class="row">
 			<div class="col">
 				<div class="item-name">
@@ -316,10 +365,12 @@ const putPvPLog = (userdata) => {
 					</div>
 					<div class="name-renewal-box">
 						<div class="profile-name">${summonerName}</div>
-						<div class="profile-ranking">엘레스 랭킹 ${elicerank}위</div>
-						<div class='renewal'><button class="btn btn-renewal" id="pvplogRenewal">
-						전적갱신
-					</button><div class='renewaltime'>${timeForToday(updatedAt)}</div></div>
+						<div class="profile-ranking">엘리스 랭킹 ${elicerank}위</div>
+						<div class='renewal'>
+								<button class="btn btn-renewal" id="pvplogRenewal">
+								전적갱신
+							</button>
+					<div class='renewaltime'>${timeForToday(updatedAt)}</div></div>
 					</div>
 				</div>
 			</div>
@@ -341,7 +392,6 @@ const putPvPLog = (userdata) => {
 										>${rank}</span
 									></span
 								>
-
 								<div class="profile-league-point fs-14">
 									리그 포인트 : ${leaguePoints}LP
 								</div>
@@ -390,7 +440,7 @@ const putPvPLog = (userdata) => {
 											justify-content: center;
 											align-items: center;
 										"
-										><div>${matchFor20Games.winRate}%</div></span
+										><div>${Math.floor(matchFor20Games.winRate)}%</div></span
 									>
 								</div>
 								<div class="current-20game-winrate">
@@ -404,14 +454,12 @@ const putPvPLog = (userdata) => {
 								</div>
 							</div>
 						</div>
-
 						<div class="col">
-							<div style='margin-left:12px'>플래이한 챔피언
+							<div class='playchamps' style='margin-left:12px'>플래이한 챔피언
 							${most3champdata.join('')}</div></div>
 						
-
 						<div class="col">
-							<div style='margin-left:12px'>선호 포지션</div>
+							<div class='preferlines' style='margin-left:12px'>선호 포지션</div>
 							<div class="box-space-evenly" style="margin-top: 20px">
 								<div class="line-rate">
 									<div class="line-pick">
@@ -419,7 +467,6 @@ const putPvPLog = (userdata) => {
 											100 + (playLineFor20Games.TOP / playgamestate) * -100
 										}%"></div>
 									</div>
-
 									<img class="top-icon" src="/img/탑.png" />
 								</div>
 								<div class="line-rate">
@@ -463,15 +510,22 @@ const putPvPLog = (userdata) => {
 		</div>
 		<div class="container">
 		<div class="row">
-			<div class="col margin-lr-10">
+			<div class="col">
 				<div class="gamelogbox">
 						${current20games.join('')}
 				</div>
 			</div>
 		</div>
+	</div>
 		`;
-	pvplogbox.insertAdjacentHTML('beforeend', main);
+	let pvplogbox = document.querySelector('.pvplogbox');
+	if (pvplogbox) {
+		document.body.removeChild(pvplogbox);
+	}
+	document.body.insertAdjacentHTML('beforeend', main);
 	PutIcons(userdata.tier);
+	const pvplogRenewalBtn = document.querySelector('#pvplogRenewal');
+	addEvent(pvplogRenewalBtn);
 };
 
 // 티어 이미지 반영 함수
