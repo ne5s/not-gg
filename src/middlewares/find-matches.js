@@ -320,6 +320,7 @@ async function findMatches(req, res, next) {
 				// console.log(i.win);
 				const win = i.win;
 				const gameEndedInEarlySurrender = i.gameEndedInEarlySurrender;
+				console.log('gameEndedInEarlySurrender', gameEndedInEarlySurrender);
 				const user_nickname = i.summonerName;
 				const user_level = i.summonerLevel;
 				const user_icon = `https://ddragon.leagueoflegends.com/cdn/${recent_version}/img/champion/${i.championName}.png`;
