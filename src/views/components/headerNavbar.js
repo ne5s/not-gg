@@ -14,7 +14,7 @@ const navber = () => {
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation "
-          style='margin-right:110px'
+          style='margin-right:15%'
         >
           <img src="/img/toggler.png" width="36px" height="24px" />
         </button>
@@ -29,11 +29,8 @@ const navber = () => {
 							summonerName && role === 'basic-user'
 								? `
                 <li class="nav-item">
-                <a href="/pvplog/${summonerName}" class="btn loginBtn color-VeryPeri bg-color-white btn-login 
-                padding-right: 10px;
-                padding-left: 10px;
-            ">
-              도구가어디서겸상을님
+                <a href="/pvplog/${summonerName}" class="btn-name">
+            ${summonerName}님
             </a>`
 								: `
                 <li class="nav-item login">
@@ -61,6 +58,11 @@ const navber = () => {
                 >내전</a
               >
             </li>
+            <li class="nav-item signup control-display-mobile" style='margin: 10px;'>
+            <a href="/" class="btn btn-logout logout">
+              로그아웃
+            </a>
+          </li>
           </ul>
         </div>
 
@@ -69,8 +71,8 @@ const navber = () => {
           ${
 						summonerName && role === 'basic-user'
 							? `<li class="nav-item">
-              <a href="/pvplog/${summonerName}" class="btn btn-login">
-            ${summonerName}님이다라
+              <a href="/pvplog/${summonerName}" class="btn-name">
+            ${summonerName}님
           </a>
           </li>
           <li class="nav-item signup">
@@ -83,7 +85,6 @@ const navber = () => {
               <a href="/login" class="btn loginBtn color-VeryPeri bg-color-white btn-login">
             로그인
           </a>
-          
           `
 					}
           
