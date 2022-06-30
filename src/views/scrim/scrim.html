@@ -71,20 +71,27 @@
 						<div class="modal-body">
 							<p class="modal-title" id="staticBackdropLabel">내전 시간</p>
 							<form>
-								<p><input type="date"></p>
-								<p><input type="time"></p>
+								<p><input type="date" class="form-control"></p>
+								<p><input type="time" class="form-control"></p>
 							</form>
 
 							<br>
 							<p class="modal-title" id="staticBackdropLabel">*경고메시지(악용하지 마세요)</p>
 							<br>
-							<p class="modal-title" id="staticBackdropLabel">등록할 포지션</p>
-							<div>
-								<img class="top-icon" src="../img/탑.png">
-								<img class="jungle-icon" src="../img/정글.png">
-								<img class="mid-icon" src="../img/미드.png">
-								<img class="ad-icon" src="../img/원딜.png">
-								<img class="sup-icon" src="../img/서폿.png">
+							<div class="modal-inner">
+								<p class="modal-title" id="staticBackdropLabel">등록할 포지션</p>
+								<div>
+									<label for="myPositionTOP"><img src="../img/탑.png"></label>
+									<input type="radio" id="myPositionTOP" name="myPosition"></input>
+									<label for="myPositionJUNGLE"><img src="../img/정글.png"></label>
+									<input type="radio" id="myPositionJUNGLE" name="myPosition"></input>
+									<label for="myPositionMIDDLE"><img src="../img/미드.png"></label>
+									<input type="radio" id="myPositionMIDDLE" name="myPosition"></input>
+									<label for="myPositionBOTTOM"><img src="../img/원딜.png"></label>
+									<input type="radio" id="myPositionBOTTOM" name="myPosition"></input>
+									<label for="myPositionUTIL"><img src="../img/서폿.png"></label>
+									<input type="radio" id="myPositionUTIL" name="myPosition"></input>
+								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
