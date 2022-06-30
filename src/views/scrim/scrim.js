@@ -263,6 +263,7 @@ async function addHandleSubmit() {
 		console.log(data);
 		await Api.post('/api/scrim', data);
 		console.log('등록성공');
+		location.reload();
 		// window.location.href = `/scrim/signup/${_id}`;
 	} catch (err) {
 		console.error(err.stack);
