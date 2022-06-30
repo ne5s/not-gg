@@ -7,7 +7,10 @@ const myInput = document.getElementById('myInput');
 // myModal.addEventListener('shown.bs.modal', () => {
 // 	myInput.focus();
 // });
-
+const 신청 = ({ scrimId, matchDate, matchTime, summonerName, selectedPosition }) =>{
+	const data = { scrimId, matchDate, matchTime, summonerName, selectedPosition }
+	const returndata = await Api.patch('/cancelScrimDetail','', data)
+}
 // 날짜 정보 랜더링
 const date = new Date(); //현재 날짜 정보
 const tomorrow = new Date(date.setDate(date.getDate() + 1)); //내일 날짜 정보

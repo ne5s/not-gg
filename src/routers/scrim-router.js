@@ -35,6 +35,7 @@ scrimRouter.get('/scrims', loginRequired, async function (req, res, next) {
 		next(error);
 	}
 });
+
 // 스크림 상세보기 클릭 시, scrimId는 req.params로 전달
 scrimRouter.get(
 	'/scrimDetail/:scrimId',
