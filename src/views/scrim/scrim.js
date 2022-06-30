@@ -1,8 +1,62 @@
 import * as Api from '/api.js';
 
+//mordal js
 const myModal = document.getElementById('myModal');
 const myInput = document.getElementById('myInput');
 
-myModal.addEventListener('shown.bs.modal', () => {
-	myInput.focus();
-});
+// myModal.addEventListener('shown.bs.modal', () => {
+// 	myInput.focus();
+// });
+
+// 날짜 정보 랜더링
+const date = new Date(); //현재 날짜 정보
+const tomorrow = new Date(date.setDate(date.getDate() + 1)); //내일 날짜 정보
+const dayaftertomorrow = new Date(date.setDate(date.getDate() + 1)); //모레 날짜 정보
+const year = date.getFullYear(); //년
+const month = date.getMonth() + 1; //월
+const day = date.getDate(); //일
+const dayKo = ['일', '월', '화', '수', '목', '금', '토', '일'][date.getDay()]; //요일
+const tomorrowdayKo = ['일', '월', '화', '수', '목', '금', '토', '일'][
+	tomorrow.getDay()
+]; //내일 요일
+const dayaftertomorrowdayKo = ['일', '월', '화', '수', '목', '금', '토', '일'][
+	dayaftertomorrow.getDay()
+]; //모레 요일
+
+const tomorrowTime = document.getElementById('tomorrowTimeset');
+const dayaftertomorrowTime = document.getElementById('dayaftertomorrowTimeset');
+
+tomorrowTime.innerHTML = `${tomorrow.getDate()}(${tomorrowdayKo})`;
+dayaftertomorrowTime.innerHTML = `${dayaftertomorrow.getDate()}(${dayaftertomorrowdayKo})`;
+
+//mordal에서 입력받은 값 db에 전달
+
+const scrimSubmitBtn = document.getElementById('scrim-submit-btn');
+const scrimDateSet = document.getElementById('scrim-date-set').value;
+const scrimTimeSet = document.getElementById('scrim-time-set').value;
+const myPosition = document.querySelector(
+	'input[name="myPosition"]:checked',
+).id;
+
+let MainPosition = myPosition.slice(10);
+
+console.log(scrimDateSet);
+console.log(scrimTimeSet);
+console.log(MainPosition);
+
+async function addHandleSubmit() {
+	// 내전 등록 api 요청
+	try {
+		const data = { MainPosition, scrimDateSet, scrimTimeSet };
+		console.log(data);
+		await Api.post('/api/scrim', data);
+		console.log('등록성공');
+
+		// window.location.href = '/scrim';
+	} catch (err) {
+		console.error(err.stack);
+		alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+	}
+}
+
+scrimSubmitBtn.addEventListener('click', addHandleSubmit);

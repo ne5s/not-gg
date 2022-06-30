@@ -71,8 +71,8 @@
 						<div class="modal-body">
 							<p class="modal-title" id="staticBackdropLabel">내전 시간</p>
 							<form>
-								<p><input type="date" class="form-control"></p>
-								<p><input type="time" class="form-control"></p>
+								<p><input id="scrim-date-set" type="date" class="form-control"></p>
+								<p><input id="scrim-time-set" type="time" class="form-control"></p>
 							</form>
 
 							<br>
@@ -81,22 +81,22 @@
 							<div class="modal-inner">
 								<p class="modal-title" id="staticBackdropLabel">등록할 포지션</p>
 								<div>
-									<label for="myPositionTOP"><img src="../img/탑.png"></label>
+									<label for="myPositionTOP"><img src="/img/탑.png"></label>
 									<input type="radio" id="myPositionTOP" name="myPosition"></input>
-									<label for="myPositionJUNGLE"><img src="../img/정글.png"></label>
+									<label for="myPositionJUNGLE"><img src="/img/정글.png"></label>
 									<input type="radio" id="myPositionJUNGLE" name="myPosition"></input>
-									<label for="myPositionMIDDLE"><img src="../img/미드.png"></label>
+									<label for="myPositionMIDDLE"><img src="/img/미드.png"></label>
 									<input type="radio" id="myPositionMIDDLE" name="myPosition"></input>
-									<label for="myPositionBOTTOM"><img src="../img/원딜.png"></label>
+									<label for="myPositionBOTTOM"><img src="/img/원딜.png"></label>
 									<input type="radio" id="myPositionBOTTOM" name="myPosition"></input>
-									<label for="myPositionUTIL"><img src="../img/서폿.png"></label>
+									<label for="myPositionUTIL"><img src="/img/서폿.png"></label>
 									<input type="radio" id="myPositionUTIL" name="myPosition"></input>
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
 						<button type="button" class="scrim-member close" data-bs-dismiss="modal">닫기</button>
-						<button type="button" class="scrim-member open">등록</button>
+						<button type="button" class="scrim-member open" id="scrim-submit-btn">등록</button>
 						</div>
 					</div>
 					</div>
@@ -107,7 +107,7 @@
 				<button class="last-match" id="last-match">...지난경기 더보기</button>
 				<div class="scrim-inner-box" id="white-container">
 					<div class="scrim-item-box">
-						<h3 class="scrim-date">
+						<h3 class="scrim-date" id="yesterdayTimeset">
 							어제
 						</h3>
 						<div class="scrim-inner">
@@ -132,7 +132,7 @@
 						</div>
 					</div>
 					<div class="scrim-item-box">
-						<h3 class="scrim-date">
+						<h3 class="scrim-date" id="todayTimeset">
 							오늘
 						</h3>
 						<div class="scrim-inner">
@@ -148,8 +148,8 @@
 						</div>
 					</div>
 					<div class="scrim-item-box">
-						<h3 class="scrim-date">
-							23(목)
+						<h3 class="scrim-date" id="tomorrowTimeset">
+							<!-- 23(목) -->
 						</h3>
 						<div class="scrim-inner">
 							<ul>
@@ -164,8 +164,8 @@
 						</div>
 					</div>
 					<div class="scrim-item-box">
-						<h3 class="scrim-date">
-							24(금)
+						<h3 class="scrim-date" id="dayaftertomorrowTimeset">
+							<!-- 24(금) -->
 						</h3>
 						<div class="scrim-inner">
 							<ul>
