@@ -114,6 +114,7 @@ scrimRouter.patch(
 				scrimId,
 				toUpdate,
 			);
+			res.status(200).json(updatedScrimDetail);
 		} catch (error) {
 			next(error);
 		}
@@ -145,11 +146,20 @@ scrimRouter.patch(
 				toUpdate,
 			);
 
-			res.status(200).json({ status: 'ok' });
+			res.status(200).json(updatedScrimDetail);
 		} catch (error) {
 			next(error);
 		}
 	},
 );
+// 내전 삭제. 내전 등록한 유저만
+scrimRouter.delete('/scrim', loginRequired, async function (req, res, next) {
+	try {
+		const { scrimId } = req.body;
+		await scrimService.deleteScrim(scrimId);
+	} catch (error) {
+		next(error);
+	}
+});
 
 export { scrimRouter };
