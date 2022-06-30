@@ -73,6 +73,8 @@ const attachEvent = () => {
 	});
 };
 
+attachEvent();
+
 // 로그인 된 계정 일때만 내전 모집 버튼 표시
 const data = await Api.get(
 	`/api/users/${localStorage.getItem('sumonnerName')}`,
