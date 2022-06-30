@@ -47,7 +47,7 @@ const fetchRankingList = async () => {
 const removeSpace = (string) => {
 	return string.replace(/\s/g, ''); //문자열 내 공백 제거
 };
-console.log(removeSpace('아파요%20머리가'));
+
 const attachEvent = () => {
 	const items = document.querySelectorAll('.summoner-name');
 	items.forEach((item) => {
