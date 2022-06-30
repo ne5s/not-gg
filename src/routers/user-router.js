@@ -8,6 +8,7 @@ import {
 	summonerFlexService,
 	matchService,
 } from '../services';
+import axios from 'axios';
 
 const userRouter = Router();
 
@@ -187,6 +188,9 @@ userRouter.patch('/users', async (req, res, next) => {
 	try {
 		// const userId = req.currentUserId;
 		// const {summonerName} = req.body;
+		const joinedSummonerName = req.body.summonerName;
+		// 이 소환사명으로 이제 검색하고, match 스키마에 저장하면 됨.
+		console.log('joinedSummonerName : ' + joinedSummonerName);
 
 		// meta data 가져오는 곳
 		const spell_jsoned = {}; // key : code , value : SummonerTeleport
@@ -247,9 +251,7 @@ userRouter.patch('/users', async (req, res, next) => {
 		// const nickname = req.body.name
 		// const joinedSummonerName = req.currentUserId;
 		// body에서 summonerName 받음
-		const joinedSummonerName = req.body.summonerName;
-		// 이 소환사명으로 이제 검색하고, match 스키마에 저장하면 됨.
-		console.log('joinedSummonerName : ' + joinedSummonerName);
+
 		const headers = {
 			'X-Riot-Token': process.env.RIOT_API_KEY,
 		};
@@ -694,6 +696,18 @@ userRouter.patch('/users', async (req, res, next) => {
 				winAndLossFor20Games.killParticipation / 20,
 			),
 		};
+
+		for (let index = 0; index < playChampsFor20Games.length; index++) {
+			playChampsFor20Games[index] = {
+				...playChampsFor20Games[index],
+				kda: Number(
+					(
+						playChampsFor20Games[index].kda / playChampsFor20Games[index].counts
+					).toFixed(2),
+				),
+			};
+		}
+
 		const sortedPlayChampsFor20Games = playChampsFor20Games.sort(function (
 			a,
 			b,
