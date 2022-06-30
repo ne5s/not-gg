@@ -43,12 +43,18 @@ const fetchRankingList = async () => {
 };
 
 // 소환사 이름 클릭시 상세 페이지로 이동
+// 소환사 이름에 띄어쓰기가 있을 때 제거하는 함수
+const removeSpace = (string) => {
+	return string.replace(/\s/g, ''); //문자열 내 공백 제거
+};
+console.log(removeSpace('아파요%20머리가'));
 const attachEvent = () => {
 	const items = document.querySelectorAll('.summoner-name');
 	items.forEach((item) => {
 		item.addEventListener('click', function () {
-			const sumomonerName = this.getAttribute('data-summoner-name');
-			window.location.href = `/pvplog/${sumomonerName}`;
+			const summonerName = this.getAttribute('data-summoner-name');
+			console.log(summonerName);
+			window.location.href = `/pvplog/${summonerName}`;
 		});
 	});
 };
