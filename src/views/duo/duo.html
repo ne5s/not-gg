@@ -44,42 +44,52 @@
                                 <div class="modal-inner">
                                     <p class="modal-title" id="staticBackdropLabel">나의 주 포지션</p>
                                     <div>
-                                        <img src="../img/탑.png">
-                                        <img src="../img/정글.png">
-                                        <img src="../img/미드.png">
-                                        <img src="../img/원딜.png">
-                                        <img src="../img/서폿.png">
+                                        <label for="myPositionTOP"><img src="../img/탑.png"></label>
+                                        <input type="radio" id="myPositionTOP" name="myPosition"></input>
+                                        <label for="myPositionJUNGLE"><img src="../img/정글.png"></label>
+                                        <input type="radio" id="myPositionJUNGLE" name="myPosition"></input>
+                                        <label for="myPositionMIDDLE"><img src="../img/미드.png"></label>
+                                        <input type="radio" id="myPositionMIDDLE" name="myPosition"></input>
+                                        <label for="myPositionBOTTOM"><img src="../img/원딜.png"></label>
+                                        <input type="radio" id="myPositionBOTTOM" name="myPosition"></input>
+                                        <label for="myPositionUTIL"><img src="../img/서폿.png"></label>
+                                        <input type="radio" id="myPositionUTIL" name="myPosition"></input>
                                     </div>
                                 </div>
                                 <div class="modal-inner">
                                     <p class="modal-title" id="staticBackdropLabel">찾고있는 듀오</p>
-                                    <select name="티어">
-                                        <option value="챌린저">챌린저</option>
-                                        <option value="그랜드마스터">그랜드마스터</option>
-                                        <option value="마스터">마스터</option>
-                                        <option value="다이아몬드">다이아몬드</option>
-                                        <option value="플래티넘">플래티넘</option>
-                                        <option value="골드">골드</option>
-                                        <option value="실버">실버</option>
-                                        <option value="브론즈">브론즈</option>
-                                        <option value="아이언">아이언</option>
+                                    <select name="티어" id="tierSelect">
+                                        <option value="CHALLENGER">CHALLENGER</option>
+                                        <option value="GRANDMASTER">GRANDMASTER</option>
+                                        <option value="MASTER">MASTER</option>
+                                        <option value="DIAMOND">DIAMOND</option>
+                                        <option value="PLATINUM">PLATINUM</option>
+                                        <option value="GOLD">GOLD</option>
+                                        <option value="SILVER">SILVER</option>
+                                        <option value="BRONZE">BRONZE</option>
+                                        <option value="IRON">IRON</option>
                                     </select>
                                     <div>
-                                        <img src="../img/탑.png">
-                                        <img src="../img/정글.png">
-                                        <img src="../img/미드.png">
-                                        <img src="../img/원딜.png">
-                                        <img src="../img/서폿.png">
+                                        <label for="duoPositionTOP"><img src="../img/탑.png"></label>
+                                        <input type="radio" id="duoPositionTOP" name="duoPosition"></input>
+                                        <label for="duoPositionJUNGLE"><img src="../img/정글.png"></label>
+                                        <input type="radio" id="duoPositionJUNGLE" name="duoPosition"></input>
+                                        <label for="duoPositionMIDDLE"><img src="../img/미드.png"></label>
+                                        <input type="radio" id="duoPositionMIDDLE" name="duoPosition"></input>
+                                        <label for="duoPositionBOTTOM"><img src="../img/원딜.png"></label>
+                                        <input type="radio" id="duoPositionBOTTOM" name="duoPosition"></input>
+                                        <label for="duoPositionUTIL"><img src="../img/서폿.png"></label>
+                                        <input type="radio" id="duoPositionUTIL" name="duoPosition"></input>
                                     </div>
                                 </div>
                                 <div class="modal-inner">
                                     <p class="modal-title" id="staticBackdropLabel">코멘트</p>
-                                    <input type="text" placeholder="엘리스 수업 끝나고 같이 게임해요!">
+                                    <input type="text" id="duoComment" placeholder="엘리스 수업 끝나고 같이 게임해요!">
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="scrim-member close" data-bs-dismiss="modal">닫기</button>
-                                <button type="button" class="scrim-member open">등록</button>
+                                <button id="duoSubmitBtn" type="button" class="scrim-member open">등록</button>
                             </div>
                         </div>
 					</div>
