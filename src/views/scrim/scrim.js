@@ -11,7 +11,6 @@ const myInput = document.getElementById('myInput');
 
 // 로그인 된 계정 일때만 내전 모집 버튼 표시
 const data = localStorage.getItem('token');
-console.log(data);
 const style = document.createElement('style');
 if (data === null) {
 	style.innerHTML = `
@@ -87,11 +86,6 @@ const dayaftertomorrowYYYYMMDD =
 	'-' +
 	dayaftertomorrowDay;
 
-console.log(todayYYYYMMDD);
-console.log(yesterdayYYYYMMDD);
-console.log(tomorrowYYYYMMDD);
-console.log(dayaftertomorrowYYYYMMDD);
-
 //요일 랜더링
 const tomorrowTime = document.getElementById('tomorrowTimeset');
 const dayaftertomorrowTime = document.getElementById('dayaftertomorrowTimeset');
@@ -145,26 +139,13 @@ ScrimList.forEach((data) => {
 	const currentApplyingNum = data.currentApplyingNum;
 	const isRecruiting = data.isRecruiting;
 	const writerSummonerName = data.writerSummonerName;
-	let matchId = data._id;
+	const matchId = data._id;
 
 	//모집 인원이 10명이 되면 버튼 색깔이 회색으로 변하게(테스트 못해봄)
 	const btnSelector = document.querySelectorAll('.scrim-member');
 	if (isRecruiting) {
 		btnSelector.className = 'scrim-member close';
 	}
-
-	//모집 현황 버튼 누르면 상세 페이지로 이동
-	const attachEvent = () => {
-		const items = document.querySelectorAll('.scrim-member');
-		items.forEach((item) => {
-			item.addEventListener('click', function () {
-				const scrimId = this.getAttribute('scrim-id-set');
-				console.log(matchId);
-				window.location.href = `/scrimDetail/${matchId}`;
-			});
-		});
-	};
-	attachEvent();
 
 	//날짜에 따라서 해당 영역으로 랜더링 시키기
 	if (matchDate === yesterdayYYYYMMDD) {
@@ -178,7 +159,7 @@ ScrimList.forEach((data) => {
 		)})</span>
 				<span>내전 모집이 마감되었습니다.</span>
 			</li>
-			<button class="scrim-member close" "scrim-id-set"=${matchId}>${currentApplyingNum}/10</button>
+			<button type="submit" class="scrim-member close" scrim-id-set="${matchId}">${currentApplyingNum}/10</button>
 		</ul>
 	`;
 	} else if (matchDate === todayYYYYMMDD) {
@@ -192,7 +173,7 @@ ScrimList.forEach((data) => {
 		)})</span>
 				<span>내전을 모집중입니다.</span>
 			</li>
-			<button class="scrim-member" "scrim-id-set"=${matchId}>${currentApplyingNum}/10</button>
+			<button type="submit" class="scrim-member" scrim-id-set="${matchId}">${currentApplyingNum}/10</button>
 		</ul>
 		`;
 	} else if (matchDate === tomorrowYYYYMMDD) {
@@ -206,7 +187,7 @@ ScrimList.forEach((data) => {
 		)})</span>
 				<span>내전을 모집중입니다.</span>
 			</li>
-			<button class="scrim-member" "scrim-id-set"=${matchId}>${currentApplyingNum}/10</button>
+			<button type="submit" class="scrim-member" scrim-id-set="${matchId}">${currentApplyingNum}/10</button>
 		</ul>
 		`;
 	} else if (matchDate === dayaftertomorrowYYYYMMDD) {
@@ -220,7 +201,7 @@ ScrimList.forEach((data) => {
 		)})</span>
 				<span>내전을 모집중입니다.</span>
 			</li>
-			<button class="scrim-member" "scrim-id-set"=${matchId}>${currentApplyingNum}/10</button>
+			<button type="submit" class="scrim-member" scrim-id-set="${matchId}">${currentApplyingNum}/10</button>
 		</ul>
 		`;
 	} else if (matchDate > dayaftertomorrowYYYYMMDD) {
@@ -234,7 +215,7 @@ ScrimList.forEach((data) => {
 		)})</span>
 				<span>내전을 모집중입니다.</span>
 			</li>
-			<button class="scrim-member" "scrim-id-set"=${matchId}>${currentApplyingNum}/10</button>
+			<button type="submit" class="scrim-member" scrim-id-set="${matchId}">${currentApplyingNum}/10</button>
 		</ul>
 		`;
 	}
@@ -264,10 +245,23 @@ async function addHandleSubmit() {
 		await Api.post('/api/scrim', data);
 		console.log('등록성공');
 		location.reload();
-		// window.location.href = `/scrim/signup/${_id}`;
+		// window.location.href = `/scrimDetail/${_id}`;
 	} catch (err) {
 		console.error(err.stack);
 		alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
 	}
 }
 scrimSubmitBtn.addEventListener('click', addHandleSubmit);
+
+//모집 인원(N/10) 버튼 누르면 상세 페이지로 이동
+const attachEvent = () => {
+	const items = document.querySelectorAll('.scrim-member');
+	items.forEach((item) => {
+		item.addEventListener('click', function (e) {
+			e.preventDefault();
+			const idSelector = this.getAttribute('scrim-id-set');
+			window.location.href = `/scrimDetail/${idSelector}`;
+		});
+	});
+};
+attachEvent();
