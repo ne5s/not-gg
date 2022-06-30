@@ -99,3 +99,23 @@ h1 {
     align-items: center;
     justify-content: center;
 }
+
+.btn--delete {
+    all: unset;
+}
+.btn--delete > span {
+    background-color: #FA576F;
+    color: #fff;
+}
+
+.my-position-filter {
+    display: flex;
+    flex-direction: row;
+}
+.my-position-item {
+    cursor: pointer;
+}
+
+.select {
+    border: 1px solid #000;
+}
