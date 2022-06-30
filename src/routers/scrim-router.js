@@ -17,20 +17,47 @@ const scrimRouter = Router();
 scrimRouter.get('/scrims', loginRequired, async function (req, res, next) {
 	try {
 		// 전체 내전 목록 가져옴
-		const scrims = await scrimService.getScrims();
-
-		for (let i = 0; i < scrims.length; i++) {
-			scrims[i].resultDate = new Date(
-				scrims[i].matchDate + ' ' + scrims[i].matchTime,
+		let scrims = await scrimService.getScrims();
+		console.log('what?');
+		// console.log(typeof scrims);
+		let scrimsToObject = JSON.stringify(scrims);
+		// console.log(typeof scrimsToObject);
+		// console.log(scrimsToObject);
+		let scrimsTo = JSON.parse(scrimsToObject);
+		// console.log(scrimsTo);
+		for (let i = 0; i < scrimsTo.length; i++) {
+			scrimsTo[i]['resultDate'] = new Date(
+				scrimsTo[i].matchDate + ' ' + scrimsTo[i].matchTime,
 			);
 		}
 
-		scrims.sort(function (a, b) {
-			return b.resultDate - a.resultDate;
+		scrimsTo.sort(function (a, b) {
+			return a.resultDate - b.resultDate;
 		});
-
+		// console.log(scrimsTo);
+		// console.log(new Date().getTimezoneOffset());
+		// console.log(new Date('2022-06-30 15:30'));
+		// console.log(new Date());
 		// 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
-		res.status(200).json(scrims);
+		// const curr = new Date();
+		// console.log('현재시간(Locale) : ' + curr);
+
+		// // 2. UTC 시간 계산
+		// const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
+
+		// // 3. UTC to KST (UTC + 9시간)
+		// const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+		// const kr_curr = new Date(utc + KR_TIME_DIFF);
+
+		// console.log('한국시간 : ' + kr_curr);
+		// const getWeek = (strsDate) => {
+		// 	const weekName = new Array('일', '월', '화', '수', '목', '금', '토');
+		// 	console.log(new Date(strsDate));
+		// 	var dayOfWeek = weekName[new Date(strsDate).getDay()];
+		// 	return dayOfWeek;
+		// };
+		// console.log(getWeek('2022-06-30'));
+		res.status(200).json(scrimsTo);
 	} catch (error) {
 		next(error);
 	}
