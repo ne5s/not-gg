@@ -160,7 +160,7 @@ ScrimList.forEach((data) => {
 			item.addEventListener('click', function () {
 				const scrimId = this.getAttribute('scrim-id-set');
 				console.log(matchId);
-				window.location.href = `/scrim/signup/${matchId}`;
+				window.location.href = `/scrimDetail/${matchId}`;
 			});
 		});
 	};
