@@ -19,6 +19,16 @@ scrimRouter.get('/scrims', loginRequired, async function (req, res, next) {
 		// 전체 내전 목록 가져옴
 		const scrims = await scrimService.getScrims();
 
+		for (let i = 0; i < scrims.length; i++) {
+			scrims[i].resultDate = new Date(
+				scrims[i].matchDate + ' ' + scrims[i].matchTime,
+			);
+		}
+
+		scrims.sort(function (a, b) {
+			return b.resultDate - a.resultDate;
+		});
+
 		// 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
 		res.status(200).json(scrims);
 	} catch (error) {
@@ -114,7 +124,14 @@ scrimRouter.patch(
 				scrimId,
 				toUpdate,
 			);
-			res.status(200).json(updatedScrimDetail);
+
+			const scrim = await scrimService.getScrimByObjectId(scrimId);
+			const toUpdate2 = {
+				...(scrim && { currentApplyingNum: scrim.currentApplyingNum + 1 }),
+			};
+			const updatedScrim = await scrimService.setScrimNum(scrimId, toUpdate2);
+
+			res.status(200).json({ updatedScrimDetail, updatedScrim });
 		} catch (error) {
 			next(error);
 		}
@@ -146,7 +163,13 @@ scrimRouter.patch(
 				toUpdate,
 			);
 
-			res.status(200).json(updatedScrimDetail);
+			const scrim = await scrimService.getScrimByObjectId(scrimId);
+			const toUpdate2 = {
+				...(scrim && { currentApplyingNum: scrim.currentApplyingNum - 1 }),
+			};
+			const updatedScrim = await scrimService.setScrimNum(scrimId, toUpdate2);
+
+			res.status(200).json({ updatedScrimDetail, updatedScrim });
 		} catch (error) {
 			next(error);
 		}
@@ -157,6 +180,8 @@ scrimRouter.delete('/scrim', loginRequired, async function (req, res, next) {
 	try {
 		const { scrimId } = req.body;
 		await scrimService.deleteScrim(scrimId);
+
+		await scrimDetailService.deleteScrimDetail(scrimId);
 	} catch (error) {
 		next(error);
 	}

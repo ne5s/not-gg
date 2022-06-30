@@ -725,6 +725,7 @@ userRouter.patch('/users', async (req, res, next) => {
 		});
 
 		console.log('20경기 데이터 저장 완료');
+		res.status(200).json({ status: 'ok' });
 	} catch (error) {
 		next(error);
 	}

@@ -42,6 +42,17 @@ class ScrimService {
 		return scrim;
 	}
 
+	// 내전 현재 신청된 인원수 수정
+	async setScrimNum(id, toUpdate) {
+		// 업데이트 진행
+		scrim = await this.scrimModel.update({
+			id,
+			update: toUpdate,
+		});
+
+		return scrim;
+	}
+
 	// 스크림 찾기(스크림의 ObjectId로)
 	async getScrimByObjectId(id) {
 		const scrim = await this.scrimModel.findByObjectId(id);
