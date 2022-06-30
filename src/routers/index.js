@@ -6,3 +6,4 @@ export * from './user-router';
 export * from './riot-router';
 export * from './summoner-solo-router';
 export * from './duo-router';
+export * from './scrim-router';

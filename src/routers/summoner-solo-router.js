@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
-import { loginRequired, findMatches } from '../middlewares';
+import { loginRequired } from '../middlewares';
 import {
 	userService,
 	summonerSoloService,
@@ -11,7 +11,6 @@ import {
 
 const soloRouter = Router();
 
-// 전체 유저 목록을 가져옴 (배열 형태임)
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
 soloRouter.get('/soloRanking', loginRequired, async function (req, res, next) {
 	try {

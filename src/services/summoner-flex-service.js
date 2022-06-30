@@ -52,7 +52,7 @@ class SummonerFlexService {
 		}
 
 		// 업데이트 진행
-		updatedUserFlex = await this.summonerFlexModel.update({
+		const updatedUserFlex = await this.summonerFlexModel.update({
 			summonerName,
 			update: toUpdate,
 		});

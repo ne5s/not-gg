@@ -320,6 +320,7 @@ async function findMatches(req, res, next) {
 				// console.log(i.win);
 				const win = i.win;
 				const gameEndedInEarlySurrender = i.gameEndedInEarlySurrender;
+				console.log('gameEndedInEarlySurrender', gameEndedInEarlySurrender);
 				const user_nickname = i.summonerName;
 				const user_level = i.summonerLevel;
 				const user_icon = `https://ddragon.leagueoflegends.com/cdn/${recent_version}/img/champion/${i.championName}.png`;
@@ -512,8 +513,7 @@ async function findMatches(req, res, next) {
 		console.log('match 데이터 저장 완료');
 
 		// summonerSolo 에 20경기에 대한 data 삽입
-		console.log('why');
-		console.log(Number((winAndLossFor20Games.assists / 20).toFixed(1)));
+		// console.log(Number((winAndLossFor20Games.assists / 20).toFixed(1)));
 		let matchFor20Games = {
 			wins: winAndLossFor20Games.wins,
 			losses: winAndLossFor20Games.losses,
@@ -534,12 +534,25 @@ async function findMatches(req, res, next) {
 				winAndLossFor20Games.killParticipation / 20,
 			),
 		};
+
+		for (let index = 0; index < playChampsFor20Games.length; index++) {
+			playChampsFor20Games[index] = {
+				...playChampsFor20Games[index],
+				kda: Number(
+					(
+						playChampsFor20Games[index].kda / playChampsFor20Games[index].counts
+					).toFixed(2),
+				),
+			};
+		}
+
 		const sortedPlayChampsFor20Games = playChampsFor20Games.sort(function (
 			a,
 			b,
 		) {
 			return b.counts - a.counts;
 		});
+
 		// console.log('sortedPlayChampsFor20Games', sortedPlayChampsFor20Games);
 		// playLineFor20Games
 

@@ -23,3 +23,5 @@ export * from './models/duo-model';
 export * from './models/match-model';
 export * from './models/summoner-solo-model';
 export * from './models/summoner-flex-model';
+export * from './models/scrim-detail-model';
+export * from './models/scrim-model';
