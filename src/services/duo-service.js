@@ -18,11 +18,14 @@ class DuoService {
     return createdNewDuo;
   }
 
-  // 계정 찾기(by name)
-  async getDuos(page) {
-    console.log(page)
-    const duos = await this.duoModel.findDuos(page);
-    return duos;
+  async getDuos(page){
+    const GetDuos = await this.duoModel.findDuos(page)
+    return GetDuos
+  }
+
+  async delete(duoId){
+    const deltedDuo = await this.duoModel.delete(duoId)
+    return deltedDuo
   }
 
 

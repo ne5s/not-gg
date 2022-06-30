@@ -7,6 +7,16 @@ import { duoService } from '../services'
 
 const DouRouter = Router();
 
+DouRouter.delete('/duo/', async (req,res,next) => {
+  try {
+    const id = req.body.targetId
+    const deltedDuo = await duoService.delete(id)
+    res.status(200).json(deltedDuo);
+  } catch (error) {
+    next(error);
+  }
+})
+
 DouRouter.get('/duo', async function (req,res,next) {
   try {
     const page = Number((req.query.page).replace('/', ''))

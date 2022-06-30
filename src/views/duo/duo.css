@@ -22,6 +22,9 @@ h1 {
 .table-row-group {
     background-color: #F7F7F9;
     padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .table-title {
     display: grid;
@@ -98,4 +101,32 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.btn--delete {
+    all: unset;
+}
+.btn--delete > span {
+    background-color: #FA576F;
+    color: #fff;
+}
+
+.my-position-filter {
+    display: flex;
+    flex-direction: row;
+}
+.my-position-item {
+    cursor: pointer;
+}
+
+.select {
+    border: 1px solid #000;
+}
+
+.btn--gray {
+    margin: 30px 0;
+}
+
+.hide {
+    display: none;
 }

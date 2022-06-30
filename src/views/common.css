@@ -84,16 +84,15 @@ a {
     border: 1px solid #6667AB;
     color: #fff;
 }
-.btn--delete {
-    background-color: #FA576F;
-    color: #fff;
-    border: none;
-    width: 20px;
-    height: 20px;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.btn--gray {
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    color: #9E9E9E;
+}
+.btn--gray:hover {
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    color: #9E9E9E;
 }
 .submit {
     border: none;

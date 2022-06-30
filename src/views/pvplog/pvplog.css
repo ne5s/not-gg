@@ -98,6 +98,13 @@ hr {
 .color-505050 {
 	color: #505050;
 }
+.color-win {
+	color: #4990e2;
+}
+.color-lose {
+	color: #fa576f;
+}
+
 .font-inter-bold {
 	font-family: 'Inter';
 	font-weight: bold;
@@ -221,7 +228,10 @@ hr {
 	margin-left: 20px;
 	width: 100%;
 }
-
+.renewal {
+	display: flex;
+	align-items: center;
+}
 .btn-renewal {
 	background-color: #6667ab;
 	color: #ffffff;
@@ -293,6 +303,10 @@ hr {
 	display: flex;
 	align-items: center;
 }
+.renewaltime {
+	padding: 10px;
+	color: #9e9e9e;
+}
 .contentsbox {
 	width: 100%;
 
@@ -314,7 +328,7 @@ hr {
 
 @media (max-width: 1200px) {
 	.row {
-		flex-direction: column-reverse;
+		flex-direction: column;
 	}
 	.contentsbox {
 		margin-top: 0px;
@@ -340,6 +354,12 @@ hr {
 	}
 	.contentsbox {
 		width: 95%;
+	}
+	.gamebox {
+		padding-left: 0px !important;
+		padding-right: 0px !important;
+		margin-right: 0px !important;
+		margin-left: 0px !important;
 	}
 }
 
@@ -370,7 +390,7 @@ hr {
 .blueteams,
 .redteams {
 	font-size: 11px;
-	width: 140px;
+	width: 130px;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
@@ -391,7 +411,38 @@ hr {
 	width: 10px;
 	background-color: #4990e2;
 }
+.losecolorline {
+	height: 80px;
+	width: 10px;
+	background-color: #fa576f;
+}
 .topborder:not(:first-child) {
 	color: inherit;
 	border-top: 1px solid #e5e5e5;
+}
+
+.champ-kda-rate,
+.champ-play-games {
+	text-align: end;
+}
+.game-kda-rate {
+	width: 76px;
+	text-align: center;
+}
+.game-winlose-playtime {
+	width: 71px;
+}
+.soloranktext {
+	text-align: left;
+	font-size: 12px;
+	width: 100%;
+}
+.soloranktext2 {
+	text-align: left;
+	font-size: 12px;
+	width: 100%;
+}
+.updatetimeAt {
+	color: inherit;
+	border-bottom: 1px solid #e5e5e5;
 }

@@ -19,9 +19,10 @@
 .SLE-logo {
 	line-height: 1em;
 	font-family: 'PyeongChangPeace-Bold';
+	color: #6667ab;
 }
 .bg-color-VeryPeri {
-	background-color: #6667ab;
+	background-color: #fff;
 }
 .bg-color-white {
 	background-color: #ffffff;
@@ -99,43 +100,19 @@
 .col {
 	padding: 0;
 }
-.nav-link {
-	padding: 12px !important;
-	margin: 2px;
-}
 .navbar {
 	--bs-navbar-padding-x: 0;
 	--bs-navbar-padding-y: 0;
 	z-index: 9;
 }
-.logout {
-	background: #fff;
-	border: 1px solid #6667ab;
-	color: #6667ab;
-	transition: all 0.5s;
+.navbar-nav {
+	display: flex;
+    align-items: center;
 }
-.logout:hover {
-	background: #6667ab;
-	border: 1px solid #fff;
-	color: #fff;
+.left-button {
+	margin-right: 20px;
 }
-.btn-name {
-	background: #6667ab;
-
-	border: 1px solid #6667ab;
-
-	padding: 10px 20px;
-	text-align: center;
-	text-decoration: none;
-	cursor: pointer;
-	display: inline-block;
-	font-size: 14px;
-	line-height: 14px;
-	box-sizing: border-box;
-	transition: all 0.5s;
-	color: #fff;
-}
-.btn-name:hover {
-	color: #9e9e9e;
-	border: 1px solid #6667ab;
+.navbar-nav .nav-link.active, 
+.navbar-nav .show > .nav-link {
+	font-weight: 500;
 }
