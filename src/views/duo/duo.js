@@ -1,30 +1,50 @@
 import * as Api from '/api.js';
-import { timeForToday } from '/useful-functions.js';
+import { timeForToday, makePositionKR, makeTierKR } from '/useful-functions.js';
 
 const duoFormsBox = document.getElementById("duoFormsBox")
 const duoSubmitBtn = document.getElementById("duoSubmitBtn")
+const addRenderDuo = document.getElementById("addRenderDuo")
 
-const duoDatas = await Api.get('/api/duo?page=0')
+let duoDataNumber = 0
+const duoDatas = await Api.get(`/api/duo?page=${duoDataNumber}`)
 
 addAllElements();
 addAllEvents();
 
 function addAllEvents() {
     duoSubmitBtn.addEventListener('click', addHandleSubmit);
+    duoFormsBox.addEventListener("click", btnClickEvent)
+    addRenderDuo.addEventListener("click", addMakeDuo)
 }
 
 async function addAllElements() {
 	makeDuo()
 }
 
+// 처음 렌더링
+function makeDuo() {
+    dataRender()
+}
+
+// 더보기 버튼 누르면 데이터 10개 추가
+function addMakeDuo() {
+    duoDataNumber++
+
+    if(duoDatas.length > 10 && duoDatas === null) {
+        addRenderDuo.classList.add("hide")
+        return
+    }
+
+    dataRender()
+}
+
+// 듀오 등록하기
 async function addHandleSubmit() {
     const myPosition = document.querySelector('input[name="myPosition"]:checked').id
     const SearchTier = document.getElementById("tierSelect").value
     const duoPosition = document.querySelector('input[name="duoPosition"]:checked').id
     const DuoComment = document.getElementById("duoComment").value
 
-    // let MainPosition = makePositionKR(myPosition.slice(10))
-    // let SearchPosition = makePositionKR(duoPosition.slice(11))
     let MainPosition = myPosition.slice(10)
     let SearchPosition = duoPosition.slice(11)
 
@@ -42,7 +62,19 @@ async function addHandleSubmit() {
     }
 }
 
-function makeDuo() {
+// 듀오 등록 취소버튼 클릭이벤트
+async function btnClickEvent(e) {
+    const btnDelete = e.target.closest('.btn--delete');
+
+    if (btnDelete) {
+        const targetId = btnDelete.name;
+        const res = await Api.delete('/api/duo', '', {targetId});
+        location.reload();
+    }    
+}
+
+// 듀오등록 데이터 목록 렌더링
+function dataRender() {
     duoDatas.forEach(data => {
         const duoComment = data.DuoComment;
         const MainPosition = data.MainPosition;
@@ -84,30 +116,4 @@ function makeDuo() {
             </ul>
         `
     })
-}
-
-
-function makePositionKR(position) {
-    const positionKR = {
-        TOP : "탑",
-        JUNGLE : "정글", 
-        MIDDLE : "미드",
-        BOTTOM : "원딜",
-        UTIL : "서폿"
-    }
-    return positionKR[position]
-}
-function makeTierKR(tier) {
-    const tierKR = {
-        IRON : "아이언",
-        BRONZE : "브론즈", 
-        SILVER : "실버",
-        GOLD : "골드",
-        PLATINUM : "플래티넘",
-        DIAMOND : "다이아",
-        MASTER : "마스터",
-        GRANDMASTER : "그마",
-        CHALLENGER : "챌린저"
-    }
-    return tierKR[tier]
 }
