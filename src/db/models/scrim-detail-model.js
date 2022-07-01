@@ -26,7 +26,19 @@ export class ScrimDetailModel {
 		return scrimDetails;
 	}
 
-	async update({ scrimId, update }) {
+	async updateForAdd({ scrimId, update }) {
+		const filter = { scrimId };
+		const option = { returnOriginal: false };
+
+		const updatedScrimDetail = await ScrimDetail.findOneAndUpdate(
+			filter,
+			update,
+			option,
+		);
+		return updatedScrimDetail;
+	}
+
+	async updateForCanel({ scrimId, update }) {
 		const filter = { scrimId };
 		const option = { returnOriginal: false };
 

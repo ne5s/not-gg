@@ -141,18 +141,15 @@ scrimRouter.patch(
 
 			const { scrimId, matchDate, matchTime, summonerName, selectedPosition } =
 				req.body;
-			console.log(scrimId, summonerName, selectedPosition);
 			// 수정하기에서는 selectedPosition이 team + 1 or 2 + TOP 이런식으로 오도록 요청
 			const toUpdate = {
 				...(selectedPosition && { [selectedPosition]: summonerName }),
 			};
-			console.log('what?');
-			const updatedScrimDetail = await scrimDetailService.setScrimDetail(
+
+			const updatedScrimDetail = await scrimDetailService.setScrimDetailForAdd(
 				scrimId,
 				toUpdate,
 			);
-			console.log('why');
-			console.log(updatedScrimDetail);
 			const scrim = await scrimService.getScrimByObjectId(scrimId);
 			const toUpdate2 = {
 				...(scrim && { currentApplyingNum: scrim.currentApplyingNum + 1 }),
@@ -180,16 +177,12 @@ scrimRouter.patch(
 
 			const { scrimId, matchDate, matchTime, summonerName, selectedPosition } =
 				req.body;
-
 			// 수정하기에서는 selectedPosition이 team + 1 or 2 + TOP 이런식으로 오도록 요청
 			const toUpdate = {
 				...(selectedPosition && { [selectedPosition]: '' }),
 			};
-
-			const updatedScrimDetail = await scrimDetailService.setScrimDetail(
-				scrimId,
-				toUpdate,
-			);
+			const updatedScrimDetail =
+				await scrimDetailService.setScrimDetailForCancel(scrimId, toUpdate);
 
 			const scrim = await scrimService.getScrimByObjectId(scrimId);
 			const toUpdate2 = {

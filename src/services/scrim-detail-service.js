@@ -23,16 +23,30 @@ class ScrimDetailService {
 	}
 
 	// 내전 디테일 사람 추가(버튼 클릭)
-	async setScrimDetail(scrimId, toUpdate) {
+	async setScrimDetailForAdd(scrimId, toUpdate) {
 		// 객체 destructuring,
 		// id : scrim ObjectId, summonerName : 로그인 한 사람의 소환사명
-
 		// 업데이트 진행
-		const scrimDetail = await this.scrimDetailModel.update({
+		const scrimDetail = await this.scrimDetailModel.updateForAdd({
 			scrimId,
 			update: toUpdate,
 		});
+		return scrimDetail;
+	}
 
+	// 내전 디테일 취소(X버튼 클릭)
+	async setScrimDetailForCancel(scrimId, toUpdate) {
+		// 객체 destructuring,
+		// id : scrim ObjectId, summonerName : 로그인 한 사람의 소환사명
+		console.log('this');
+		console.log(scrimId, toUpdate);
+		// 업데이트 진행
+		const scrimDetail = await this.scrimDetailModel.updateForCanel({
+			scrimId,
+			update: toUpdate,
+		});
+		console.log('gogo');
+		console.log('scrimDetail', scrimDetail);
 		return scrimDetail;
 	}
 
