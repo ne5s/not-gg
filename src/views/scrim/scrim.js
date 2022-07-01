@@ -141,7 +141,7 @@ ScrimList.forEach((data) => {
 		)})</span>
 				<span>내전 모집이 마감되었습니다.</span>
 			</li>
-			<button type="submit" class="scrim-member close" scrim-id-set="${matchId}">${currentApplyingNum}/10</button>
+			<button type="submit" class="scrim-member close" "scrim-id-set="${matchId}" disabled>${currentApplyingNum}/10</button>
 		</ul>
 	`;
 	} else if (matchDate === todayYYYYMMDD) {
