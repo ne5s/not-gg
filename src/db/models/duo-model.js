@@ -13,6 +13,7 @@ export class DuoModel {
     async findDuos(page){
         console.log(page)
         const DuosData = await Duos.find({})
+			.sort({createdAt: -1})
             .skip(10 * Number(page))
             .limit(10)
         return DuosData
