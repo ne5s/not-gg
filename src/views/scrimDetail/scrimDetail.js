@@ -147,12 +147,21 @@ const renderData = async (scrimId) => {
 					if (userArr[i][1] === summonerName) {
 						// 취소버튼 추가
 						let selectedPosition = userArr[i][0];
-						$id(userArr[i][0]).insertAdjacentHTML(
-							'beforebegin',
-							xbox(summonerName),
-						);
-						취소버튼(summonerName, scrimId, selectedPosition),
-							($id(userArr[i][0]).style = 'width:250px');
+						if (i < 5) {
+							$id(userArr[i][0]).insertAdjacentHTML(
+								'beforebegin',
+								xbox(summonerName),
+							);
+							취소버튼(summonerName, scrimId, selectedPosition),
+								($id(userArr[i][0]).style = 'width:250px');
+						} else {
+							$id(userArr[i][0]).insertAdjacentHTML(
+								'afterend',
+								xbox(summonerName),
+							);
+							취소버튼(summonerName, scrimId, selectedPosition),
+								($id(userArr[i][0]).style = 'width:248px');
+						}
 					}
 				} else {
 					$id(userArr[i][0]).innerHTML = '신청하기';
