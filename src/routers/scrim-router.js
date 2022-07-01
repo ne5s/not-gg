@@ -18,7 +18,6 @@ scrimRouter.get('/scrims', loginRequired, async function (req, res, next) {
 	try {
 		// 전체 내전 목록 가져옴
 		let scrims = await scrimService.getScrims();
-		console.log('what?');
 		// console.log(typeof scrims);
 		let scrimsToObject = JSON.stringify(scrims);
 		// console.log(typeof scrimsToObject);

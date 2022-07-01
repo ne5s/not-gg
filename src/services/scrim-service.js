@@ -45,7 +45,7 @@ class ScrimService {
 	// 내전 현재 신청된 인원수 수정
 	async setScrimNum(id, toUpdate) {
 		// 업데이트 진행
-		scrim = await this.scrimModel.update({
+		const scrim = await this.scrimModel.update({
 			id,
 			update: toUpdate,
 		});
