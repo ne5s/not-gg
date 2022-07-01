@@ -8,8 +8,8 @@ const { summonerName } = getUserData();
 const loadingrenewal = `
   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 `;
-const xbox = (summonerName) =>
-	`<span><button class='cancel-btn' id=${summonerName}>✕</button></span>`;
+const xbox = (selectedPosition) =>
+	`<span><button class='cancel-btn ${selectedPosition}' >✕</button></span>`;
 
 const url = location.pathname.replace(/\/scrimDetail\/([\d\w]*)\/?/g, '$1');
 const scrimId = decodeURI(url).replace('/', '');
@@ -151,7 +151,7 @@ const renderData = async (scrimId) => {
 							try {
 								$id(userArr[i][0]).insertAdjacentHTML(
 									'beforebegin',
-									xbox(summonerName),
+									xbox(selectedPosition),
 								);
 							} catch (e) {
 								console.log(e);
@@ -162,7 +162,7 @@ const renderData = async (scrimId) => {
 							try {
 								$id(userArr[i][0]).insertAdjacentHTML(
 									'afterend',
-									xbox(summonerName),
+									xbox(selectedPosition),
 								);
 							} catch (e) {
 								console.log(e);
@@ -209,7 +209,7 @@ const 삭제버튼이벤트 = (scrimId, summonerName, writerSummonerName) => {
 	});
 };
 const 취소버튼 = (summonerName, scrimId, selectedPosition) => {
-	$id(`${summonerName}`).addEventListener('click', (e) => {
+	$(`${selectedPosition}`).addEventListener('click', (e) => {
 		e.preventDefault();
 		cancelscrim(scrimId, selectedPosition);
 	});
