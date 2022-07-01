@@ -95,27 +95,9 @@ dayaftertomorrowTime.innerHTML = `${dayaftertomorrow.getDate()}(${dayaftertomorr
 
 //요일 구하는 함수
 const getWeek = (strsDate) => {
-	const weekName = new Array('월', '화', '수', '목', '금', '토', '일');
-	let strYear = '';
-	let strMonth = '';
-	let strDay = '';
-	let aData = '';
-
-	if (strsDate.indexOf('-')) {
-		aData = strsDate.split('-');
-		strYear = aData[0];
-		strMonth = aData[1];
-		strDay = aData[2];
-	} else {
-		strYear = strsDate(0, 4);
-		strMonth = strsDate(4, 6);
-		strDay = strsDate(6, 8);
-	}
-	strDay = parseFloat(strDay);
-	const sDate = strYear + '/' + strMonth + '/' + strDay;
-	const tmpDate = new Date(sDate);
-	const nWeek = tmpDate.getDay();
-	return weekName[nWeek];
+	const weekName = new Array('일', '월', '화', '수', '목', '금', '토');
+	var dayOfWeek = weekName[new Date(strsDate).getDay()];
+	return dayOfWeek;
 };
 
 //내전 페이지 랜더링
@@ -159,7 +141,7 @@ ScrimList.forEach((data) => {
 		)})</span>
 				<span>내전 모집이 마감되었습니다.</span>
 			</li>
-			<button type="submit" class="scrim-member close" scrim-id-set="${matchId}">${currentApplyingNum}/10</button>
+			<button type="submit" class="scrim-member close" "scrim-id-set="${matchId}" disabled>${currentApplyingNum}/10</button>
 		</ul>
 	`;
 	} else if (matchDate === todayYYYYMMDD) {
@@ -168,7 +150,7 @@ ScrimList.forEach((data) => {
 			<li>
 				<span class="components">${writerSummonerName}</span>
 				<span>님이</span>
-				<span class="components" id="scrim-date">${matchMonth}월${matchDay}일(수) ${matchHour}:${matchMinute}(${getWeek(
+				<span class="components" id="scrim-date">${matchMonth}월${matchDay}일 ${matchHour}:${matchMinute}(${getWeek(
 			matchDate,
 		)})</span>
 				<span>내전을 모집중입니다.</span>
@@ -182,7 +164,7 @@ ScrimList.forEach((data) => {
 			<li>
 				<span class="components">${writerSummonerName}</span>
 				<span>님이</span>
-				<span class="components" id="scrim-date">${matchMonth}월${matchDay}일(수) ${matchHour}:${matchMinute}(${getWeek(
+				<span class="components" id="scrim-date">${matchMonth}월${matchDay}일 ${matchHour}:${matchMinute}(${getWeek(
 			matchDate,
 		)})</span>
 				<span>내전을 모집중입니다.</span>
@@ -196,7 +178,7 @@ ScrimList.forEach((data) => {
 			<li>
 				<span class="components">${writerSummonerName}</span>
 				<span>님이</span>
-				<span class="components" id="scrim-date">${matchMonth}월${matchDay}일(수) ${matchHour}:${matchMinute}(${getWeek(
+				<span class="components" id="scrim-date">${matchMonth}월${matchDay}일 ${matchHour}:${matchMinute}(${getWeek(
 			matchDate,
 		)})</span>
 				<span>내전을 모집중입니다.</span>
@@ -210,7 +192,7 @@ ScrimList.forEach((data) => {
 			<li>
 				<span class="components">${writerSummonerName}</span>
 				<span>님이</span>
-				<span class="components" id="scrim-date">${matchMonth}월${matchDay}일(수) ${matchHour}:${matchMinute}(${getWeek(
+				<span class="components" id="scrim-date">${matchMonth}월${matchDay}일 ${matchHour}:${matchMinute}(${getWeek(
 			matchDate,
 		)})</span>
 				<span>내전을 모집중입니다.</span>
