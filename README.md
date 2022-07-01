@@ -115,10 +115,8 @@ MongoDB Compass 등을 이용하여 DB에 잘 저장되었는 지 확인
 <br>
 
 ## 7. FAQ
-<details><summary>1. 현재 배포된 상태인가요?</summary>
+1. 지금 배포된 상태인가요?
+    * 배포는 아직 되어있지 않으며, 개발 완료 시 github pages를 통해 배포 예정입니다.
+  
 
-  <p>
-    현재 배포는 아직 되어있지 않으며, 개발완료 시 github pages를 통해 배포예정입니다.
-  </p>
 
-</details>
