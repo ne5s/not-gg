@@ -69,9 +69,13 @@ const cancelscrim = async (scrimId, selectedPosition) => {
 };
 // 삭제 함수
 const deletescrim = async (scrimId, summonerName, writerSummonerName) => {
-	if (summonerName === writerSummonerName) {
+	try {
 		const objects = { scrimId: scrimId };
+		console.log(objects);
 		const canceleddata = await Api.delete('/api/scrim', '', objects);
+		console.log(canceleddata);
+	} catch (e) {
+		console.log(e);
 	}
 	location.pathname = '/scrim/';
 };
