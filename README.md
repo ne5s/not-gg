@@ -1,119 +1,73 @@
-# 쇼핑몰 웹 서비스 - 기본 코드 Heroku 배포
+# ![sparkle20](https://user-images.githubusercontent.com/30680187/176836739-8dfc226b-d3a1-4e48-8d46-c69a4599aa57.png) 이상한 리그의 엘리스
 
 <div>
 
-<img alt="쇼핑-데모 로고" src="https://i.ibb.co/xSZHxmy/image.png">
+엘리스 레이서를 위한 **RIOT API 기반의 전적검색 사이트** 입니다.
 
 </div>
 
 <br />
 
-## 1. 서비스 링크
+## 1. github 주소(현재 비공개이며, 추후 배포 예정)
 
-### https://shopping-mall-racer.herokuapp.com/ 
+### https://github.com/ne5s/not-gg
 
 <br />
 
 ## 2. 서비스 소개
 
-#### 제품 등록, 장바구니 추가, 주문하기 등 쇼핑몰의 핵심 서비스를 구현합니다. 
-1. 회원가입, 로그인, 회원정보 수정 및 탈퇴 등 사용자 관련 CRUD를 할 수 있습니다.
-2. 카테고리 관련 CRUD, 제품 관련 CRUD, 주문 관련 CRUD할 할 수 있습니다.
-3. 장바구니 관련 기능을 프론트 단에서 수행할 수 있습니다.  
-4. 관리자 페이지가 있습니다.
-5. 추가 기능 ???
+**기술 스택** <br />
+
+< FrontEnd >
+   * VanillaJS, CSS, HTML
+   * Bootstrap
+
+< BackEnd >
+   * MongoDB/mongoose
+   * NodeJS/ExpressJS
+      
+<br />
+
+## 3. 서비스 요약
+
+
+* 회원가입 / 로그인 구현
+* 소환사의 최근 20경기에 대한 전적검색
+* 엘리스 내 랭킹 페이지
+* 듀오 찾기 페이지
+* 내전(5vs5) 찾기 페이지
+
 
 <br />
 
-### 2-1. API 문서
-
-### https://documenter.getpostman.com/view/19463141/Uz5JHvXh
-
-<br>
-
-### 2-2. 데모 영상
-
-<details><summary>사용자 회원가입, 로그인</summary>
-
-![image](https://user-images.githubusercontent.com/91174156/172159634-1e105633-9948-464e-a540-5429200a1353.gif)
-
-</details>
-
-<details><summary>카테고리 추가 및 반영</summary>
-
-관련 영상 삽입해야 함 (하기 2가지 방법 가능)
-1. 화면녹화 -> 유튜브 업로드 -> 유튜브 링크 삽입  
-2. 화면움짤녹화 -> 움짤삽입 (https://www.screentogif.com/ 활용가능)
-   
-</details>
-
-<details><summary>제품 추가 및 반영</summary>
-
-관련 영상 삽입해야 함 (하기 2가지 방법 가능)
-1. 화면녹화 -> 유튜브 업로드 -> 유튜브 링크 삽입  
-2. 화면움짤녹화 -> 움짤삽입 (https://www.screentogif.com/ 활용가능)
-
-</details>
-
-<details><summary>장바구니 기능</summary>
-
-관련 영상 삽입해야 함 (하기 2가지 방법 가능)
-1. 화면녹화 -> 유튜브 업로드 -> 유튜브 링크 삽입  
-2. 화면움짤녹화 -> 움짤삽입 (https://www.screentogif.com/ 활용가능)
-
-</details>
-
-<details><summary>주문 기능</summary>
-
-관련 영상 삽입해야 함 (하기 2가지 방법 가능)
-1. 화면녹화 -> 유튜브 업로드 -> 유튜브 링크 삽입  
-2. 화면움짤녹화 -> 움짤삽입 (https://www.screentogif.com/ 활용가능)
-
-</details>
-
-<details><summary>관리자 페이지</summary>
-
-관련 영상 삽입해야 함 (하기 2가지 방법 가능)
-1. 화면녹화 -> 유튜브 업로드 -> 유튜브 링크 삽입  
-2. 화면움짤녹화 -> 움짤삽입 (https://www.screentogif.com/ 활용가능)
-
-</details>
-
-<br />
-
-### 2-3. 페이지 별 화면
-
-|  |  |
-| ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------|
-| ![image](https://i.ibb.co/jyxjcd3/image.png) | ![image](https://i.ibb.co/Q860RKz/image.png) |
-|    메인 페이지                                |      회원가입 화면                            |
-| ![image](https://i.ibb.co/RpYN379/image.png) | ![]()                                        |
-|    로그인 페이지                              |     추가해야 할 페이지                         |
-
-<br />
-
-
-## 3. 기술 스택
-
-![image](https://i.ibb.co/N34mXzy/image.png)
-
-<br />
-
-## 4. 인프라 구조
-
-![image](https://i.ibb.co/9tGxmx0/image.png)<br />
-
-<br />
-
-## 5. 제작자
+## 4. 프로젝트 팀원 역할 분담
 
 | 이름 | 담당 업무 |
 | ------ | ------ |
-| 김광태 | 튜터 |
+| 연은빈 | 프론트엔드/디자인 개발 |
+| 김한얼 | 프론트엔드 개발 |
+| 조영환 | 프론트엔드 개발 |
+| 오승준 | 백엔드 개발 |
+| 장종원 | 팀장/백엔드 개발 |
 
 <br />
 
-## 6. 실행 방법
+**멤버별 상세역할**
+<br />
+1. 연은빈
+    * 홈화면 / 로그인 / 회원가입 / 듀오찾기 / 디자인 개발
+3. 김한얼
+    * 전적검색 / 내전 상세보기 / 모바일뷰 개발
+4. 조영환
+    * 랭킹 / 내전 목록 개발
+5. 오승준
+    * DB / Endpoint API / RIOT API 사용로직 개발
+6. 장종원
+    * DB / Endpoint API / RIOT API 사용로직 개발
+
+<br />
+
+## 5. 실행 방법
 
 1. 레포지토리를 클론하고자 하는 디렉토리에서 아래 명령어를 수행
 
@@ -133,7 +87,7 @@ npm install
 
 ```bash
 MONGODB_URL=<몽고DB URL>
-PORT=5000
+PORT=5555
 JWT_SECERT_KEY=<랜덤 문자열>
 ```
 
@@ -144,18 +98,25 @@ JWT_SECERT_KEY=<랜덤 문자열>
 npm run start
 ```
 
+5. 각종 API를 Postman으로 확인
+```bash
+Postman으로 Endpoint API 확인 시 MONGODB_URL, PORT, JWT_SECRET_KEY, RIOT_API_KEY 정상인지 확인
+```
+
+6. API 정상 작동 확인
+```bash
+MongoDB Compass 등을 이용하여 DB에 잘 저장되었는 지 확인
+```
 <br>
 
-## 7. 버전
+## 6. 버전
 ### 1.0.0
 
 <br>
 
-## 8. FAQ
-<details><summary>1. 현재 배포도 GCP를 이용한 것인가요?</summary>
+## 7. FAQ
+1. 지금 배포된 상태인가요?
+    * 배포는 아직 되어있지 않으며, 개발 완료 시 github pages를 통해 배포 예정입니다.
+  
 
-  <p>
-    현재 배포는 Heroku를 사용하였습니다.
-  </p>
 
-</details>

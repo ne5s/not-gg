@@ -84,3 +84,44 @@ main {
   z-index: 8;
   text-align:right;
 }
+
+@media (min-width: 320px) and (max-width: 990px) {
+  main {
+    flex-direction: column;
+    margin-top: 80px;
+  }
+	.title {
+    font-size: 34px;
+    line-height: 58px;
+    padding-bottom: 40px;
+    font-weight: 700;
+  }
+  .title > div {
+    display: inline-block;
+  }
+  .list-card {
+    display: block;
+    margin-left: 0;
+  }
+  .card {
+    margin-bottom: 20px;
+    height: 100px;
+    width: 350px;
+    margin-left: 0;
+    padding: 0 0 32px 0;
+  }
+  .spread {
+    height: 100px;
+    width: 350px;
+    padding-right: 0;
+  }
+  .spread:first-child {
+    height: 200px;
+    width: 350px;
+    padding-right: 0;
+  }
+  .card > span {
+    align-self: center;
+    text-align: center;
+  }
+}
