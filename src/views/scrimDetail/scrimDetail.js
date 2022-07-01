@@ -148,17 +148,25 @@ const renderData = async (scrimId) => {
 						// 취소버튼 추가
 						let selectedPosition = userArr[i][0];
 						if (i < 5) {
-							$id(userArr[i][0]).insertAdjacentHTML(
-								'beforebegin',
-								xbox(summonerName),
-							);
+							try {
+								$id(userArr[i][0]).insertAdjacentHTML(
+									'beforebegin',
+									xbox(summonerName),
+								);
+							} catch (e) {
+								console.log(e);
+							}
 							취소버튼(summonerName, scrimId, selectedPosition),
 								($id(userArr[i][0]).style = 'width:250px');
 						} else {
-							$id(userArr[i][0]).insertAdjacentHTML(
-								'afterend',
-								xbox(summonerName),
-							);
+							try {
+								$id(userArr[i][0]).insertAdjacentHTML(
+									'afterend',
+									xbox(summonerName),
+								);
+							} catch (e) {
+								console.log(e);
+							}
 							취소버튼(summonerName, scrimId, selectedPosition),
 								($id(userArr[i][0]).style = 'width:248px');
 						}
