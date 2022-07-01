@@ -13,12 +13,13 @@ const navber = () => {
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation "
-          style='margin-right:110px;
-          background-color: #6667ab;
+          aria-label="Toggle navigation"
+          style='margin-right: 60px;
           '
         >
-          <img src="/img/toggler.png" width="36px" height="24px" />
+          <span class="material-icons" style="color: #6667ab; font-size: 34px;">
+          menu
+          </span>
         </button>
         <a class="navbar-brand mb-2 mt-2 SLE-logo" href="/"
           >이상한<br />
@@ -31,7 +32,7 @@ const navber = () => {
 							summonerName && role === 'basic-user'
 								? `
                 <li class="nav-item">
-                <a href="/pvplog/${summonerName}" class="btn loginBtn color-VeryPeri bg-color-white btn-login 
+                <a href="/pvplog/${summonerName}" class="loginBtn color-VeryPeri bg-color-white
                 padding-right: 10px;
                 padding-left: 10px;
             ">
@@ -64,8 +65,8 @@ const navber = () => {
               >
             </li>
             <li class="nav-item signup control-display-mobile" style='margin: 10px;'>
-            <a href="/" class="btn btn-logout logout">
-              로그아웃
+            <a href="/" class="logout">
+            <img src="../img/sparkle20.png" alt=""> 로그아웃
             </a>
           </li>
           </ul>
