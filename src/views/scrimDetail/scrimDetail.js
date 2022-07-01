@@ -2,7 +2,7 @@ import * as Api from '/api.js';
 import { getUserData } from '/utils/user.js';
 
 const { summonerName } = getUserData();
-console.log(summonerName);
+
 //db에서 가져온 소환사 이름(미설정)
 //db에서 가져온 내전 시간(미설정)
 const loadingrenewal = `
@@ -26,7 +26,7 @@ const $ = (selector) => {
 const getWeek = (strsDate) => {
 	const weekName = new Array('일', '월', '화', '수', '목', '금', '토');
 	var dayOfWeek = weekName[new Date(strsDate).getDay()];
-	console.log(new Date(strsDate));
+
 	return dayOfWeek;
 };
 
@@ -49,7 +49,7 @@ const signupscrim = async (scrimId, summonerName, selectedPosition) => {
 		summonerName,
 		selectedPosition,
 	};
-	console.log(data);
+
 	try {
 		const renewaldata = await Api.patch('/api/addScrimDetail', '', data);
 	} catch (e) {
@@ -71,9 +71,7 @@ const cancelscrim = async (scrimId, selectedPosition) => {
 const deletescrim = async (scrimId, summonerName, writerSummonerName) => {
 	try {
 		const objects = { scrimId: scrimId };
-		console.log(objects);
 		const canceleddata = await Api.delete('/api/scrim', '', objects);
-		console.log(canceleddata);
 	} catch (e) {
 		console.log(e);
 	}
@@ -99,7 +97,6 @@ const 누가언제몇시내전 = async (
 const renderData = async (scrimId) => {
 	try {
 		const data = await getscrimData(scrimId);
-		console.log(data);
 		const { matchDate, matchTime, writerSummonerName } = data.scrimId;
 		누가언제몇시내전(matchDate, matchTime, writerSummonerName, summonerName);
 		삭제버튼이벤트(scrimId, summonerName, writerSummonerName);
@@ -144,7 +141,6 @@ const renderData = async (scrimId) => {
 		if (userName.find((name) => name === summonerName)) {
 			console.log('이미 신청했던 소환사입니다.');
 			for (let i = 0; i < userArr.length; i++) {
-				console.log(userArr[i][1]);
 				if (userArr[i][1]) {
 					$id(userArr[i][0]).innerHTML = userArr[i][1];
 					$id(userArr[i][0]).classList.remove('recruit');

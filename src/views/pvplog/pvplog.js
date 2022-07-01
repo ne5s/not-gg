@@ -45,7 +45,6 @@ const pvpdatapatch = async () => {
 		pvplogRenewalBtn.disabled = true;
 		pvplogRenewalBtn.insertAdjacentHTML('afterbegin', loadingrenewal);
 		await Api.patch('/api/users', '', data).then((res) => {
-			console.log(res);
 			if (res) {
 				reload();
 			}
@@ -72,14 +71,14 @@ const pvpdatapatch = async () => {
 const getLogintoken = async () => {
 	const url = location.pathname.replace(/\/pvplog\/([\d\w]*)\/?/g, '$1');
 	const id = decodeURI(url).replace('/', '');
-	console.log(id);
+
 	// user, match, soloRank data
 	try {
 		const data3 = await Api.get(`/api/search/${id}`);
 		//	엘리스 순위 등록을 위한 get
 		const data2 = await Api.get(`/api/soloRanking`);
 		const elicerank = data2.findIndex((res) => res.summonerName === id) + 1;
-		console.log(data3);
+
 		// 데이터 정리
 		const { summonerName, summonerLevel, profileIconURL } = data3.user;
 		const matches = data3.match;
@@ -120,8 +119,6 @@ const userdata = await getLogintoken();
 
 // 화면 구현 함수();
 const putPvPLog = (userdata) => {
-	console.log(userdata);
-
 	const {
 		leaguePoints,
 		matchFor20Games,
@@ -143,7 +140,6 @@ const putPvPLog = (userdata) => {
 	// 챔프 모스트 3개
 	const most3champdata = [];
 	for (let i = 0; i < 3; i++) {
-		console.log(sortedPlayChampsFor20Games[i]);
 		if (sortedPlayChampsFor20Games[i]) {
 			let a = `<div class="box-space-evenly" style="margin-top: 10px">
 						<img
