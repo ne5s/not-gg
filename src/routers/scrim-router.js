@@ -203,6 +203,7 @@ scrimRouter.delete('/scrim', loginRequired, async function (req, res, next) {
 		await scrimService.deleteScrim(scrimId);
 
 		await scrimDetailService.deleteScrimDetail(scrimId);
+		res.status(200).json({ status: 'ok' });
 	} catch (error) {
 		next(error);
 	}
