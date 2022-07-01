@@ -14,7 +14,9 @@ const navber = () => {
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation "
-          style='margin-right:110px'
+          style='margin-right:110px;
+          background-color: #6667ab;
+          '
         >
           <img src="/img/toggler.png" width="36px" height="24px" />
         </button>
@@ -33,7 +35,7 @@ const navber = () => {
                 padding-right: 10px;
                 padding-left: 10px;
             ">
-              도구가어디서겸상을님
+            ${summonerName}님
             </a>`
 								: `
                 <li class="nav-item login">
@@ -61,6 +63,11 @@ const navber = () => {
                 ><img src="../img/sparkle20.png" alt=""> 내전</a
               >
             </li>
+            <li class="nav-item signup control-display-mobile" style='margin: 10px;'>
+            <a href="/" class="btn btn-logout logout">
+              로그아웃
+            </a>
+          </li>
           </ul>
         </div>
 
