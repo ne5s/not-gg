@@ -207,3 +207,8 @@ h1 {
 	line-height: 14px;
 	box-sizing: border-box;
 }
+
+.ad-icon {
+	height: 45px;
+	width: 45px;
+}

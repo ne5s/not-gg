@@ -38,8 +38,8 @@ const 날짜치환 = (matchtime) => {
 };
 
 // data 가져오기
-const getscrimData = async (id) => {
-	const data = await Api.get(`/api/scrimDetail/${id}`);
+const getscrimData = async (scrimId) => {
+	const data = await Api.get(`/api/scrimDetail/${scrimId}`);
 	return data;
 };
 //추가 함수
@@ -49,22 +49,23 @@ const signupscrim = async (scrimId, summonerName, selectedPosition) => {
 		summonerName,
 		selectedPosition,
 	};
+	console.log(data);
 	try {
-		await Api.patch('/api/addScrimDetail', '', data);
+		const renewaldata = await Api.patch('/api/addScrimDetail', '', data);
 	} catch (e) {
 		console.log(e);
 	}
-	location.pathname = '/scrim/';
+	location.reload();
 };
 //취소 함수
 const cancelscrim = async (scrimId, selectedPosition) => {
 	const data = { scrimId, selectedPosition };
 	try {
-		const canceleddata = await Api.patch('/api/addScrimDetail', '', data);
+		const canceleddata = await Api.patch('/api/cancelScrimDetail', '', data);
 	} catch (e) {
 		console.log(e);
 	}
-	// location.reload();
+	location.reload();
 };
 // 삭제 함수
 const deletescrim = async (scrimId, summonerName, writerSummonerName) => {
@@ -72,6 +73,7 @@ const deletescrim = async (scrimId, summonerName, writerSummonerName) => {
 		const objects = { scrimId: scrimId };
 		const canceleddata = await Api.delete('/api/scrim', '', objects);
 	}
+	location.pathname = '/scrim/';
 };
 // writer 표시 삭제버튼 안보이게 하기
 const 누가언제몇시내전 = async (
