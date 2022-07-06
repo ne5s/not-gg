@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>이상한 리그의 엘리스</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../eliceLoL.png"
+    />
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"
+        defer></script>
+    <!-- navbar -->
+    <script src="/components/headerNavbar.js" type="module" defer></script>
+    <link rel="stylesheet" href="/components/headerNavbar.css" />
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="/common.css" />
+    <link rel="stylesheet" href="duo.css" />
+    <script src="duo.js" type="module" defer></script>
+    </head>
+<body>
+    <!-- Navbar.js -->
+
+    <!-- contents -->
+    <section class="section">
+        <div class="container">
+            <div class="title-box">
+                <h1>듀오</h1>
+                <!-- Button trigger modal -->
+				<button class="submit" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">듀오 등록하기</button>
+		
+				<!-- Modal -->
+				<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">듀오 등록하기</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="modal-inner">
+                                    <p class="modal-title" id="staticBackdropLabel">나의 주 포지션</p>
+                                    <div>
+                                        <label for="myPositionTOP"><img src="../img/탑.png"></label>
+                                        <input type="radio" id="myPositionTOP" name="myPosition"></input>
+                                        <label for="myPositionJUNGLE"><img src="../img/정글.png"></label>
+                                        <input type="radio" id="myPositionJUNGLE" name="myPosition"></input>
+                                        <label for="myPositionMIDDLE"><img src="../img/미드.png"></label>
+                                        <input type="radio" id="myPositionMIDDLE" name="myPosition"></input>
+                                        <label for="myPositionBOTTOM"><img src="../img/원딜.png"></label>
+                                        <input type="radio" id="myPositionBOTTOM" name="myPosition"></input>
+                                        <label for="myPositionUTIL"><img src="../img/서폿.png"></label>
+                                        <input type="radio" id="myPositionUTIL" name="myPosition"></input>
+                                    </div>
+                                </div>
+                                <div class="modal-inner">
+                                    <p class="modal-title" id="staticBackdropLabel">찾고있는 듀오</p>
+                                    <select name="티어" id="tierSelect">
+                                        <option value="CHALLENGER">CHALLENGER</option>
+                                        <option value="GRANDMASTER">GRANDMASTER</option>
+                                        <option value="MASTER">MASTER</option>
+                                        <option value="DIAMOND">DIAMOND</option>
+                                        <option value="PLATINUM">PLATINUM</option>
+                                        <option value="GOLD">GOLD</option>
+                                        <option value="SILVER">SILVER</option>
+                                        <option value="BRONZE">BRONZE</option>
+                                        <option value="IRON">IRON</option>
+                                    </select>
+                                    <div>
+                                        <label for="duoPositionTOP"><img src="../img/탑.png"></label>
+                                        <input type="radio" id="duoPositionTOP" name="duoPosition"></input>
+                                        <label for="duoPositionJUNGLE"><img src="../img/정글.png"></label>
+                                        <input type="radio" id="duoPositionJUNGLE" name="duoPosition"></input>
+                                        <label for="duoPositionMIDDLE"><img src="../img/미드.png"></label>
+                                        <input type="radio" id="duoPositionMIDDLE" name="duoPosition"></input>
+                                        <label for="duoPositionBOTTOM"><img src="../img/원딜.png"></label>
+                                        <input type="radio" id="duoPositionBOTTOM" name="duoPosition"></input>
+                                        <label for="duoPositionUTIL"><img src="../img/서폿.png"></label>
+                                        <input type="radio" id="duoPositionUTIL" name="duoPosition"></input>
+                                    </div>
+                                </div>
+                                <div class="modal-inner">
+                                    <p class="modal-title" id="staticBackdropLabel">코멘트</p>
+                                    <input type="text" id="duoComment" placeholder="엘리스 수업 끝나고 같이 게임해요!" size="50">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="scrim-member close" data-bs-dismiss="modal">닫기</button>
+                                <button id="duoSubmitBtn" type="button" class="scrim-member open">등록</button>
+                            </div>
+                        </div>
+					</div>
+				</div>
+            </div>
+            <div class="table-row-group">
+                <div class="table-title">
+                    <p class="table-cell">소환사 이름</p>
+                    <p class="table-cell">주 포지션</p>
+                    <p class="table-cell">티어</p>
+                    <p class="table-cell">코멘트</p>
+                    <p class="table-cell">등록일시</p>
+                    <p class="table-cell">등록취소</p>
+                </div>
+                <!-- render되는 부분 -->
+                <div class="duo-forms-box" id="duoFormsBox">
+                </div>
+                <button class="btn btn--gray" id="addRenderDuo">더보기</button>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

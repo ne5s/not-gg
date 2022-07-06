@@ -1,113 +1,49 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-데모</title>
-    <!-- 아이콘 -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/elice-rabbit-favicon.png"
-    />
-    <!-- bulma css 관련 -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
-    <!-- 폰트 어썸: 아이콘 -->
-    <script
-      defer
-      src="https://kit.fontawesome.com/7630448495.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="login.css" />
-    <script src="login.js" type="module" defer></script>
-  </head>
-  <body>
-    <!-- 헤더 -->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="container mt-3">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <img src="/elice-rabbit.png" width="30" height="30" />
-            <span class="has-text-link">쇼핑-데모</span>
-          </a>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>이상한 리그의 엘리스</title>
+		<!-- 아이콘 -->
+		<link rel="icon" type="image/png" sizes="32x32" href="../eliceLoL.png" />
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- 커스텀 css, js -->
+		<link rel="stylesheet" href="../common.css" />
+		<link rel="stylesheet" href="login.css" />
+		<script src="login.js" type="module" defer></script>
+	</head>
+	<body>
+		<!-- 헤더 -->
+		<div class="header-logo">
+			<a class="navbar-logo" href="/"
+				>이상한<br /><span class="color-red">리그</span>의<br />엘리스</a
+			>
+		</div>
 
-          <a
-            role="button"
-            class="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
+		<div class="container">
+			<h1>로그인</h1>
+			<form action="" class="form-box">
+				<div class="form-group">
+					<label for="idInput">아이디</label>
+					<input id="idInput" type="text" placeholder="아이디" />
+				</div>
+				<div class="form-group">
+					<label for="passwordInput">비밀번호</label>
+					<input id="passwordInput" type="password" placeholder="비밀번호" />
+				</div>
+				<button id="submitButton" type="submit" class="submit">로그인</button>
+			</form>
 
-        <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
-            <ul id="navbar">
-              <li><a href="/register">회원가입</a></li>
-              <li>
-                <a href="/cart" aria-current="page">
-                  <span class="icon">
-                    <i class="fas fa-cart-shopping"></i>
-                  </span>
-                  <span>카트</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <!-- 로그인 폼(Form) -->
-    <div class="login-form-container">
-      <form class="box login-form-box" id="loginForm">
-        <p class="title is-5 has-text-info">어서오세요!</p>
-        <div class="field">
-          <label class="label" for="emailInput">이메일</label>
-          <div class="control">
-            <input
-              class="input"
-              id="emailInput"
-              type="email"
-              placeholder="abc@example.com"
-              autocomplete="on"
-            />
-          </div>
-        </div>
-
-        <div class="field mb-5">
-          <label class="label" for="passwordInput">비밀번호</label>
-          <div class="control">
-            <input
-              class="input"
-              id="passwordInput"
-              type="password"
-              placeholder="********"
-              autocomplete="on"
-            />
-          </div>
-        </div>
-
-        <button class="button is-info is-fullwidth" id="submitButton">
-          로그인하기
-        </button>
-      </form>
-<<<<<<< HEAD
-=======
-      <span>
-        LOGO에 처음이세요?
-        <a href="/signup" class="atag">회원가입하기</a>
-      </span>
->>>>>>> parent of 95fddab (logo 추가)
-    </div>
-  </body>
+			<span>
+				이상한 리그의 엘리스에 처음이세요?
+				<a href="/signup" class="atag">회원가입하기</a>
+			</span>
+		</div>
+	</body>
 </html>

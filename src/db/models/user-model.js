@@ -4,33 +4,51 @@ import { UserSchema } from '../schemas/user-schema';
 const User = model('users', UserSchema);
 
 export class UserModel {
-  async findByEmail(email) {
-    const user = await User.findOne({ email });
-    return user;
-  }
+	async findByName(name) {
+		const user = await User.findOne({ name });
+		return user;
+	}
 
-  async findById(userId) {
-    const user = await User.findOne({ _id: userId });
-    return user;
-  }
+	async findById(id) {
+		const user = await User.findOne({ id });
+		return user;
+	}
 
-  async create(userInfo) {
-    const createdNewUser = await User.create(userInfo);
-    return createdNewUser;
-  }
+	async findBySummonerName(summonerName) {
+		const user = await User.findOne({ summonerName });
+		return user;
+	}
 
-  async findAll() {
-    const users = await User.find({});
-    return users;
-  }
+	async create(userInfo) {
+		const createdNewUser = await User.create(userInfo);
+		return createdNewUser;
+	}
 
-  async update({ userId, update }) {
-    const filter = { _id: userId };
-    const option = { returnOriginal: false };
+	async findAll() {
+		const users = await User.find({});
+		return users;
+	}
 
-    const updatedUser = await User.findOneAndUpdate(filter, update, option);
-    return updatedUser;
-  }
+	async update({ id, update }) {
+		const filter = { id };
+		const option = { returnOriginal: false };
+
+		const updatedUser = await User.findOneAndUpdate(filter, update, option);
+		return updatedUser;
+	}
+
+	async updateBySummonerName({ summonerName, update }) {
+		const filter = { summonerName };
+		const option = { returnOriginal: false };
+
+		const updatedUser = await User.findOneAndUpdate(filter, update, option);
+		return updatedUser;
+	}
+
+	async delete(id) {
+		await User.deleteOne({ id });
+		return;
+	}
 }
 
 const userModel = new UserModel();

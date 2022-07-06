@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>이상한 리그의 엘리스</title>
+		<!-- 아이콘 -->
+		<link
+		rel="icon"
+		type="image/png"
+		sizes="32x32"
+		href="/eliceLoL.png"
+		/>
+		<!-- bootstrap -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+			crossorigin="anonymous"
+			defer
+		></script>
+		<!-- 폰트 어썸: 아이콘 -->
+		<script
+			defer
+			src="https://kit.fontawesome.com/7630448495.js"
+			crossorigin="anonymous"
+		></script>
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- navbar -->
+		<script src="/components/headerNavbar.js" type="module" defer></script>
+		<link rel="stylesheet" href="/components/headerNavbar.css" />
+		<!-- 커스텀 css, js -->
+		<link rel="stylesheet" href="/common.css" />
+		<link rel="stylesheet" href="scrimDetail.css" />
+		<script src="scrimDetail.js" type="module" defer></script>
+	</head>
+	<body>
+		<section class="section">
+			<div class="container" id="scrim-head">
+				<div class="title-box">
+				<h1>내전 정보</h1>
+
+				</div>
+			</div>
+			<!-- scrimDetail.js -->
+			<div class="scrim-body" id="scrim-body">
+				<div class="scrim-inner-box background-gray">
+					<div class="scrim-item-box">
+						<div class="scrim-inner main">
+							<ul>
+								<li>
+									<span class="components base-info" id="writerSummonerName"></span>
+									<span>님이</span>
+									<span class="components base-info" id="matchTime">6월22일(수) PM9:00</span>
+									<span>내전을 모집중입니다.</span>
+								</li>
+								<button class="scrim-member base-del " id="delete-btn">삭제</button>
+							</ul>
+						</div>
+					</div>
+				</div>
+					<div class="scrim-inner-box" id="white-container">
+						<div class="scrim-item-box">
+							<div class="scrim-inner">
+								<ul>
+									<li>
+										<button class="scrim-member lane" id="team1TOP"></button>
+										<span><img class="top-icon" src="/img/탑.png"></span>
+									</li>
+									<li>
+										<span><img class="top-icon" src="/img/탑.png"></span>
+										<button class="scrim-member lane" id="team2TOP"></button>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="scrim-item-box">
+							<div class="scrim-inner">
+								<ul>
+									<li>
+										<button class="scrim-member lane" id="team1JUNGLE"></button>
+										<span><img class="jungleicon" src="/img/정글.png"></span>
+									</li>
+									<li>
+										<span><img class="jungleicon" src="/img/정글.png"></span>
+										<button class="scrim-member lane" id="team2JUNGLE"></button>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="scrim-item-box">
+							<div class="scrim-inner">
+								<ul>
+									<li>
+										<button class="scrim-member lane" id="team1MIDDLE"></button>
+										<span><img class="midicon" src="/img/미드.png"></span>
+									</li>
+									<!-- <h3 class="match-category">토너먼트 드레프트</h3> -->
+									<h1 class="vs">VS</h1>
+									<li>
+										<span><img class="midicon" src="/img/미드.png"></span>
+										<button class="scrim-member lane" id="team2MIDDLE"></button>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="scrim-item-box">
+							<div class="scrim-inner">
+								<ul>
+									<li>
+										<button class="scrim-member lane" id="team1BOTTOM"></button>
+										<span><img class="adicon" src="/img/원딜.png"></span>
+									</li>
+									<li>
+										<span><img class="adicon" src="/img/원딜.png"></span>
+										<button class="scrim-member lane" id="team2BOTTOM"></button>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="scrim-item-box">
+							<div class="scrim-inner">
+								<ul>
+									<li>
+										<button class="scrim-member lane" id="team1UTILITY"></button>
+										<span><img class="supicon" src="/img/서폿.png"></span>
+									</li>
+									<li>
+										<span><img class="supicon" src="/img/서폿.png"></span>
+										<button class="scrim-member lane" id="team2UTILITY"></button>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</section>
+	</body>
+</html>
