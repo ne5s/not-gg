@@ -3,12 +3,14 @@
 <div>
 
 엘리스 레이서를 위한 **RIOT API 기반의 전적검색 사이트** 입니다.
+### https://strange-league-elice.herokuapp.com/
+
 
 </div>
 
 <br />
 
-## 1. github 주소(현재 개발중이며, 추후 완료 시 배포 예정)
+## 1. github 주소(배포된 상태)
 
 ### https://github.com/ne5s/not-gg
 
@@ -116,7 +118,7 @@ MongoDB Compass 등을 이용하여 DB에 잘 저장되었는 지 확인
 
 ## 7. FAQ
 1. 지금 배포된 상태인가요?
-    * 배포는 아직 되어있지 않으며, 개발 완료 시 배포 예정입니다.
+    * 1차 배포된 상태입니다. 이후 추가 리펙토링 예정입니다.
   
 
 
